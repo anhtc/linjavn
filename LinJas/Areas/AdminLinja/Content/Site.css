@@ -1,0 +1,73 @@
+﻿@font-face {
+    font-family: 'kendoui';
+    src: url('kendo/images/kendoui.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'glyphicons-halflings-regular';
+    src: url('../../../fonts/glyphicons-halflings-regular.ttf') format('truetype');
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+/*kiểm tra phone*/
+.bgcheckphone{
+    background-color:transparent;
+    background-image:url(../Content/images/check_sign_icon_light_green.png);
+    background-repeat:no-repeat;
+    width:12px;
+    height:20px;
+    border:navajowhite;
+    margin:0px 0px 16px 2px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+input{height:34px;}
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+#error-confirmpassword,#error-password, #error-phone, #error-magioithieu
+{
+    color:#ff0000;
+    font-size:1.3em;
+    font-weight:bold;   
+} 
+#error-hoten,#error-mavung
+{
+    font-size:1.3em;
+    font-weight:bold; 
+    color:transparent;
+}
