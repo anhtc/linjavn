@@ -46,6 +46,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoJSON4EntityFramework, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GeoJSON4EntityFramework.2.2.0\lib\net45\GeoJSON4EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Kendo.Mvc, Version=2013.3.1127.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Areas\AdminLinja\Dll\Kendo.Mvc.dll</HintPath>
@@ -84,6 +93,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -188,7 +199,9 @@
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\ImageSize.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\ThumbnailCreator.cs" />
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\FuntionExtend.cs" />
     <Compile Include="Common\HtmlHelperExtension.cs" />
+    <Compile Include="Common\IdentityExtension.cs" />
     <Compile Include="Common\SessionHelper.cs" />
     <Compile Include="Common\StringHelper.cs" />
     <Compile Include="Common\SubmitButtonAttribute.cs" />
@@ -198,9 +211,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AsbController.cs" />
+    <Compile Include="Models\AsbNetModel.cs" />
+    <Compile Include="Models\AsbNetRole.cs" />
+    <Compile Include="Models\AsbNetUser.cs" />
+    <Compile Include="Models\AsbRoleController.cs" />
+    <Compile Include="Models\AuthAttribute.cs" />
+    <Compile Include="Models\ControllerModel.cs" />
+    <Compile Include="Models\IdentityModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\script.sql" />
     <Content Include="Areas\AdminLinja\Content\bootstrap-select.css" />
     <Content Include="Areas\AdminLinja\Content\bootstrap-select.min.css" />
     <Content Include="Areas\AdminLinja\Content\bootstrap.css" />
@@ -464,13 +486,18 @@
     <Content Include="Areas\AdminLinja\Content\map-icon\trash-icon.png" />
     <Content Include="Areas\AdminLinja\Content\pastaxi-style.css" />
     <Content Include="Areas\AdminLinja\Content\Site.css" />
-    <Content Include="Areas\AdminLinja\Content\Uploads\Articles\anh-test\slide-1.jpg" />
+    <Content Include="Areas\AdminLinja\Content\Uploads\Articles\anh-test\logo-ninja.png" />
+    <Content Include="Areas\AdminLinja\Content\Uploads\Articles\Destination\logo-ninja.png" />
+    <Content Include="Areas\AdminLinja\Content\Uploads\Articles\Liberty\logo-ninja.png" />
     <Content Include="Areas\AdminLinja\Content\Uploads\Articles\Public\alofone-vietnam.jpg" />
     <Content Include="Areas\AdminLinja\Content\Uploads\Articles\Public\Banner Vuong.jpg" />
     <Content Include="Areas\AdminLinja\Content\Uploads\Articles\Public\cach-thuc-uu-dai-pasgo.png" />
     <Content Include="Areas\AdminLinja\Content\Uploads\Articles\Public\dload-ios.png" />
     <Content Include="Areas\AdminLinja\Content\Uploads\Articles\Public\dload-play.png" />
+    <Content Include="Areas\AdminLinja\Content\Uploads\Articles\rosa\logo-ninja.png" />
+    <Content Include="Areas\AdminLinja\Content\Uploads\Prices\Liberty\logo-ninja.png" />
     <Content Include="Areas\AdminLinja\Content\Uploads\Prices\Parideli\Anam-QT-Spa1.jpg" />
+    <Content Include="Areas\AdminLinja\Content\Uploads\Prices\Public\logo-ninja.png" />
     <Content Include="Areas\AdminLinja\Dll\Kendo.Mvc.dll" />
     <Content Include="Areas\AdminLinja\Scripts\bootstrap-select.js" />
     <Content Include="Areas\AdminLinja\Scripts\bootstrap-select.min.js" />
@@ -960,7 +987,10 @@
     <Content Include="Areas\AdminLinja\Scripts\Toastr\toastr.css" />
     <Content Include="Areas\AdminLinja\Scripts\Toastr\toastr.js" />
     <None Include="Areas\AdminLinja\Scripts\_references.js" />
+    <Content Include="Areas\AdminLinja\Views\ImageBrowser\logo-ninja.png" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\Prices\logo-ninja.png" />
+    <Content Include="Content\Uploads\Articles\logo-ninja.png" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\linja.search.desktop.css" />
@@ -1483,18 +1513,7 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Search\Detail.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Areas\AdminLinja\Content\Uploads\Articles\Destination\" />
-    <Folder Include="Areas\AdminLinja\Content\Uploads\Articles\Liberty\" />
-    <Folder Include="Areas\AdminLinja\Content\Uploads\Articles\rosa\" />
-    <Folder Include="Areas\AdminLinja\Content\Uploads\Prices\Liberty\" />
-    <Folder Include="Areas\AdminLinja\Content\Uploads\Prices\Public\" />
-    <Folder Include="Areas\AdminLinja\Views\ImageBrowser\" />
-    <Folder Include="Content\Prices\" />
-    <Folder Include="Content\Uploads\Articles\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
