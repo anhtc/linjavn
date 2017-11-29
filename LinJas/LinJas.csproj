@@ -1017,6 +1017,7 @@
     <Content Include="Images\banner\chuyen-phat-nhanh-an-tin-phong.jpg" />
     <Content Include="Images\banner\chuyen-phat-nhanh-ninja.jpg" />
     <Content Include="Images\logo\logo-ninja-v1.png" />
+    <Content Include="Images\tailieu\Phần mềm chuyển phát nhanh may đo chuyên nghiệp _ phần mềm chuyển phát nhanh _ phần mềm quản lý chuyển phát nhanh.html" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery-1.10.2.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1480,6 +1481,8 @@
     <Content Include="Areas\AdminLinja\Scripts\kendo\kendo.window.min.js.map" />
     <Content Include="Areas\AdminLinja\Views\Shared\_Layouts.cshtml" />
     <Content Include="Areas\AdminLinja\Views\Homes\Index.cshtml" />
+    <Content Include="Images\tailieu\VNPost_Baocaothuongnien_2013.pdf" />
+    <Content Include="Images\tailieu\VS Du Thao - 2511%28 Chuan%29.pdf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
