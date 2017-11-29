@@ -1,7 +1,14 @@
-﻿@{
+﻿@using LinJas.Common
+@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
-<p>Use this area to provide additional information.</p>
+@section css{
+    @Html.InlineStyles("~/css/about.desktop.css")
+}
+@section js{
+    @Html.InlineScripts("~/bundles/js/jquery.common.js")
+    @Scripts.RenderFormat("<script type=\"text/javascript\" src=\"{0}\" async></script>", "~/bundles/js/about.desktop.js")
+}
+@section Metas{
+    <title>Code Amp</title>
+}

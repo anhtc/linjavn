@@ -1,52 +1,229 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using LinJas.Common
+
+@section css{
+    @Html.InlineStyles("~/css/home.index.desktop.css")
 }
+@section js{
+    @Html.InlineScripts("~/bundles/js/jquery.common.js")
+    @Scripts.RenderFormat("<script type=\"text/javascript\" src=\"{0}\" async></script>", "~/bundles/js/home.index.desktop.js")
+}
+@section Metas{
+    <title>Code Amp</title>
+}
+<section class="wap">
+    <article class="container">
+        <div class="row">
+            <div class="col-md-4 search-left">               
+                <div class="form-group">
+                    <span class="text-left"><b>Mã VĐ:</b></span>
+                    <div class="input-group">
+                        <input class="form-control" type="text" name="search" placeholder="Search" required />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>Theo dõi
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="carousel-ninja" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-ninja" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-ninja" data-slide-to="1"></li>
+                        <li data-target="#carousel-ninja" data-slide-to="2"></li>
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="~/Images/banner/chuyen-phat-nhanh-ninja.jpg" alt="" class="img-responsive"/>
+                        </div>
+                        <div class="item">
+                            <img src="~/Images/banner/chuyen-phat-nhanh-ninja.jpg" alt="" class="img-responsive" />
+                        </div>   
+                        <div class="item">
+                            <img src="~/Images/banner/chuyen-phat-nhanh-ninja.jpg" alt="" class="img-responsive" />
+                        </div>   
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-ninja" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>                        
+                    </a>
+                    <a class="right carousel-control" href="#carousel-ninja" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>                        
+                    </a>
+                </div>
+            </div>
+        </div>
+    </article>
+    <!--Tra cứu  vận đơn-->
+    <article class="container">
+        <div class="row">
+            <div class="col-md-4">
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+            </div>
+            <div class="col-md-4">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
+    </article>
+    <!--dịch vụ-->
+    <article class="container">
+        <div class="row service">
+            <div class="col-md-4">
+                <div class="item">
+                    <a href="#">                        
+                        <img src="~/Images/avatar/cp-tiet-kiem-vtk.jpg" alt="" class="img-responsive" />
+                        <h3>Dịch vụ Chuyển Phát Nhanh (VCN)</h3>
+                    </a>
+                    <div class="time"><span class="glyphicon glyphicon-time"></span> @DateTime.Now.ToString("M/d/yyyy")</div>
+                    <div class="chat-luongdv"><span class="glyphicon glyphicon-star"></span> Nhanh | An Toàn | Chính Xác</div>
+                    <div class="description">
+                        Là dịch vụ nhận gửi, vận chuyển và phát nhanh chứng từ hàng hóa, vật phẩm bằng đường bộ, đường hàng không theo thời gian công bố trước và tính theo giờ.
+                    </div>
+                    <div class="viewmore">
+                        <a href="#">Xem thêm...</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="item">
+                    <a href="#">
+                        <img src="~/Images/avatar/2-hoa-toc.jpg" alt="" class="img-responsive" />
+                        <h3>Dịch vụ chuyển phát Tiết Kiệm (VTK)</h3>
+                    </a>
+                    <div class="time"><span class="glyphicon glyphicon-time"></span> @DateTime.Now.ToString("M/d/yyyy")</div>
+                    <div class="chat-luongdv"><span class="glyphicon glyphicon-star"></span> Nhanh | An Toàn | Chính Xác</div>
+                    <div class="description">
+                        Là dịch vụ nhận gửi, vận chuyển và phát nhanh chứng từ hàng hóa, vật phẩm bằng đường bộ, đường hàng không theo thời gian công bố trước và tính theo giờ.
+                    </div>
+                    <div class="viewmore">
+                        <a href="#">Xem thêm...</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="item">
+                    <a href="#">
+                        <img src="~/Images/avatar/1cpn-avata.jpg" alt="" class="img-responsive" />
+                        <h3>Dịch vụ chuyển phát Hỏa Tốc (VHT)</h3>
+                    </a>
+                    <div class="time"><span class="glyphicon glyphicon-time"></span> @DateTime.Now.ToString("M/d/yyyy")</div>
+                    <div class="chat-luongdv"><span class="glyphicon glyphicon-star"></span> Nhanh | An Toàn | Chính Xác</div>
+                    <div class="description">
+                        Là dịch vụ nhận gửi, vận chuyển và phát nhanh chứng từ hàng hóa, vật phẩm bằng đường bộ, đường hàng không theo thời gian công bố trước và tính theo giờ.
+                    </div>
+                    <div class="viewmore">
+                        <a href="#">Xem thêm...</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <!--tin tức-->
+    <article class="container">
+        <div class="row">
+            <div class="col-md-7 new">
+                <div class="title">Tin tức</div>
+                <ul>
+                    <li class="item">
+                        <a href="#">
+                            <img src="~/Images/avatar/avatar-new.png" alt="" class="img-responsive"/>
+                            <h3>Các loại Phụ phí Chuyển phát Quốc tế Nhanh</h3>
+                        </a>
+                        <div class="time"><span class="glyphicon glyphicon-time"></span> @DateTime.Now.ToString("M/d/yyyy")</div>                        
+                        <div class="description">
+                            Là dịch vụ nhận gửi, vận chuyển và phát nhanh chứng từ hàng hóa, vật phẩm bằng đường bộ, đường hàng không theo thời gian công bố trước và tính theo giờ.
+                        </div>
+                        <div class="viewmore">
+                            <a href="#">Xem thêm...</a>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <a href="#">
+                            <img src="~/Images/avatar/avatar-new.png" alt="" class="img-responsive" />
+                            <h3>Các loại Phụ phí Chuyển phát Quốc tế Nhanh</h3>
+                        </a>
+                        <div class="time"><span class="glyphicon glyphicon-time"></span> @DateTime.Now.ToString("M/d/yyyy")</div>
+                        <div class="description">
+                            Là dịch vụ nhận gửi, vận chuyển và phát nhanh chứng từ hàng hóa, vật phẩm bằng đường bộ, đường hàng không theo thời gian công bố trước và tính theo giờ.
+                        </div>
+                        <div class="viewmore">
+                            <a href="#">Xem thêm...</a>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <a href="#">
+                            <img src="~/Images/avatar/avatar-new.png" alt="" class="img-responsive" />
+                            <h3>Các loại Phụ phí Chuyển phát Quốc tế Nhanh</h3>
+                        </a>
+                        <div class="time"><span class="glyphicon glyphicon-time"></span> @DateTime.Now.ToString("M/d/yyyy")</div>
+                        <div class="description">
+                            Là dịch vụ nhận gửi, vận chuyển và phát nhanh chứng từ hàng hóa, vật phẩm bằng đường bộ, đường hàng không theo thời gian công bố trước và tính theo giờ.
+                        </div>
+                        <div class="viewmore">
+                            <a href="#">Xem thêm...</a>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <a href="#">
+                            <img src="~/Images/avatar/avatar-new.png" alt="" class="img-responsive" />
+                            <h3>Các loại Phụ phí Chuyển phát Quốc tế Nhanh</h3>
+                        </a>
+                        <div class="time"><span class="glyphicon glyphicon-time"></span> @DateTime.Now.ToString("M/d/yyyy")</div>
+                        <div class="description">
+                            Là dịch vụ nhận gửi, vận chuyển và phát nhanh chứng từ hàng hóa, vật phẩm bằng đường bộ, đường hàng không theo thời gian công bố trước và tính theo giờ.
+                        </div>
+                        <div class="viewmore">
+                            <a href="#">Xem thêm...</a>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <a href="#">
+                            <img src="~/Images/avatar/avatar-new.png" alt="" class="img-responsive" />
+                            <h3>Các loại Phụ phí Chuyển phát Quốc tế Nhanh</h3>
+                        </a>
+                        <div class="time"><span class="glyphicon glyphicon-time"></span> @DateTime.Now.ToString("M/d/yyyy")</div>
+                        <div class="description">
+                            Là dịch vụ nhận gửi, vận chuyển và phát nhanh chứng từ hàng hóa, vật phẩm bằng đường bộ, đường hàng không theo thời gian công bố trước và tính theo giờ.
+                        </div>
+                        <div class="viewmore">
+                            <a href="#">Xem thêm...</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-5">
+                <!--Hỗ trợ khách hàng-->
+                <div class="help-block">
+                    <div class="title-help">Hỗ trợ khách hàng</div>
+                    <ul>
+                        <li>
+                            <a href="skype:tacaoanh">Skype: Nguyễn Văn Đoàn</a>
+                        </li>
+                        <li>
+                            <a href="tel:09090909090">Hotline: 09090909090</a>
+                        </li>
+                        <li>
+                            <a href="tel:09090909090">Hotline: 09090909090</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Video-->
+                <div class="help-video">
+                    <div class="title-help">Video về Ninja</div>
+                    
+                </div>
+                <!--Facebook-->
+                <div class="help-facebook">
+                    <div class="title-help">Fanpage Ninja</div>
+                    <div class="fb-page" data-href="https://www.facebook.com/Trang-C&#xfa;c-Cu-372753389806419/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Trang-C&#xfa;c-Cu-372753389806419/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Trang-C&#xfa;c-Cu-372753389806419/">Trang Cúc Cu</a></blockquote></div>
+                </div>
+            </div>           
+        </div>
+    </article>
+</section>
