@@ -1,0 +1,61 @@
+﻿@using LinJas.Common
+@{
+    ViewBag.Title = "Kết quả  lọc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    @Html.InlineStyles("~/css/search.desktop.css")
+}
+@section js{
+    @Html.InlineScripts("~/bundles/js/jquery.common.js")
+    @Scripts.RenderFormat("<script type=\"text/javascript\" src=\"{0}\" async></script>", "~/bundles/js/search.desktop.js")
+}
+@section Metas{
+    <title>Code Amp</title>
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @class = "form-search" }))
+            {
+                <span class="label-info">Mã phiếu gửi(Tra nhiều bill bằng cách thêm dấu phẩy giữa các bill VD: 392773302,392447363)</span>
+                <div class="input-group">
+                    @Html.TextBox("textSearch", "", new { @class = "form-control", @placeholder = "Mã phiếu gủi (Phân tách nhau bởi dấu , )" })                    
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-default" value="Theo dõi"/>                       
+                    </span>
+                </div><!-- /input-group -->                           
+            }
+        </div>
+        <div class="col-md-12">
+            <label class="label-default">Có (<b>1</b>) danh sách mã phiếu gửi</label>
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th>Mã Phiếu gửi</th>
+                        <th>Ngày gửi</th>
+                        <th>Bưu cục nhận</th>
+                        <th>Dịch vụ</th>
+                        <th>Ngày trạng thái</th>
+                        <th>Trạng thái</th>
+                        <th>Trọng lượng</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#">12323323</a></td>
+                        <td>21/07/2016 17:20</td>
+                        <td>Thái Bình - Thái Bình</td>
+                        <td>VCN Chuyển phát nhanh</td>
+                        <td>21/07/2016 17:20</td>
+                        <td>Nhập phiếu gửi</td>
+                        <td>50</td>
+                        <td><a href="#">Chi tiết >></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
