@@ -176,7 +176,7 @@ list-style: none;
     clear: both;
     margin: 0px 0px 10px 0px;
 }
-.title {
+/*.title {
     font-size: 20px;
     font-weight: bold;
     color: #8e8d8e;
@@ -185,7 +185,7 @@ list-style: none;
     height: 50px;
     margin-bottom: 10px;
     background: #fff;
-}
+}*/
 /*help-block*/
 .help-block {
     background: #ffbf01;

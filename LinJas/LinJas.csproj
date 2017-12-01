@@ -509,6 +509,7 @@
     <Content Include="Areas\AdminLinja\Scripts\bootstrap.min.js" />
     <Content Include="Areas\AdminLinja\Scripts\encoder.js" />
     <Content Include="Areas\AdminLinja\Scripts\howler.js" />
+    <Content Include="App_Data\Ninja.bak" />
     <None Include="Areas\AdminLinja\Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\AdminLinja\Scripts\jquery-1.10.2.js" />
     <Content Include="Areas\AdminLinja\Scripts\jquery-1.10.2.min.js" />

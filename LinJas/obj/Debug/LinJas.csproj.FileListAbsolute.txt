@@ -100,3 +100,4 @@ D:\DATA\linja\Git\trunk\LinJas\bin\Microsoft.AI.Web.xml
 D:\DATA\linja\Git\trunk\LinJas\obj\Debug\LinJas.csproj.CoreCompileInputs.cache
 D:\DATA\linja\Git\trunk\LinJas\obj\Debug\LinJas.dll
 D:\DATA\linja\Git\trunk\LinJas\obj\Debug\LinJas.pdb
+D:\DATA\linja\Git\trunk\LinJas\obj\Debug\LinJas.csprojResolveAssemblyReference.cache
