@@ -22,12 +22,10 @@ D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\Microsoft.VisualBasic.Core.targets
 D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\Microsoft.Win32.Primitives.dll
 D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.AppContext.dll
-D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.Collections.Immutable.dll
 D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.Console.dll
 D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
 D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.Diagnostics.Process.dll
 D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.Diagnostics.StackTrace.dll
-D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.IO.FileSystem.dll
 D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.IO.FileSystem.DriveInfo.dll
 D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.IO.FileSystem.Primitives.dll
 D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.IO.Pipes.dll
@@ -100,4 +98,5 @@ D:\DATA\linja\Git\trunk\LinJas\bin\Microsoft.AI.Web.xml
 D:\DATA\linja\Git\trunk\LinJas\obj\Debug\LinJas.csproj.CoreCompileInputs.cache
 D:\DATA\linja\Git\trunk\LinJas\obj\Debug\LinJas.dll
 D:\DATA\linja\Git\trunk\LinJas\obj\Debug\LinJas.pdb
-D:\DATA\linja\Git\trunk\LinJas\obj\Debug\LinJas.csprojResolveAssemblyReference.cache
+D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.Collections.Immutable.dll
+D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.IO.FileSystem.dll

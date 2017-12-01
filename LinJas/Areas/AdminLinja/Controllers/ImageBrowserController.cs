@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using KendoEditorImageBrowser.Models;
 using LinJas.Areas.AdminLinja.Models;
+using LinJas.Models;
 
 namespace LinJas.Areas.AdminLinja.Controllers
 {
+    [Auth]
     public class ImageBrowserController : Controller
     {
         // GET: AdminLinja/ImageBrowser
