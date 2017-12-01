@@ -14,7 +14,7 @@ namespace LinJas.Models
     public class ControllerRoleModel
     {
         public List<AsbRoleController> ControllerSelecteds { get; set; }
-        public List<AsbController> Controller { get; set; }
+        public List<AsbController> Controllers { get; set; }
         public AsbNetRole Roles { get; set; }
     }
 }

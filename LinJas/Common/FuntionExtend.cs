@@ -27,7 +27,7 @@ namespace LinJas.Common
                 {
                     foreach (var item in db.AsbNetRoles)
                     {
-                        rs = item.Isselected(filterContext.ActionDescriptor.ControllerDescriptor.ControllerName, filterContext.ActionDescriptor.ActionName);
+                        rs = item.IsSelected(filterContext.ActionDescriptor.ControllerDescriptor.ControllerName, filterContext.ActionDescriptor.ActionName);
                         if (rs)
                         {
                             return rs;
@@ -46,7 +46,7 @@ namespace LinJas.Common
         /// <param name="controller"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-        private static bool Isselected(this AsbNetRole asbController, string controller, string action)
+        public static bool IsSelected(this AsbNetRole asbController, string controller, string action)
         {
             using (AsbNetModel db = new AsbNetModel())
             {

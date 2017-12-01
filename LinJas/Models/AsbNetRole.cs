@@ -8,7 +8,7 @@ namespace LinJas.Models
 
     public partial class AsbNetRole
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [StringLength(150)]
         public string Name { get; set; }

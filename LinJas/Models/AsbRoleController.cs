@@ -9,9 +9,8 @@ namespace LinJas.Models
     [Table("AsbRoleController")]
     public partial class AsbRoleController
     {
-        [Key]
-        [Column(Order = 0)]
-        public int RoleId { get; set; }
+     
+        public Guid RoleId { get; set; }
 
         [Key]
         [Column(Order = 1)]

@@ -207,6 +207,7 @@
     <Compile Include="Common\SubmitButtonAttribute.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,6 +220,7 @@
     <Compile Include="Models\AuthAttribute.cs" />
     <Compile Include="Models\ControllerModel.cs" />
     <Compile Include="Models\IdentityModel.cs" />
+    <Compile Include="Models\AsbGetRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -261,6 +263,8 @@
     <Content Include="Areas\AdminLinja\Content\images\save.png" />
     <Content Include="Areas\AdminLinja\Content\images\thongbao.jpg" />
     <Content Include="Areas\AdminLinja\Content\images\users.jpg" />
+    <Content Include="Areas\AdminLinja\Content\jquery.tree-multiselect.css" />
+    <Content Include="Areas\AdminLinja\Content\jquery.tree-multiselect.min.css" />
     <Content Include="Areas\AdminLinja\Content\kendo\Black\editor.png" />
     <Content Include="Areas\AdminLinja\Content\kendo\Black\imagebrowser.png" />
     <Content Include="Areas\AdminLinja\Content\kendo\Black\indeterminate.gif" />
@@ -966,15 +970,11 @@
     <Content Include="Areas\AdminLinja\Scripts\kendo\kendo.window.min.js" />
     <Content Include="Areas\AdminLinja\Scripts\modernizr-2.6.2.js" />
     <Content Include="Areas\AdminLinja\Scripts\pastaxi-funcs.js" />
-    <Content Include="Areas\AdminLinja\Scripts\pastaxi\chidinhtaixe_chokhachhang.js" />
-    <Content Include="Areas\AdminLinja\Scripts\pastaxi\map_khachhang.js" />
-    <Content Include="Areas\AdminLinja\Scripts\pastaxi\map_khachhang_chidinhtaixe.js" />
-    <Content Include="Areas\AdminLinja\Scripts\pastaxi\map_khachhang_datchotruoc.js" />
-    <Content Include="Areas\AdminLinja\Scripts\pastaxi\map_khachhang_sendSMS.js" />
-    <Content Include="Areas\AdminLinja\Scripts\pastaxi\pastaxi_config_parameter.js" />
-    <Content Include="Areas\AdminLinja\Scripts\pastaxi\pastaxi_developer_config_parameter.js" />
-    <Content Include="Areas\AdminLinja\Scripts\pastaxi\pubnub_chidinhtaixe.js" />
-    <Content Include="Areas\AdminLinja\Scripts\pastaxi\pubnub_taixe.js" />
+    <Content Include="Areas\AdminLinja\Scripts\pastaxi\jquery-1.11.3.min.js" />
+    <Content Include="Areas\AdminLinja\Scripts\pastaxi\jquery-ui.min.js" />
+    <Content Include="Areas\AdminLinja\Scripts\pastaxi\jquery.tree-multiselect.js" />
+    <Content Include="Areas\AdminLinja\Scripts\pastaxi\jquery.tree-multiselect.min.js" />
+    <Content Include="Areas\AdminLinja\Scripts\pastaxi\jquery.tree.common.js" />
     <Content Include="Areas\AdminLinja\Scripts\pubnub\Pastaxi_Publish.js" />
     <Content Include="Areas\AdminLinja\Scripts\pubnub\Pastaxi_Pubnub_Init.js" />
     <Content Include="Areas\AdminLinja\Scripts\pubnub\Pastaxi_Subsribe.js" />
@@ -1515,6 +1515,8 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Search\Detail.cshtml" />
+    <Content Include="Views\Roles\GetController.cshtml" />
+    <Content Include="Views\Roles\AddController.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
