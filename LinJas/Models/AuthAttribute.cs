@@ -14,8 +14,7 @@ namespace LinJas.Models
 
         public void OnAuthorization(AuthorizationContext filterContext)
         {
-            _authenticate = (filterContext.ActionDescriptor.GetCustomAttributes(typeof(OverrideAuthenticationAttribute), true).Length == 0);
-            throw new NotImplementedException();
+            _authenticate = (filterContext.ActionDescriptor.GetCustomAttributes(typeof(OverrideAuthenticationAttribute), true).Length == 0);            
         }
 
         public void AuthenticationChallenge(AuthenticationChallengeContext filterContext){
