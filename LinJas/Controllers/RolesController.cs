@@ -32,9 +32,13 @@ namespace LinJas.Controllers
             {
                 try
                 {
-                    AsbController itemAdd = new AsbController { Controller = item.Controller, Action = item.Action };
-                    db.AsbControllers.Add(itemAdd);
-                    db.SaveChanges();
+                    AsbController flag = db.AsbControllers.First(s=>s.Controller.Contains(item.Controller) && s.Action.Contains(item.Action));
+                    if (flag==null)
+                    {
+                        AsbController itemAdd = new AsbController { Controller = item.Controller, Action = item.Action };
+                        db.AsbControllers.Add(itemAdd);
+                        db.SaveChanges();
+                    }                    
                 }
                 catch (Exception ex)
                 {

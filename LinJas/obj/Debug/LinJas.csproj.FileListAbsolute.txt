@@ -100,3 +100,4 @@ D:\DATA\linja\Git\trunk\LinJas\obj\Debug\LinJas.dll
 D:\DATA\linja\Git\trunk\LinJas\obj\Debug\LinJas.pdb
 D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.Collections.Immutable.dll
 D:\DATA\linja\Git\trunk\LinJas\bin\roslyn\System.IO.FileSystem.dll
+D:\DATA\linja\Git\trunk\LinJas\obj\Debug\LinJas.csprojResolveAssemblyReference.cache
