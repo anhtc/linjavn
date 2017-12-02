@@ -224,6 +224,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ninjadiagrams.PNG" />
     <Content Include="App_Data\script.sql" />
     <Content Include="Areas\AdminLinja\Content\bootstrap-select.css" />
     <Content Include="Areas\AdminLinja\Content\bootstrap-select.min.css" />

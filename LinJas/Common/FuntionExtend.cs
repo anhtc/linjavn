@@ -46,7 +46,7 @@ namespace LinJas.Common
         /// <param name="controller"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-        private static bool IsSelected(this AsbNetRole asbController, string controller, string action)
+        public static bool IsSelected(this AsbNetRole asbController, string controller, string action)
         {
             using (AsbNetModel db = new AsbNetModel())
             {
