@@ -1,5 +1,4 @@
-﻿using LinJas.Manager.Common;
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Security.Cryptography;
@@ -8,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Configuration;
 
-namespace LinJas.Manager.Common
+namespace LinJas.Areas.AdminLinja.Common
 {
     public class PWUtility
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace LinJas.Manager.Common
+namespace LinJas.Areas.AdminLinja.Common
 {
     public class TVConstants
     {
@@ -17,6 +17,12 @@ namespace LinJas.Manager.Common
                 public const string ModelUpdate = @"Admin_Model_Update @Id ={0}, @CarMarkerId={1}, @Name={2}";
                 public const string ModelDelete = @"Admin_Model_Delete @Id={0}";
                 
+            }
+            public class AdminRole
+            {
+                public const string GetAllRolesController = @"admin_GetAllRolesController";
+                public const string AddController = @"admin_AddController @Controller={0},@Action={1},@Area={2},@Description={3},@IsDelete={4}";
+                public const string CheckControllerandAction = @"admin_CheckControllerandAction  @Controller={0},@Action={1}";
             }
         }
     }

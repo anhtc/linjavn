@@ -6,7 +6,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
-namespace LinJas.Manager.Common
+namespace LinJas.Areas.AdminLinja.Common
 {
     public static class StringHelper
     {
