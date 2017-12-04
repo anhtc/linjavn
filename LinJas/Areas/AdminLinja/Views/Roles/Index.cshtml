@@ -1,0 +1,73 @@
+﻿@using LinJas.Areas.AdminLinja.Models.AuthModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/AdminLinja/Views/Shared/_Layouts.cshtml";
+}
+
+<h2>Cập nhật Phân quyền</h2>
+<div id="clientsDb">
+    @(Html.Kendo().Grid<AspController>()
+          .Name("grdController")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.Controller).Sortable(false).Title("Controller");
+              columns.Bound(c => c.Action).Title("Action");
+              columns.Bound(c => c.Area).Sortable(false).Title("Area");
+              columns.Bound(c => c.Description).Sortable(false).Title("Mô tả");
+              columns.Bound(c => c.TrangThai).Sortable(true).Title("Trạng thái");            
+              columns.Bound(c => c.Action).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEdit(\"#=Action#\")' ><span class='glyphicon glyphicon-pencil'></span></a>");
+              columns.Bound(c => c.Action).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Action#\")' ><span class='glyphicon glyphicon-trash'></span></a>");
+          })
+          .ToolBar(toolbar =>
+          {
+          toolbar.Template(@<text>
+        <div class="toolbar">
+            <table style="width:100%">
+                <tr>
+                    <td width="50%" align="left">
+                        <button type="button" id="btnPhanQuyen" class="k-button"><span class="k-icon k-i-plus"></span>Cập nhật phân quyền</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </text>);
+          })
+        .Pageable()
+        .Sortable()
+        .Selectable(select => select
+        .Mode(GridSelectionMode.Single)
+        .Type(GridSelectionType.Row))
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .Read(read => read.Action("LoadData", "Roles")))
+    )
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnPhanQuyen").click(function () {
+            getupdateroles();
+        })
+    })
+    function getupdateroles() {      
+         $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetController", "Roles")',           
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+               // log(data.Num + '' + data.Message);
+                if (data.Num == 1) {                    
+                    //$("#grdTinTuc").data("kendoGrid").dataSource.read();
+                    //$("#grdTinTuc").data("kendoGrid").refresh();
+                }
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+    }   
+</script>

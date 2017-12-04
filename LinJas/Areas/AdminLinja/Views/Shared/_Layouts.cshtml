@@ -37,5 +37,181 @@
     <div>
         @RenderBody()
     </div>
+    <!--Thông báo-->
+    <div>
+        @(Html.Kendo().Window()
+        .Name("windowPopup")
+        .Title("Thông báo")
+         .Visible(false)
+         .Draggable()
+        //.Resizable()
+        .Modal(true)
+        .Width(350)
+        //.Actions()
+        .AutoFocus(true)
+        .Content(@<text>
+            <span id="tlAllPopup">
+                Bạn có chắc chắn không?
+            </span>
+            <div id="puBottom">
+                <center>
+                    <button type="button" id="BTN1" class="btn btn-primary">Yes</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" id="BTN2" class="btn btn-default">No </button>
+                </center>
+            </div>
+        </text>)
+        .HtmlAttributes(new { @class = "no-buttons" })
+        )
+
+    </div>
+
+    <script type="text/javascript">
+
+        function showAlertView(message, titleBTN1, titleBTN2, callBack) {
+            document.getElementById("tlAllPopup").innerHTML = message;
+
+            $("#BTN1").hide();
+            $("#BTN2").hide();
+
+            if ((titleBTN1 != null) && (titleBTN1.length > 0)) {
+                $("#BTN1").show();
+                document.getElementById("BTN1").innerHTML = titleBTN1;
+
+            }
+            if ((titleBTN2 != null) && (titleBTN2.length > 0)) {
+                $("#BTN2").show();
+                document.getElementById("BTN2").innerHTML = titleBTN2;
+            }
+
+
+            $("#windowPopup").data("kendoWindow").center().open();
+            $("#BTN1").unbind();
+            $('#BTN1').click(function () {
+                $("#windowPopup").data("kendoWindow").close();
+                if (callBack) {
+                    callBack(1);
+                }
+
+            });
+
+            $('#BTN2').click(function () {
+                $("#windowPopup").data("kendoWindow").close();
+                if (callBack) {
+                    callBack(2);
+                }
+            });
+
+        }
+
+        // --- Đổi màu cell khi di chuột đến cell
+
+        function moveMouseInCell(Id, gridName) {
+            if ((gridName == null) || (gridName === undefined)) {
+
+                grid = "grid";
+            }
+            gridName = '#' + gridName;
+
+            var gview = $(gridName).data("kendoGrid");
+            var data = gview.dataSource.data();
+            for (var i = 0; i < data.length; i++) {
+                var item1 = data[i];
+                if (item1.Id == Id) {
+                    $('tr[data-uid="' + item1.uid + '"] ').css("background-color", "orange");
+                    $('tr[data-uid="' + item1.uid + '"] ').css("color", "black");
+
+                    break;
+                }
+
+            }
+        }
+
+        function onMouseOutMove(Id, gridName) {
+
+            if (!gridName) {
+
+                grid = "grid";
+            }
+
+            gridName = '#' + gridName;
+
+            var gview = $(gridName).data("kendoGrid");
+            var data = gview.dataSource.data();
+            for (var i = 0; i < data.length; i++) {
+                var item1 = data[i];
+                if (item1.Id == Id) {
+
+                    if ((i % 2) == 0) {
+                        $('tr[data-uid="' + item1.uid + '"] ').css("background-color", "transparent");
+                    }
+                    else {
+
+                        $('tr[data-uid="' + item1.uid + '"] ').css("background-color", "#f5f5f5");
+                    }
+
+                    changerTextCellColor(gridName, item1);
+
+                    break;
+                }
+
+            }
+        }
+
+
+        function changerTextCellColor(gridName, item1) {
+
+
+            if (gridName == "#grid-khachhang") {
+
+                var trangThaiId = item1["TrangThaiId"];
+                var trangThaiHang = item1["TrangThaiHang"];
+
+                if (((trangThaiId == 2) || (trangThaiId == 3) || (trangThaiId == 11) || (trangThaiId == 12) || (trangThaiId == 13) || (trangThaiHang == 1) || (trangThaiHang == 5)) && (trangThaiHang != 6)) {
+
+                    $('tr[data-uid="' + item1.uid + '"] ').css("color", "red");
+
+                } else if (((trangThaiId == 1) || (trangThaiId == 4) || (trangThaiId == 5) || (trangThaiHang == 2) || (trangThaiHang == 3) || (trangThaiHang == 4)) && (trangThaiHang != 6)) {
+
+                    //$('tr[data-uid="' + item1.uid + '"] ').css("color", "#f5f5f5");
+
+
+                } else {
+
+                    $('tr[data-uid="' + item1.uid + '"] ').css("color", "#30c60f");
+
+                }
+                //td: eq(13)
+
+
+            } else if (gridName == "#grid-datchotruoc") {
+
+                //--- Check giành cho cuộc gọi đặt trước.
+                var gviewTruoc = $("#grid-datchotruoc").data("kendoGrid");
+                var dataTruoc = gviewTruoc.dataSource.data();
+
+                for (var i = 0; i < dataTruoc.length; i++) {
+                    var item = dataTruoc[i];
+                    var trangThaiHang = item["TrangThaiHang"];
+
+                    if ((trangThaiHang == 1) || (trangThaiHang == 5)) {
+
+                        $('tr[data-uid="' + item.uid + '"] ').css("color", "red");
+
+                    } else if (trangThaiHang == 6) {
+
+                        $('tr[data-uid="' + item.uid + '"] ').css("color", "#30c60f");
+                    }
+                }
+            }
+        }
+
+        //_Hiển thị thông báo lỗi ngay trên popup.
+        function showErrorInPopup(message) {
+            $("#ErrorMessage").show();
+            document.getElementById("ErrorMessage").innerHTML = message;
+        }
+
+    </script>
+
 </body>
 </html>
