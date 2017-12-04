@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
-using LinJas.Areas.AdminLinja.Commons;
+using LinJas.Areas.AdminLinja.Common;
 using Kendo.Mvc.Extensions;
 
 namespace LinJas.Areas.AdminLinja.Controllers
