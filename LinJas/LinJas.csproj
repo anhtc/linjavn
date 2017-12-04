@@ -191,6 +191,7 @@
     <Compile Include="Areas\AdminLinja\Common\TVConstants.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\HomesController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\ImageBrowserController.cs" />
+    <Compile Include="Areas\AdminLinja\Controllers\RolesController.cs" />
     <Compile Include="Areas\AdminLinja\Models\AutherizeUser.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspController.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspNetRole.cs" />
@@ -1492,6 +1493,7 @@
     <Content Include="Images\tailieu\VNPost_Baocaothuongnien_2013.pdf" />
     <Content Include="Images\tailieu\VS Du Thao - 2511%28 Chuan%29.pdf" />
     <Content Include="Areas\AdminLinja\Views\Shared\_Menu.cshtml" />
+    <Content Include="Areas\AdminLinja\Views\Roles\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
