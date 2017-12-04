@@ -192,6 +192,11 @@
     <Compile Include="Areas\AdminLinja\Controllers\HomesController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\ImageBrowserController.cs" />
     <Compile Include="Areas\AdminLinja\Models\AutherizeUser.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AuthModel\AspController.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AuthModel\AspNetRole.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AuthModel\AspNetRoleModel.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AuthModel\AspNetUser.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AuthModel\AspRoleController.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\DirectoryBrowser.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\EntryType.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\FileBrowserEntry.cs" />
