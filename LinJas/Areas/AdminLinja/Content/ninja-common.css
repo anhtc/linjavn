@@ -1,10 +1,4 @@
-﻿#megaStore {
-    max-width: 600px;
-    margin: 30px auto;
-    padding-top: 120px;
-    background: url('../content/web/menu/header.jpg') no-repeat center 0;
-}
-
+﻿
 #menu h2 {
     font-size: 1em;
     text-transform: uppercase;
@@ -39,18 +33,21 @@
     clear: left;
     margin: 5px 0 5px 12px;
 }
+
 /*alert*/
+#windowPopup {
+    text-align:center;
+}
 #tlAllPopup {
-    float: left;
-    width: 98%;
-    font-size: 14px;
-    margin: 15px;
-    text-align: center;
+    width: 100%;
+    font-size: 16px;
 }
 
 #puBottom {
-    float: left;
-    width: 98%;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 15px 0px;
 }
 
 /*.k-window-action {
