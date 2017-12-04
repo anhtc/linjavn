@@ -1,4 +1,4 @@
-namespace LinJas.Areas.AdminLinja.Models.AuthModel
+﻿namespace LinJas.Areas.AdminLinja.Models.AuthModel
 {
     using System;
     using System.Collections.Generic;
@@ -26,5 +26,19 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
         public string Description { get; set; }
 
         public bool? IsDelete { get; set; }
+        public string TrangThai {
+            get{
+                var text = "";
+                if (IsDelete == true)
+                {
+                    text += "Đã Hủy";
+                }
+                else
+                {
+                    text += "Đang sử dụng";
+                }
+                return text;
+            }
+        }
     }
 }
