@@ -20,22 +20,59 @@
     width: 380px;
 }
 
-    #template ol {
-        float: left;
-        margin: 0 0 0 30px;
-        padding: 10px 10px 0 10px;
-    }
+#template ol {
+    float: left;
+    margin: 0 0 0 30px;
+    padding: 10px 10px 0 10px;
+}
 
-    #template:after {
-        content: ".";
-        display: block;
-        height: 0;
-        clear: both;
-        visibility: hidden;
-    }
+#template:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
 
-    #template .k-button {
-        float: left;
-        clear: left;
-        margin: 5px 0 5px 12px;
-    }
+#template .k-button {
+    float: left;
+    clear: left;
+    margin: 5px 0 5px 12px;
+}
+/*alert*/
+#tlAllPopup {
+    float: left;
+    width: 98%;
+    font-size: 14px;
+    margin: 15px;
+    text-align: center;
+}
+
+#puBottom {
+    float: left;
+    width: 98%;
+}
+
+/*.k-window-action {
+
+}*/
+
+#BTN1 {
+    width: 50px;
+}
+
+#BTN2 {
+    width: 50px;
+}
+
+.clSpan {
+    float: left;
+    width: 100%;
+}
+
+#ErrorMessage {
+    float: left;
+    padding: 10px;
+    color: red;
+    font-size: 13px;
+}
