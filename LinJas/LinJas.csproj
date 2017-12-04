@@ -197,6 +197,7 @@
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspNetRoleModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspNetUser.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspRoleController.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AuthModel\ControllerViewModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\DirectoryBrowser.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\EntryType.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\FileBrowserEntry.cs" />
@@ -494,7 +495,7 @@
     <Content Include="Areas\AdminLinja\Content\map-icon\map_location-128.png" />
     <Content Include="Areas\AdminLinja\Content\map-icon\pin_marker-128.png" />
     <Content Include="Areas\AdminLinja\Content\map-icon\trash-icon.png" />
-    <Content Include="Areas\AdminLinja\Content\pastaxi-style.css" />
+    <Content Include="Areas\AdminLinja\Content\ninja-common.css" />
     <Content Include="Areas\AdminLinja\Content\Site.css" />
     <Content Include="Areas\AdminLinja\Content\Uploads\Articles\anh-test\logo-ninja.png" />
     <Content Include="Areas\AdminLinja\Content\Uploads\Articles\Destination\logo-ninja.png" />
@@ -1490,6 +1491,7 @@
     <Content Include="Areas\AdminLinja\Views\Homes\Index.cshtml" />
     <Content Include="Images\tailieu\VNPost_Baocaothuongnien_2013.pdf" />
     <Content Include="Images\tailieu\VS Du Thao - 2511%28 Chuan%29.pdf" />
+    <Content Include="Areas\AdminLinja\Views\Shared\_Menu.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

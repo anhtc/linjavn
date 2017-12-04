@@ -31,7 +31,11 @@
     <script src="~/Areas/AdminLinja/Scripts/Toastr/toastr.js"></script>
     <script src="~/Areas/AdminLinja/Scripts/pastaxi-funcs.js"></script>
 </head>
-<body class="container">
-    @RenderBody()
+<body class="content">
+    <!--Menu-->
+    @Html.Partial("_Menu")
+    <div>
+        @RenderBody()
+    </div>
 </body>
 </html>
