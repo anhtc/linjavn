@@ -1494,6 +1494,7 @@
     <Content Include="Images\tailieu\VS Du Thao - 2511%28 Chuan%29.pdf" />
     <Content Include="Areas\AdminLinja\Views\Shared\_Menu.cshtml" />
     <Content Include="Areas\AdminLinja\Views\Roles\Index.cshtml" />
+    <Content Include="Areas\AdminLinja\Views\Roles\_CreateRoleId.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

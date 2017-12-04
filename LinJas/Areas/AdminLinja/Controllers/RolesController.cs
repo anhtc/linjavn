@@ -15,7 +15,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
     {
         // khởi tạo db
         private readonly AspNetRoleModel _db;
-        public RolesController(){
+        public RolesController() {
             _db = new AspNetRoleModel();
         }
         // clear bộ nhớ
@@ -54,46 +54,62 @@ namespace LinJas.Areas.AdminLinja.Controllers
             {
                 AspController flag = _db.AspControllers.Find(item.Controller, item.Action);
                 if (flag == null)
-                {                  
+                {
                     result =
                         _db.Database.ExecuteSqlCommand(
-                        TVConstants.StoredProcedure.AdminRole.AddController, item.Controller, item.Action, "", "", 0);                   
-                    if (result == 0) text = "Thêm Thất bại";                   
+                        TVConstants.StoredProcedure.AdminRole.AddController, item.Controller, item.Action, "", "", 0);
+                    if (result == 0) text = "Thêm Thất bại";
                 }
             }
             return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
         }
-        //public ActionResult AddController(Guid? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        id = new Guid("00000000-0000-0000-0000-000000000000");
-        //    }
-        //    var role = db.AsbNetRoles.SingleOrDefault(s => s.Id == id);
-        //    if (role != null)
-        //    {
-        //        var controllerSelected = db.AsbRoleControllers.Where(s => s.RoleId == id).ToList();
-        //        var controller = db.AsbControllers.ToList();
-        //        ControllerRoleModel model = new ControllerRoleModel { Roles = role, ControllerSelecteds = controllerSelected, Controllers = controller };
-        //        return View(model);
-        //    }
-        //    return HttpNotFound();
-        //}
-        //[HttpPost]
-        //public ActionResult AddController(Guid userId, params string[] selectedController)
-        //{
-        //    var ctx = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
-        //    ctx.ExecuteStoreCommand("DELETE FROM [AsbRoleController] WHERE RoleId={0}", userId);
+        public ActionResult AddController(Guid? id)
+        {
+            if (id == null)
+            {
+                id = new Guid("00000000-0000-0000-0000-000000000000");
+            }
+            var role = _db.AspNetRoles.SingleOrDefault(s => s.Id == id);
+            if (role != null)
+            {
+                var controllerSelected = _db.AspRoleControllers.Where(s => s.RoleId == id).ToList();
+                var controller = _db.AspControllers.ToList();
+                ControllerRoleViewModel model = new ControllerRoleViewModel { Roles = role, ControllerSelecteds = controllerSelected, Controllers = controller };
+                return View(model);
+            }
+            return HttpNotFound();
+        }
+        [HttpPost]
+        public ActionResult AddController(Guid userId, params string[] selectedController)
+        {
+            var ctx = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)_db).ObjectContext;
+            ctx.ExecuteStoreCommand("DELETE FROM [AsbRoleController] WHERE RoleId={0}", userId);
 
-        //    foreach (var item in selectedController)
-        //    {
-        //        string controller = item.Split('-')[0];
-        //        string action = item.Split('-')[1];
+            foreach (var item in selectedController)
+            {
+                string controller = item.Split('-')[0];
+                string action = item.Split('-')[1];
 
-        //        db.AsbRoleControllers.Add(new AsbRoleController { RoleId = userId, Controller = controller, Action = action });
-        //    }
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+                _db.AspRoleControllers.Add(new AspRoleController { RoleId = userId, Controller = controller, Action = action });
+            }
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        /// <summary>
+        /// Thêm quyền
+        /// </summary>
+        /// <param name="roleName"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult CreateNewRoleId(string txtName)
+        {
+            var result = 0;           
+            result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.CreateRoleId, txtName);
+            var text = "Thêm mới thành công";
+            if (result < 1) text = "Thêm mới Thất bại";
+            return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+        }
+       
     }
 }

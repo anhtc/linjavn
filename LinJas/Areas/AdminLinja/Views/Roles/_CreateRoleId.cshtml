@@ -1,0 +1,37 @@
+﻿
+
+@*Thêm mới ảnh*@
+<div id="window-AddImg">
+    @(Html.Kendo().Window().Name("WindowAddRoleId")
+                .Title("Quản lý quyền")
+                .Draggable()
+                .Width(350)
+                .Visible(false)
+                .Modal(true)
+                .Actions(actions => actions.Close())
+                .Content(
+                    @<text>
+                    <div><span id="ErrorMessage"></span></div>
+                    <div>
+                        <table style="width: 100%;" border="0">
+                            <tr>
+                                <td><label>Tên quyền</label></td>
+                            </tr>
+                            <tr>                              
+                                <td>                                   
+                                    <input type="text" id="txtRolesName"  class='k-textbox' placeholder="Nhập tên quyền (user)..." />
+                                </td>
+                            </tr>                   
+                            <tr>
+                                <td>
+                                    <hr />
+                                    <button type="button" id="BtnAddNew" class="k-button"  onclick="AddNewRoleId()"><span class="k-icon k-edit"></span> Thêm mới</button>
+                                    <button type="button" id="BtnUpdate" class="k-button"  onclick="UpdateRoleId()"><span class="k-icon k-edit"></span> Cập nhật</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    </text>
+    )
+    )
+</div>

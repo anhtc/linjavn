@@ -4,7 +4,7 @@
     Layout = "~/Areas/AdminLinja/Views/Shared/_Layouts.cshtml";
 }
 
-<h2>Cập nhật Phân quyền</h2>
+<h2 class="text-title">Cập nhật Phân quyền</h2>
 <div id="clientsDb">
     @(Html.Kendo().Grid<AspController>()
           .Name("grdController")
@@ -14,23 +14,27 @@
               columns.Bound(c => c.Action).Title("Action");
               columns.Bound(c => c.Area).Sortable(false).Title("Area");
               columns.Bound(c => c.Description).Sortable(false).Title("Mô tả");
-              columns.Bound(c => c.TrangThai).Sortable(true).Title("Trạng thái");            
-              columns.Bound(c => c.Action).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEdit(\"#=Action#\")' ><span class='glyphicon glyphicon-pencil'></span></a>");
-              columns.Bound(c => c.Action).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Action#\")' ><span class='glyphicon glyphicon-trash'></span></a>");
+              columns.Bound(c => c.TrangThai).Sortable(true).Title("Trạng thái");
+              columns.Bound(c => c.Action).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEdit(\"#=Action#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Action).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Action#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
           })
           .ToolBar(toolbar =>
           {
-          toolbar.Template(@<text>
-        <div class="toolbar">
-            <table style="width:100%">
-                <tr>
-                    <td width="50%" align="left">
-                        <button type="button" id="btnPhanQuyen" class="k-button"><span class="k-icon k-i-plus"></span>Cập nhật phân quyền</button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        </text>);
+          toolbar.Template(
+            @<text>
+                <div class="toolbar">
+                    <table style="width:100%">
+                        <tr>
+                            <td width="25%" align="left">
+                                <button type="button" id="btnPhanQuyen" class="k-button"><span class="k-icon k-i-plus"></span>Cập nhật phân quyền</button>
+                            </td>
+                            <td>
+                                <button type="button" id="btnCreateRoleId" onclick="showAdd()" class="k-button"><span class="k-icon k-i-plus"></span>Tạo Quyền</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </text>);
           })
         .Pageable()
         .Sortable()
@@ -43,23 +47,58 @@
         .Read(read => read.Action("LoadData", "Roles")))
     )
 </div>
-
+<!--popup tạo quyền-->
+@*@Html.Partial("_CreateRoleId")*@
+@*Thêm mới ảnh*@
+<div id="window-Add">
+    @(Html.Kendo().Window().Name("WindowAddRoleId")
+                .Title("Quản lý quyền")
+                .Draggable()
+                .Width(350)
+                .Visible(false)
+                .Modal(true)
+                .Actions(actions => actions.Close())
+                .Content(
+    @<text>
+        <div><span id="ErrorMessage"></span></div>
+        <div>
+            <table style="width: 100%;" border="0">
+                <tr>
+                    <td><label>Tên quyền</label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="txtRolesName" class='k-textbox' placeholder="Nhập tên quyền (user)..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <hr />
+                        <button type="button" id="BtnAddNew" class="k-button" onclick="CreateRoleId()"><span class="k-icon k-edit"></span> Thêm mới</button>
+                        <button type="button" id="BtnUpdate" class="k-button" onclick="UpdateRoleId()"><span class="k-icon k-edit"></span> Cập nhật</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </text>
+    )
+    )
+</div>
 <script>
     $(document).ready(function () {
         $("#btnPhanQuyen").click(function () {
             getupdateroles();
         })
     })
-    function getupdateroles() {      
-         $.ajax({
+    function getupdateroles() {
+        $.ajax({
             type: "POST",
-            url: '@Url.Action("GetController", "Roles")',           
+            url: '@Url.Action("GetController", "Roles")',
             dataType: 'json',
             contentType: false,
             processData: false,
             success: function (data) {
-               // log(data.Num + '' + data.Message);
-                if (data.Num == 1) {                    
+                if (data.Num == 1) {
                     //$("#grdTinTuc").data("kendoGrid").dataSource.read();
                     //$("#grdTinTuc").data("kendoGrid").refresh();
                 }
@@ -69,5 +108,81 @@
                 showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
             }
         });
-    }   
+    }
+    // thêm
+    function showAdd() {       
+        $("#BtnAddNew").show();
+        $("#BtnUpdate").hide();
+
+        if (!$("#WindowAddRoleId").is(":visible")) {
+            //resetAllField();
+            $("#WindowAddRoleId").data("kendoWindow").center().open();
+        }
+    }
+    //sửa
+    function showUpdate() {
+        $("#BtnAddNew").hide();
+        $("#BtnUpdate").show();
+
+        if (!$("#WindowAddRoleId").is(":visible")) {
+            $("#WindowAddRoleId").data("kendoWindow").center().open();
+        }
+    }
+    @*//
+    function updateItemGridLHDL(Id)
+    {
+        clearData();
+        _anhId = Id;
+        $.get('@Url.Action("GetAnhbyId", "BannerManger")', { anhId: Id })
+       .done(function (data) {
+
+           $("#txtLink").val(data.Link);
+           $("#txtAlter").val(data.Alter);
+           $("#anhBanner").attr("src", data.Anh);
+
+           showUpdate();
+       });
+    }*@
+    //
+    function validate() {
+        var _roleName = $("#txtRolesName").val()
+        
+        if (_roleName == "") {
+            $("#ErrorMessage").text("Quyền không được phép trống.");
+            return false;
+        }
+    }
+    function CreateRoleId()
+    {
+        if (validate())
+        {
+            var _rolesName = $("#txtRolesName").val();       
+            var formData = new FormData();
+
+            console.log(_rolesName+1);
+            formData.append("txtName", _rolesName);
+            console.log(_rolesName+2);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CreateNewRoleId", "Roles")',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.Num > 0)
+                    {
+                        $("#WindowAddRoleId").data("kendoWindow").center().close();
+                        //$("#grid").data("kendoGrid").dataSource.read();
+                        //$("#grid").data("kendoGrid").refresh();
+                    }
+                    showAlertView(data.Message, "Đồng ý", "");
+                },
+                error: function () {
+
+                    showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý", "");
+                }
+            });
+        }
+    }
 </script>
