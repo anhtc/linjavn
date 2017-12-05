@@ -136,5 +136,15 @@ namespace LinJas.Areas.AdminLinja.Controllers
             if (result < 1) text = "Xóa thất bại";
             return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// LẤy người dùng để phân quyền
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public ActionResult LoadDataNguoiDung([DataSourceRequest] DataSourceRequest request)
+        {
+            var listItems = _db.Database.SqlQuery<NguoiDungModel>(TVConstants.StoredProcedure.AdminRole.GetAllUser).ToList();
+            return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
     }
 }

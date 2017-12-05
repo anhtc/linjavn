@@ -45,11 +45,11 @@ input.k-textbox{
 #BtnAddNew{
     float:right;
 }
-#grdRole tbody tr td:first-child {
+#grdRole tbody tr td:first-child, #grdUser tbody tr td:first-child {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width:30px;
+    max-width: 30px;
 }
 #windowConfirm{
     text-align:center;

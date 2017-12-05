@@ -85,7 +85,97 @@
             )
         </div>
     </div>
+    <!--Người dùng-->
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-title">Danh sách người dùng</h2>
+            <div id="clientsDb">
+                @(Html.Kendo().Grid<NguoiDungModel>()
+          .Name("grdUser")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.Id).Sortable(false).Title("Id");
+              columns.Bound(c => c.Avatar).Title("Avatar");
+              columns.Bound(c => c.Email).Sortable(false).Title("Email");
+              columns.Bound(c => c.Phone).Sortable(false).Title("Phone");
+              columns.Bound(c => c.UserName).Sortable(true).Title("Tên tài khoản");
+              columns.Bound(c => c.PasswordHash).Sortable(false).Title("Mật khẩu");
+              columns.Bound(c => c.RoleName).Sortable(false).Title("Quyền");
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEdit(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Template(
+                @<text>
+                    <div class="toolbar">
+                        <table style="width:100%">
+                            <tr>
+                                <td width="25%" align="left">
+                                    <button type="button" id="btnPhanQuyen" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Người dùng</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </text>);
+          })
+        .Pageable()
+        .Sortable()
+        .Selectable(select => select
+        .Mode(GridSelectionMode.Single)
+        .Type(GridSelectionType.Row))
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .Read(read => read.Action("LoadDataNguoiDung", "Roles")))
+                )
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div id="clientsDb">
+                @(Html.Kendo().Grid<BranchFilterModel>()
+                  .Name("grid-filter")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.Id).HeaderTemplate("<span class='k-link'><input id='mastercheckbox' name='all' type='checkbox'/></span>")
+              .ClientTemplate("<input name='checkedRecords' type='checkbox' value='#=Id#' id='checkboxGroups_#=Id#' #=isBranchFormat# />")
+              .Sortable(false).Width(70);
+              columns.Bound(c => c.STT).Title("STT").Width(50);
+              columns.Bound(c => c.NhomKhuyenMai).Title("Nhóm khuyến mại");
+              columns.Bound(c => c.FilterCategoryName).Title("Bộ lọc");
+              columns.Bound(c => c.NameVn).Title("Tên (tiếng việt)");
+              columns.Bound(c => c.NameEn).Title("Tên (tiếng anh)");
+              columns.Bound(c => c.IsSelectedFormat).Title("Chọn mặc định").ClientTemplate("#=IsSelectedFormat#");
 
+              columns.Bound(c => c.Description).Title("Mô tả");
+
+          })
+           .ToolBar(toolbar =>
+           {
+           toolbar.Template(@<text>
+                    <div class="toolbar">
+                        <button type="button" id="BtnCreate" onclick="UpdateFilterBranch();" class="k-button"><span class="k-icon k-i-plus"></span>Cập Nhật</button>
+                    </div>
+        </text>);
+           })
+            .Pageable()
+            .Selectable(select => select
+            .Mode(GridSelectionMode.Single)
+            .Type(GridSelectionType.Row))
+            .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(20)
+            .Model(model =>
+            {
+            model.Id(p => p.Id);
+            }
+            )
+            .Read(read => read.Action("LoadDataBranchFilter", "DoiTac").Data("filterParams"))
+            .ServerOperation(true)
+            ))
+            </div>
+        </div>
+    </div>
 </div>
 
 @*Thêm mới Role*@
@@ -139,8 +229,8 @@
             processData: false,
             success: function (data) {
                 if (data.Num == 1) {
-                    //$("#grdTinTuc").data("kendoGrid").dataSource.read();
-                    //$("#grdTinTuc").data("kendoGrid").refresh();
+                    $("#grdController").data("kendoGrid").dataSource.read();
+                    $("#grdController").data("kendoGrid").refresh();
                 }
                 showAlertView(data.Message, "Đồng ý");
             },
