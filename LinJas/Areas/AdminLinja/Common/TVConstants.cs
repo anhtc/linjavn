@@ -29,6 +29,8 @@ namespace LinJas.Areas.AdminLinja.Common
                 public const string CreateRoleId = @"admin_CreateRoleId @RoleName={0}";
                 public const string UpdateRoles = @"admin_UpdateRoles @Id={0},@RoleName={1}";
                 public const string DeleteRoleById = @"admin_DeleteRoleById @Id={0}";
+                //USER
+                public const string GetAllUser = @"admin_GetAllUser";
             }
         }
     }
