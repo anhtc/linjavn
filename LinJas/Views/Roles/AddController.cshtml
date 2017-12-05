@@ -1,4 +1,4 @@
-﻿@model LinJas.Models.ControllerModel
+﻿@model LinJas.Models.ControllerRoleModel
 @using LinJas.Common
 @{
     ViewBag.Title = "AddController";
@@ -36,11 +36,7 @@
                         <div class="col-md-10">
                             <select id="selectedController" name="selectedController" multiple="multiple">
                                 @foreach (var item in Model.Controllers)
-                                {
-                                    if (FuntionExtend.IsSelected(Model.Roles.Id))
-                                    {
-
-                                    }
+                                {                                    
                                     <option name="selectedController" value="@item.Controller-@item.Action" data-section="@item.Controller" selected="selected" data-index="3">@item.Action</option>
                                 }
                             </select>
