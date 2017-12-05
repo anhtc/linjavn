@@ -5,8 +5,11 @@
 }
 
 <h2 class="text-title">Cập nhật Phân quyền</h2>
-<div id="clientsDb">
-    @(Html.Kendo().Grid<AspController>()
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9">
+            <div id="clientsDb">
+                @(Html.Kendo().Grid<AspController>()
           .Name("grdController")
           .Columns(columns =>
           {
@@ -20,21 +23,18 @@
           })
           .ToolBar(toolbar =>
           {
-          toolbar.Template(
-            @<text>
-                <div class="toolbar">
-                    <table style="width:100%">
-                        <tr>
-                            <td width="25%" align="left">
-                                <button type="button" id="btnPhanQuyen" class="k-button"><span class="k-icon k-i-plus"></span>Cập nhật phân quyền</button>
-                            </td>
-                            <td>
-                                <button type="button" id="btnCreateRoleId" onclick="showAdd()" class="k-button"><span class="k-icon k-i-plus"></span>Tạo Quyền</button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </text>);
+              toolbar.Template(
+                @<text>
+                    <div class="toolbar">
+                        <table style="width:100%">
+                            <tr>
+                                <td width="25%" align="left">
+                                    <button type="button" id="btnPhanQuyen" class="k-button"><span class="k-icon k-i-plus"></span>Cập nhật phân quyền</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </text>);
           })
         .Pageable()
         .Sortable()
@@ -45,11 +45,50 @@
         .Ajax()
         .PageSize(10)
         .Read(read => read.Action("LoadData", "Roles")))
-    )
+                )
+            </div>
+        </div>
+        <div class="col-md-3">
+            @(Html.Kendo().Grid<AspNetRole>()
+          .Name("grdRole")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.Id).Sortable(false).Title("Mã");
+              columns.Bound(c => c.RoleName).Title("Quyền");
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='updateItemGridRole(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Template(
+                @<text>
+                    <div class="toolbar">
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <button type="button" id="btnCreateRoleId" onclick="showAdd()" class="k-button"><span class="k-icon k-i-plus"></span>Tạo Quyền</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </text>);
+          })
+        .Pageable()
+        .Sortable()
+        .Selectable(select => select
+        .Mode(GridSelectionMode.Single)
+        .Type(GridSelectionType.Row))
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .Read(read => read.Action("GetAllRole", "Roles")))
+            )
+        </div>
+    </div>
+
 </div>
-<!--popup tạo quyền-->
-@*@Html.Partial("_CreateRoleId")*@
-@*Thêm mới ảnh*@
+
+@*Thêm mới Role*@
 <div id="window-Add">
     @(Html.Kendo().Window().Name("WindowAddRoleId")
                 .Title("Quản lý quyền")
@@ -74,8 +113,8 @@
                 <tr>
                     <td>
                         <hr />
-                        <button type="button" id="BtnAddNew" class="k-button" onclick="CreateRoleId()"><span class="k-icon k-edit"></span> Thêm mới</button>
-                        <button type="button" id="BtnUpdate" class="k-button" onclick="UpdateRoleId()"><span class="k-icon k-edit"></span> Cập nhật</button>
+                        <button type="button" id="BtnAddNew" class="k-button" onclick="InsertRole()"><span class="k-icon k-edit"></span> Thêm mới</button>
+                        <button type="button" id="BtnUpdate" class="k-button" onclick="UpdateRole()"><span class="k-icon k-edit"></span> Cập nhật</button>
                     </td>
                 </tr>
             </table>
@@ -84,7 +123,8 @@
     )
     )
 </div>
-<script>
+<script type="text/javascript">
+    var idRole;
     $(document).ready(function () {
         $("#btnPhanQuyen").click(function () {
             getupdateroles();
@@ -110,7 +150,7 @@
         });
     }
     // thêm
-    function showAdd() {       
+    function showAdd() {
         $("#BtnAddNew").show();
         $("#BtnUpdate").hide();
 
@@ -128,61 +168,123 @@
             $("#WindowAddRoleId").data("kendoWindow").center().open();
         }
     }
-    @*//
-    function updateItemGridLHDL(Id)
+    //lấy detail để sửa Role
+    function updateItemGridRole(Id)
     {
         clearData();
-        _anhId = Id;
-        $.get('@Url.Action("GetAnhbyId", "BannerManger")', { anhId: Id })
-       .done(function (data) {
-
-           $("#txtLink").val(data.Link);
-           $("#txtAlter").val(data.Alter);
-           $("#anhBanner").attr("src", data.Anh);
-
+        idRole = Id;
+        $.get('@Url.Action("GetUpdateRole", "Roles")', { id: idRole })
+            .done(function (data) {
+                $("#txtRolesName").val(data.RoleName);
            showUpdate();
        });
-    }*@
+    }
     //
     function validate() {
         var _roleName = $("#txtRolesName").val()
-        
+
         if (_roleName == "") {
             $("#ErrorMessage").text("Quyền không được phép trống.");
             return false;
         }
     }
-    function CreateRoleId()
-    {
-        if (validate())
-        {
-            var _rolesName = $("#txtRolesName").val();       
-            var formData = new FormData();
+    //Thêm mới quyền
+     function InsertRole() {
+        var _rolesName = $("#txtRolesName").val();
+        var formData = new FormData();
+        formData.append("roleName", _rolesName);
 
-            console.log(_rolesName+1);
-            formData.append("txtName", _rolesName);
-            console.log(_rolesName+2);
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("CreateNewRoleId", "Roles")',
-                data: formData,
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    if (data.Num > 0)
-                    {
-                        $("#WindowAddRoleId").data("kendoWindow").center().close();
-                        //$("#grid").data("kendoGrid").dataSource.read();
-                        //$("#grid").data("kendoGrid").refresh();
-                    }
-                    showAlertView(data.Message, "Đồng ý", "");
-                },
-                error: function () {
-
-                    showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý", "");
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CreateNewRoleId", "Roles")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Num == 1) {
+                    clearData();
+                    $("#WindowAddRoleId").data("kendoWindow").center().close();
+                    $("#grdRole").data("kendoGrid").dataSource.read();
+                    $("#grdRole").data("kendoGrid").refresh();
                 }
-            });
-        }
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+
+    }
+    //sửa quyền
+    function UpdateRole() {
+
+        var _rolesName = $("#txtRolesName").val();
+        var formData = new FormData();
+        formData.append("roleName", _rolesName);
+        formData.append("id", idRole);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UpdateRole", "Roles")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Num == 1) {
+                    clearData();
+                    $("#WindowAddRoleId").data("kendoWindow").center().close();
+                    $("#grdRole").data("kendoGrid").dataSource.read();
+                    $("#grdRole").data("kendoGrid").refresh();
+                }
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+     }
+    //sửa quyền
+    function DeleteRole(Id) { 
+        idRole = Id;
+        var formData = new FormData();        
+        formData.append("id", idRole);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteRole", "Roles")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Num == 1) {                   
+                    $("#WindowAddRoleId").data("kendoWindow").center().close();
+                    $("#grdRole").data("kendoGrid").dataSource.read();
+                    $("#grdRole").data("kendoGrid").refresh();
+                }
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+    }
+    // Xóa hết dữ liệu khi cập nhật thành công
+    function clearData() {
+        $('#txtRolesName').val('');
+    }
+    function removeItemGrid(id) {
+        $("#windowConfirm").data("kendoWindow").center().open();
+        $("#confirmYes").unbind();
+        $('#confirmYes').click(function () {
+            $("#windowConfirm").data("kendoWindow").close();
+            DeleteRole(id);
+        });
+
+        $('#confirmNo').click(function () {
+            $("#windowConfirm").data("kendoWindow").close();
+        });
     }
 </script>
+@* Thông báo *@
+@Html.Partial("_Arlert")

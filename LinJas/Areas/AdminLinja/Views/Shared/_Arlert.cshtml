@@ -1,0 +1,26 @@
+﻿
+
+<div>
+    @(Html.Kendo().Window()
+          .Name("windowConfirm")
+          .Title("Thông báo")
+          .Visible(false)
+          .Draggable()
+          .Resizable()
+          .Modal(true)
+          .Width(420)
+          .Height(120)
+          .Actions(actions => actions.Close())
+          .AutoFocus(true)
+          .Content(@<text>
+            <h4>
+                Bạn có chắc chắn không?
+            </h4>
+            <div class="checkconfirm">
+                <button type="button" id="confirmYes" class="btn btn-primary">Yes</button>
+                <button type="button" id="confirmNo" class="btn btn-default">No</button>
+            </div>
+        </text>)
+    )
+
+</div>

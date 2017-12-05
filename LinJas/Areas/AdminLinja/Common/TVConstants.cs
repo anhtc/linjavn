@@ -23,7 +23,12 @@ namespace LinJas.Areas.AdminLinja.Common
                 public const string GetAllRolesController = @"admin_GetAllRolesController";
                 public const string AddController = @"admin_AddController @Controller={0},@Action={1},@Area={2},@Description={3},@IsDelete={4}";
                 public const string CheckControllerandAction = @"admin_CheckControllerandAction  @Controller={0},@Action={1}";
+                //quyền
+                public const string GetAllRoles = @"admin_GetAllRoles";
+                public const string GetRoleById = @"admin_GetRoleById @Id={0}";
                 public const string CreateRoleId = @"admin_CreateRoleId @RoleName={0}";
+                public const string UpdateRoles = @"admin_UpdateRoles @Id={0},@RoleName={1}";
+                public const string DeleteRoleById = @"admin_DeleteRoleById @Id={0}";
             }
         }
     }

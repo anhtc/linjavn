@@ -1,4 +1,7 @@
-﻿
+﻿.container-fluid {
+    overflow:hidden;
+    padding:0px 1px;
+}
 h2.text-title {
     text-transform: uppercase;
     font-size: 20px;
@@ -41,6 +44,18 @@ input.k-textbox{
 }
 #BtnAddNew{
     float:right;
+}
+#grdRole tbody tr td:first-child {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width:30px;
+}
+#windowConfirm{
+    text-align:center;
+}
+#windowConfirm.checkconfirm{
+    margin:15px 0px;
 }
 /*alert*/
 #windowPopup {

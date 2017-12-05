@@ -99,17 +99,42 @@ namespace LinJas.Areas.AdminLinja.Controllers
         /// Thêm quyền
         /// </summary>
         /// <param name="roleName"></param>
-        /// <returns></returns>
-        [HttpPost]
+        /// <returns></returns>        
         [ValidateInput(false)]
-        public ActionResult CreateNewRoleId(string txtName)
+        public ActionResult CreateNewRoleId(string roleName)
         {
             var result = 0;           
-            result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.CreateRoleId, txtName);
+            result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.CreateRoleId, roleName);
             var text = "Thêm mới thành công";
             if (result < 1) text = "Thêm mới Thất bại";
             return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
         }
-       
+        public ActionResult GetAllRole([DataSourceRequest] DataSourceRequest request)
+        {
+            var listItems = _db.Database.SqlQuery<AspNetRole>(TVConstants.StoredProcedure.AdminRole.GetAllRoles).ToList();
+            return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetUpdateRole(Guid id)
+        {
+            var model = _db.Database.SqlQuery<AspNetRole>(TVConstants.StoredProcedure.AdminRole.GetRoleById, id).FirstOrDefault();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [ValidateInput(false)]
+        public ActionResult UpdateRole(Guid id, string roleName)
+        {
+            var result = 0;
+            
+            result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.UpdateRoles,id, roleName);
+            var text = "Chỉnh sửa thành công";
+            if (result < 1) text = "Chỉnh sửa Thất bại";
+            return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DeleteRole(Guid Id)
+        {
+            var result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.DeleteRoleById, Id);
+            var text = "Đã xóa thành công";
+            if (result < 1) text = "Xóa thất bại";
+            return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+        }
     }
 }
