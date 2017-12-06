@@ -28,6 +28,22 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
         public DateTime? CreateDate { get; set; }
 
         public bool? Active { get; set; }
+        public string Activeted
+        {
+            get
+            {
+                string trangthai = "";
+                if (Active == true)
+                {
+                    trangthai += "<span style=\"color:#02bb10;\" class=\"glyphicon glyphicon-check\"></span>";
+                }
+                else
+                {
+                    trangthai += "<span  style=\"color:#d02028;\" class=\"glyphicon glyphicon-lock\"></span>";
+                }
+                return trangthai;
+            }
+        }
 
         public string RoleName { get; set; }
     }

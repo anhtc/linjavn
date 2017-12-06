@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using LinJas.Areas.AdminLinja.Common;
 using Kendo.Mvc.Extensions;
+using System.Text.RegularExpressions;
 
 namespace LinJas.Areas.AdminLinja.Controllers
 {
@@ -63,38 +64,80 @@ namespace LinJas.Areas.AdminLinja.Controllers
             }
             return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult AddController(Guid? id)
+        public ActionResult AddController([DataSourceRequest] DataSourceRequest request)
         {
-            if (id == null)
+            try
             {
-                id = new Guid("00000000-0000-0000-0000-000000000000");
+                var controller = _db.Database.SqlQuery<NhomQuyenModel>(TVConstants.StoredProcedure.AdminRole.GetAllControllerByRole).ToList();
+
+                return Json(controller.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
             }
-            var role = _db.AspNetRoles.SingleOrDefault(s => s.Id == id);
-            if (role != null)
+            catch (Exception ex)
             {
-                var controllerSelected = _db.AspRoleControllers.Where(s => s.RoleId == id).ToList();
-                var controller = _db.AspControllers.ToList();
-                ControllerRoleViewModel model = new ControllerRoleViewModel { Roles = role, ControllerSelecteds = controllerSelected, Controllers = controller };
-                return View(model);
+                throw ex;
             }
-            return HttpNotFound();
         }
-        [HttpPost]
-        public ActionResult AddController(Guid userId, params string[] selectedController)
+        public ActionResult GetAllActionByController([DataSourceRequest] DataSourceRequest request, string _controller)
         {
-            var ctx = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)_db).ObjectContext;
-            ctx.ExecuteStoreCommand("DELETE FROM [AsbRoleController] WHERE RoleId={0}", userId);
-
-            foreach (var item in selectedController)
+            try
             {
-                string controller = item.Split('-')[0];
-                string action = item.Split('-')[1];
+                var listItems = _db.Database.SqlQuery<CheckQuyenModel>(TVConstants.StoredProcedure.AdminRole.GetAllActionByController, _controller).ToList();
 
-                _db.AspRoleControllers.Add(new AspRoleController { RoleId = userId, Controller = controller, Action = action });
+                return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
             }
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+        public ActionResult UpdateQuyen(Guid userId, string controller, string quyenIds, string removelQuyenIds)
+        {
+            try
+            {
+                var text = "";
+                var result = 0;
+               
+                for (int i = 0; i < quyenIds.Length; i++)
+                {
+                    string[] arrQuyen = Regex.Split(quyenIds, ",");
+                    string[] removeArrQuyen = Regex.Split(removelQuyenIds, ",");
+
+                    result += _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.UpdatePhanquyenUserById, userId, controller, arrQuyen[i], removeArrQuyen[i]);
+                }              
+
+                if (result > 0)
+                {
+                    text = "Cập nhật quyền thành công.";
+                }
+                else
+                {
+
+                    text = "Cập nhật quyền thất bại.";
+                }
+
+                return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(new { Num = 0, Message = "Cập nhật quyền thất bại." }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        //[HttpPost]
+        //public ActionResult AddController(Guid userId, params string[] selectedController)
+        //{
+        //    var ctx = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)_db).ObjectContext;
+        //    ctx.ExecuteStoreCommand("DELETE FROM [AsbRoleController] WHERE RoleId={0}", userId);
+
+        //    foreach (var item in selectedController)
+        //    {
+        //        string controller = item.Split('-')[0];
+        //        string action = item.Split('-')[1];
+
+        //        _db.AspRoleControllers.Add(new AspRoleController { RoleId = userId, Controller = controller, Action = action });
+        //    }
+        //    _db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
         /// <summary>
         /// Thêm quyền
         /// </summary>

@@ -94,19 +94,20 @@
           .Name("grdUser")
           .Columns(columns =>
           {
-              columns.Bound(c => c.Id).Sortable(false).Title("Id");
-              columns.Bound(c => c.Avatar).Title("Avatar");
-              columns.Bound(c => c.Email).Sortable(false).Title("Email");
-              columns.Bound(c => c.Phone).Sortable(false).Title("Phone");
-              columns.Bound(c => c.UserName).Sortable(true).Title("Tên tài khoản");
-              columns.Bound(c => c.PasswordHash).Sortable(false).Title("Mật khẩu");
-              columns.Bound(c => c.RoleName).Sortable(false).Title("Quyền");
-              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEdit(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
-              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
-          })
+          columns.Bound(c => c.Id).Sortable(false).Title("Id");
+          columns.Bound(c => c.Avatar).Title("Avatar");
+          columns.Bound(c => c.Email).Sortable(false).Title("Email");
+          columns.Bound(c => c.Phone).Sortable(false).Title("Phone");
+          columns.Bound(c => c.UserName).Sortable(true).Title("Tên tài khoản");
+          columns.Bound(c => c.PasswordHash).Sortable(false).Title("Mật khẩu");
+          columns.Bound(c => c.RoleName).Sortable(false).Title("Quyền");
+          columns.Bound(c => c.Activeted).Sortable(false).Title("Trạng thái").ClientTemplate("<div style=\"text-align:center;\">#=Activeted#</div>").Width(30);
+        columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEdit(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+        columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+    })
           .ToolBar(toolbar =>
           {
-              toolbar.Template(
+        toolbar.Template(
                 @<text>
                     <div class="toolbar">
                         <table style="width:100%">
@@ -124,58 +125,76 @@
         .Selectable(select => select
         .Mode(GridSelectionMode.Single)
         .Type(GridSelectionType.Row))
+        .Events(events => events.Change("onChange").DataBound("onDataBound").DataBinding("onDataBinding"))
         .DataSource(dataSource => dataSource
         .Ajax()
         .PageSize(10)
         .Read(read => read.Action("LoadDataNguoiDung", "Roles")))
                 )
             </div>
+        </div>       
+    </div>
+    <!--Phân quyền-->
+    <div class="row">
+        <div class="col-md-12 heading">
+            <h2 class="text-title">Danh sách Quyền</h2>
         </div>
         <div class="col-md-6">
             <div id="clientsDb">
-                @(Html.Kendo().Grid<BranchFilterModel>()
-                  .Name("grid-filter")
-          .Columns(columns =>
-          {
-              columns.Bound(c => c.Id).HeaderTemplate("<span class='k-link'><input id='mastercheckbox' name='all' type='checkbox'/></span>")
-              .ClientTemplate("<input name='checkedRecords' type='checkbox' value='#=Id#' id='checkboxGroups_#=Id#' #=isBranchFormat# />")
-              .Sortable(false).Width(70);
-              columns.Bound(c => c.STT).Title("STT").Width(50);
-              columns.Bound(c => c.NhomKhuyenMai).Title("Nhóm khuyến mại");
-              columns.Bound(c => c.FilterCategoryName).Title("Bộ lọc");
-              columns.Bound(c => c.NameVn).Title("Tên (tiếng việt)");
-              columns.Bound(c => c.NameEn).Title("Tên (tiếng anh)");
-              columns.Bound(c => c.IsSelectedFormat).Title("Chọn mặc định").ClientTemplate("#=IsSelectedFormat#");
-
-              columns.Bound(c => c.Description).Title("Mô tả");
-
-          })
-           .ToolBar(toolbar =>
-           {
-           toolbar.Template(@<text>
-                    <div class="toolbar">
-                        <button type="button" id="BtnCreate" onclick="UpdateFilterBranch();" class="k-button"><span class="k-icon k-i-plus"></span>Cập Nhật</button>
-                    </div>
-        </text>);
-           })
+                @(Html.Kendo().Grid<NhomQuyenModel>()
+                .Name("grdQuyen")
+                .Columns(columns =>
+                {
+                    columns.Bound(c => c.Controller).Sortable(false).Title("Controller");
+                })
             .Pageable()
+            .Sortable()
             .Selectable(select => select
             .Mode(GridSelectionMode.Single)
             .Type(GridSelectionType.Row))
+            .Events(events => events.Change("onChangeAction").DataBound("onDataBoundAction").DataBinding("onDataBindingAction"))
             .DataSource(dataSource => dataSource
             .Ajax()
-            .PageSize(20)
-            .Model(model =>
-            {
-            model.Id(p => p.Id);
-            }
-            )
-            .Read(read => read.Action("LoadDataBranchFilter", "DoiTac").Data("filterParams"))
-            .ServerOperation(true)
-            ))
+            .PageSize(10)
+            .Read(read => read.Action("AddController", "Roles")))
+                )
             </div>
         </div>
-    </div>
+        <div class="col-md-6">
+            <div id="clientsDb">
+                @(Html.Kendo().Grid<CheckQuyenModel>()
+        .Name("grdAction")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.Action).HeaderTemplate("<span class='k-link'><input id='mastercheckbox' name='all' type='checkbox'/></span>")
+              .ClientTemplate("<input name='checkedRecords' type='checkbox' value='#=Action#' id='checkboxGroups_#=Action#' #=isBranchFormat# />")
+              .Sortable(false).Width(20);
+              columns.Bound(c => c.Controller).Title("Controller");
+              columns.Bound(c => c.Action).Title("Action");
+              columns.Bound(c => c.Mota).Title("Mô tả");
+          })
+           .ToolBar(toolbar =>
+           {
+           toolbar.Template(
+            @<text>
+                <div class="toolbar">
+                    <button type="button" id="BtnCreate" onclick="UpdateQuyenBranch();" class="k-button"><span class="k-icon k-i-plus"></span>Cập Nhật Quyền</button>
+                </div>
+            </text>);
+           })
+        .Pageable()
+        .Selectable(select => select
+        .Mode(GridSelectionMode.Single)
+        .Type(GridSelectionType.Row))
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .Read(read => read.Action("GetAllActionByController", "Roles").Data("filterActionParams"))
+        .ServerOperation(true)
+        ))
+            </div>
+        </div>
+    </div>   
 </div>
 
 @*Thêm mới Role*@
@@ -213,6 +232,47 @@
     )
     )
 </div>
+<script>
+    var controller = "Roles";
+    var userId = "";
+    function onChange(arg) {
+        console.log('Event On Changer;');
+        var grid = $('#grdUser').data("kendoGrid");
+        var selectedRow = grid.select();
+        var selectedRowIndex = selectedRow.index();
+        var data = grid.dataSource.data();
+        userId = data[selectedRowIndex].Id;
+        console.log(data[selectedRowIndex].Id);
+        lienHeItemGrid(data[selectedRowIndex].Id);
+    }
+    function onDataBound(arg) {
+        detailId = '';
+        refreshGridQuyen();
+    }
+
+    function onDataBinding(arg) {
+
+    }
+    //Action
+    function onChangeAction(arg) {
+        console.log('Event On Changer;');
+        var grid = $('#grdQuyen').data("kendoGrid");
+        var selectedRow = grid.select();
+        var selectedRowIndex = selectedRow.index();
+        var data = grid.dataSource.data();
+        controller = data[selectedRowIndex].Controller;
+        console.log(controller);
+        lienHeItemGridAction(data[selectedRowIndex].Controller);
+    }
+    function onDataBoundAction(arg) {
+        controller = "";
+        refreshGridAction();
+    }
+
+    function onDataBindingAction(arg) {
+
+    }
+</script>
 <script type="text/javascript">
     var idRole;
     $(document).ready(function () {
@@ -335,9 +395,9 @@
         });
      }
     //sửa quyền
-    function DeleteRole(Id) { 
+    function DeleteRole(Id) {
         idRole = Id;
-        var formData = new FormData();        
+        var formData = new FormData();
         formData.append("id", idRole);
         $.ajax({
             type: "POST",
@@ -347,7 +407,7 @@
             contentType: false,
             processData: false,
             success: function (data) {
-                if (data.Num == 1) {                   
+                if (data.Num == 1) {
                     $("#WindowAddRoleId").data("kendoWindow").center().close();
                     $("#grdRole").data("kendoGrid").dataSource.read();
                     $("#grdRole").data("kendoGrid").refresh();
@@ -374,6 +434,128 @@
         $('#confirmNo').click(function () {
             $("#windowConfirm").data("kendoWindow").close();
         });
+    }
+    //user
+
+    function lienHeItemGrid(id) {
+        detailId = id;
+        console.log("detailId " + detailId);
+        refreshGridQuyen();
+    }
+    function refreshGridQuyen() {
+        $("#grdQuyen").data("kendoGrid").dataSource.read();
+        $("#grdQuyen").data("kendoGrid").refresh();
+    }
+    //Action
+    function lienHeItemGridAction(id) {
+        controller = id;
+        console.log("controller " + controller);
+        refreshGridAction();
+    }
+    function refreshGridAction() {
+        $("#grdAction").data("kendoGrid").dataSource.read();
+        $("#grdAction").data("kendoGrid").refresh();
+    }
+    function filterActionParams() {
+        return {
+            _controller: controller
+        };
+    }
+    // Script dung cho ben su kien check and uncheck action
+    $('#mastercheckbox').click(function () {
+
+        var data = $("#grdAction").data("kendoGrid").dataSource.data();
+
+        for (var i = 0; i < data.length; i++) {
+
+            var itemId = data[i]["Action"];
+            var itemClass = "#checkboxGroups_" + itemId;
+            console.log(itemId);
+            if ($(this).is(':checked')) {
+                $(itemClass).prop('checked', 'checked').attr('checked', true).change();
+            }
+            else {
+                $(itemClass).removeAttr('checked').change();
+            }
+        }
+    });
+
+    $('#grdAction').on('change', 'input[type=checkbox][id!=mastercheckbox]', function (e) {
+        var $check = $(this);
+        if ($check.is(":checked") == true) {
+
+            $(this).attr('checked', true);
+
+        }
+        else {
+            $(this).removeAttr('checked');
+        }
+    });
+    //update quyền
+    function UpdateQuyenBranch()
+    {
+        var selectedIds = [];
+        var unSelectedIds = [];
+        var grid = $('#grdAction').data("kendoGrid");
+        var data = grid.dataSource.data();
+        for (var i = 0; i < data.length; i++) {
+            var _controller = data[i]["Controller"];
+            var _action = data[i]["Action"];
+            var _description = data[i]["Mota"];
+            var keyID = "#checkboxGroups_" + _action;
+
+            if ($(keyID).is(":checked") == true) {
+
+                selectedIds.push(_action);
+              
+            } else {
+
+                unSelectedIds.push( _action);
+            }
+        }
+
+        var quyenIds = selectedIds.join(",");
+        var removelQuyenIds = unSelectedIds.join(",");
+        
+        if ((userId == null) || (userId.length == 0)) {
+
+            showAlertView("Bạn cần chọn quản trị viên để cập nhật", "Đồng ý");
+            return;
+        }
+        showAlertView("Bạn có chắc chắn không?", "Đồng ý", "Hủy", function (btnTag) {
+
+            //___OK->Next
+            if (btnTag == 1) {
+
+                var formData = new FormData();
+                formData.append("userId", userId);
+                formData.append("controller", _controller);
+                formData.append("quyenIds", quyenIds);
+                formData.append("removelQuyenIds", removelQuyenIds);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("UpdateQuyen", "Roles")',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data.Num > 0) {
+                            $("#grdAction").data("kendoGrid").dataSource.read();
+                            $("#grdAction").data("kendoGrid").refresh();
+                        }
+                        showAlertView(data.Message, "Đồng ý");
+
+                    },
+                    error: function () {
+
+                        showAlertView("Không thể thêm mới quyền lúc này", "Đồng ý");
+                    }
+                });
+            }
+
+        });
+
     }
 </script>
 @* Thông báo *@

@@ -31,6 +31,9 @@ namespace LinJas.Areas.AdminLinja.Common
                 public const string DeleteRoleById = @"admin_DeleteRoleById @Id={0}";
                 //USER
                 public const string GetAllUser = @"admin_GetAllUser";
+                public const string GetAllControllerByRole = @"admin_GetAllControllerByRole";
+                public const string GetAllActionByController = @"admin_GetAllActionByController @Controller={0}";
+                public const string UpdatePhanquyenUserById = @"admin_UpdatePhanquyenUserById @RoleId={0}, @Controller={1}, @Action={2}, @Description={3}, @remoquyen={4}";
             }
         }
     }
