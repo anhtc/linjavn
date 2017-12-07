@@ -256,5 +256,98 @@ namespace LinJas.Areas.AdminLinja.Controllers
             var listItems = _db.Database.SqlQuery<NguoiDungModel>(TVConstants.StoredProcedure.AdminRole.GetAllUser).ToList();
             return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// Lấy người dùng để sửa
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult GetUpdateUserById(Guid id)
+        {
+            var model = _db.Database.SqlQuery<AspNetUser>(TVConstants.StoredProcedure.AdminRole.GetUpdateUserById, id).FirstOrDefault();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// Xóa người dùng
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public ActionResult DeleteUserById(Guid Id)
+        {
+            var result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.DeleteUserById, Id);
+            var text = "Đã xóa thành công";
+            if (result < 1) text = "Xóa thất bại";
+            return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// Sửa người dùng
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="_email"></param>
+        /// <param name="_password"></param>
+        /// <param name="_phone"></param>
+        /// <param name="_userName"></param>
+        /// <param name="_avatar"></param>
+        /// <param name="_active"></param>
+        /// <param name="_roleId"></param>
+        /// <param name="_hoten"></param>
+        /// <returns></returns>
+        public ActionResult UpdateUser(Guid id, string _email, string _password, string _phone, string _userName
+            , string _avatar
+            , bool _active
+            , Guid _roleId
+            , string _hoten)
+        {
+            var result = 0;
+
+            result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.UpdateUser
+                , id
+                , _email
+                , _password
+                , _phone
+                , _userName
+                , _avatar
+                , _active
+                , _roleId
+                , _hoten);
+
+            var text = "Chỉnh sửa thành công";
+            if (result < 1) text = "Chỉnh sửa Thất bại";
+            return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// Thêm mới người dùng
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="_email"></param>
+        /// <param name="_password"></param>
+        /// <param name="_phone"></param>
+        /// <param name="_userName"></param>
+        /// <param name="_avatar"></param>
+        /// <param name="_active"></param>
+        /// <param name="_roleId"></param>
+        /// <param name="_hoten"></param>
+        /// <returns></returns>
+        public ActionResult InsertUser(string _email, string _password, string _phone, string _userName
+            , string _avatar
+            , bool _active
+            , Guid _roleId
+            , string _hoten)
+        {
+            var result = 0;
+
+            result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.InsertUser
+                , _email
+                , _password
+                , _phone
+                , _userName
+                , _avatar
+                , _active
+                , _roleId
+                , _hoten);
+
+            var text = "Chỉnh sửa thành công";
+            if (result < 1) text = "Chỉnh sửa Thất bại";
+            return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+        }
     }
 }
