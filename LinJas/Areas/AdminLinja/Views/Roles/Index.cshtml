@@ -104,8 +104,8 @@
               columns.Bound(c => c.PasswordHash).Sortable(false).Title("Mật khẩu");
               columns.Bound(c => c.RoleName).Sortable(false).Title("Quyền");
               columns.Bound(c => c.Activeted).Sortable(false).Title("Trạng thái").ClientTemplate("<div style=\"text-align:center;\">#=Activeted#</div>").Width(30);
-              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEdit(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
-              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='updateItemGridUser(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGridUser(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
           })
           .ToolBar(toolbar =>
           {
@@ -369,7 +369,7 @@
 
         $.get('@Url.Action("GetUpdateMotaQuyen", "Roles")', { _controller: controller, _action: action })
             .done(function (data) {
-                
+
                 $("#txtControllers").val(data.Controller);
                 $("#txtActions").val(data.Action);
                 $("#txtDescription").val(data.Description);
@@ -650,6 +650,125 @@
 
         });
 
+    }
+    //--->Thao tác với người dùng<---
+    //Thêm mới quyền
+     function InsertUser() {
+        var _rolesName = $("#txtRolesName").val();
+        var formData = new FormData();
+        formData.append("roleName", _rolesName);
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("InsertUser", "Roles")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Num == 1) {
+                    clearData();
+                    $("#WindowAddRoleId").data("kendoWindow").center().close();
+                    $("#grdRole").data("kendoGrid").dataSource.read();
+                    $("#grdRole").data("kendoGrid").refresh();
+                }
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+
+    }
+    //sửa người dùng
+    function UpdateUser() {
+
+        var _rolesName = $("#txtRolesName").val();
+        var formData = new FormData();
+        formData.append("roleName", _rolesName);
+        formData.append("id", idRole);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UpdateUser", "Roles")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Num == 1) {
+                    clearData();
+                    $("#WindowAddRoleId").data("kendoWindow").center().close();
+                    $("#grdRole").data("kendoGrid").dataSource.read();
+                    $("#grdRole").data("kendoGrid").refresh();
+                }
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+     }
+    //lấy người người dùng cần sửa
+    function updateItemGridUser(Id)
+    {
+        clearDataUser();
+        userId = Id;
+        $.get('@Url.Action("GetUpdateUserById", "Roles")', { id: userId })
+            .done(function (data) {
+                $("#txtRolesName").val(data.RoleName);
+           showUpdate();
+       });
+    }
+    //
+    function validate() {
+        var _roleName = $("#txtRolesName").val()
+
+        if (_roleName == "") {
+            $("#ErrorMessage").text("Quyền không được phép trống.");
+            return false;
+        }
+    }
+    //Xóa người dùng
+    function DeleteUser(Id) {
+        userId = Id;
+        var formData = new FormData();
+        formData.append("id", userId);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteUserById", "Roles")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Num == 1) {
+                    $("#WindowAddUserId").data("kendoWindow").center().close();
+                    $("#grdUser").data("kendoGrid").dataSource.read();
+                    $("#grdUser").data("kendoGrid").refresh();
+                }
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+    }
+    //? xóa người dùng
+    function removeItemGridUser(Id) {
+        $("#windowConfirm").data("kendoWindow").center().open();
+        $("#confirmYes").unbind();
+        $('#confirmYes').click(function () {
+            $("#windowConfirm").data("kendoWindow").close();
+            DeleteUser(id);
+        });
+
+        $('#confirmNo').click(function () {
+            $("#windowConfirm").data("kendoWindow").close();
+        });
+    }
+    //Xóa text dành cho người dùng
+    function clearDataUser() {
+        $('#txtRolesName').val('');
     }
 </script>
 @* Thông báo *@
