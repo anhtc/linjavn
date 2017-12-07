@@ -30,11 +30,21 @@ namespace LinJas.Areas.AdminLinja.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// Hiển thị danh sách các  quyền từ hệ thống
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public ActionResult LoadData([DataSourceRequest] DataSourceRequest request)
         {
             var listItems = _db.Database.SqlQuery<AspController>(TVConstants.StoredProcedure.AdminRole.GetAllRolesController).ToList();
             return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// Thêm mới danh sách quyền từ hệ thống
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public ActionResult GetController([DataSourceRequest] DataSourceRequest request)
         {
             string namespaces = "LinJas.Areas.AdminLinja.Controllers";
@@ -64,6 +74,11 @@ namespace LinJas.Areas.AdminLinja.Controllers
             }
             return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// Lấy danh sách nhóm quyền Controller
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public ActionResult AddController([DataSourceRequest] DataSourceRequest request)
         {
             try
@@ -77,11 +92,18 @@ namespace LinJas.Areas.AdminLinja.Controllers
                 throw ex;
             }
         }
-        public ActionResult GetAllActionByController([DataSourceRequest] DataSourceRequest request, string _controller)
+        /// <summary>
+        /// Lấy action theo controller
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="_userId"></param>
+        /// <param name="_controller"></param>
+        /// <returns></returns>
+        public ActionResult GetAllActionByController([DataSourceRequest] DataSourceRequest request,Guid? _userId, string _controller)
         {
             try
             {
-                var listItems = _db.Database.SqlQuery<CheckQuyenModel>(TVConstants.StoredProcedure.AdminRole.GetAllActionByController, _controller).ToList();
+                var listItems = _db.Database.SqlQuery<CheckQuyenModel>(TVConstants.StoredProcedure.AdminRole.GetAllActionByController,_userId, _controller).ToList();
 
                 return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
             }
@@ -90,20 +112,41 @@ namespace LinJas.Areas.AdminLinja.Controllers
                 throw ex;
             }
         }
-        public ActionResult UpdateQuyen(Guid userId, string controller, string quyenIds, string removelQuyenIds)
+        /// <summary>
+        /// Cập nhật quyền  cho người dùng
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="controller"></param>
+        /// <param name="quyenIds"></param>
+        /// <param name="mota"></param>
+        /// <param name="removelQuyenIds"></param>
+        /// <returns></returns>
+        public ActionResult UpdateQuyen(Guid userId, string controller, string quyenIds,string mota, string removelQuyenIds)
         {
             try
             {
                 var text = "";
                 var result = 0;
-               
-                for (int i = 0; i < quyenIds.Length; i++)
-                {
-                    string[] arrQuyen = Regex.Split(quyenIds, ",");
-                    string[] removeArrQuyen = Regex.Split(removelQuyenIds, ",");
+                string[] arrQuyen = Regex.Split(quyenIds, ",");
+                string[] removeArrQuyen = Regex.Split(removelQuyenIds, ",");
 
-                    result += _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.UpdatePhanquyenUserById, userId, controller, arrQuyen[i], removeArrQuyen[i]);
-                }              
+                if (removeArrQuyen[0].ToString() != "" && !string.IsNullOrEmpty(removeArrQuyen[0]))
+                {
+                    for (int i = 0; i < removeArrQuyen.Length.GetHashCode(); i++)
+                    {
+                        AddQuyenModel model = new AddQuyenModel { RoleId = userId, Controller = controller, Action = removeArrQuyen[i].ToString(), Description = mota};
+                        result += _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.DeletePhanquyenUserById, model.RoleId, model.Controller, model.Action, model.Description);
+                    }                   
+                }
+                if (arrQuyen[0].ToString() != "" && !string.IsNullOrEmpty(arrQuyen[0]))
+                {
+                    for (int i = 0; i < arrQuyen.Length.GetHashCode(); i++)
+                    {
+                        AddQuyenModel model = new AddQuyenModel { RoleId = userId, Controller = controller, Action = arrQuyen[i].ToString(), Description = mota};
+                        result += _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.UpdatePhanquyenUserById, model.RoleId, model.Controller, model.Action, model.Description);
+                    }
+                }
+                             
 
                 if (result > 0)
                 {
@@ -111,7 +154,6 @@ namespace LinJas.Areas.AdminLinja.Controllers
                 }
                 else
                 {
-
                     text = "Cập nhật quyền thất bại.";
                 }
 
@@ -119,25 +161,9 @@ namespace LinJas.Areas.AdminLinja.Controllers
             }
             catch (Exception)
             {
-                return Json(new { Num = 0, Message = "Cập nhật quyền thất bại." }, JsonRequestBehavior.AllowGet);
+                return Json(new { Num = 0, Message = "Quyền chưa được cập nhật." }, JsonRequestBehavior.AllowGet);
             }
-        }
-        //[HttpPost]
-        //public ActionResult AddController(Guid userId, params string[] selectedController)
-        //{
-        //    var ctx = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)_db).ObjectContext;
-        //    ctx.ExecuteStoreCommand("DELETE FROM [AsbRoleController] WHERE RoleId={0}", userId);
-
-        //    foreach (var item in selectedController)
-        //    {
-        //        string controller = item.Split('-')[0];
-        //        string action = item.Split('-')[1];
-
-        //        _db.AspRoleControllers.Add(new AspRoleController { RoleId = userId, Controller = controller, Action = action });
-        //    }
-        //    _db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+        }        
         /// <summary>
         /// Thêm quyền
         /// </summary>
@@ -152,16 +178,52 @@ namespace LinJas.Areas.AdminLinja.Controllers
             if (result < 1) text = "Thêm mới Thất bại";
             return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// hiển thị quyền 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public ActionResult GetAllRole([DataSourceRequest] DataSourceRequest request)
         {
             var listItems = _db.Database.SqlQuery<AspNetRole>(TVConstants.StoredProcedure.AdminRole.GetAllRoles).ToList();
             return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// Hiển thị cho Update mo tả  quyền
+        /// </summary>
+        /// <param name="_controller"></param>
+        /// <param name="_action"></param>
+        /// <returns></returns>
+        public ActionResult GetUpdateMotaQuyen(string _controller, string _action)
+        {
+            var model = _db.Database.SqlQuery<AspController>(TVConstants.StoredProcedure.AdminRole.GetMotaQuyenByAction, _controller,_action).FirstOrDefault();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult UpdateMotaQuyen(string _controllers, string _actions, string _descriptions)
+        {
+            var result = 0;
+
+            result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.UpdateMotaQuyen, _controllers, _actions, _descriptions, "AdminLinja");
+            var text = "Chỉnh sửa thành công";
+            if (result < 1) text = "Chỉnh sửa Thất bại";
+            return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// Hiển thị cho update roles
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult GetUpdateRole(Guid id)
         {
             var model = _db.Database.SqlQuery<AspNetRole>(TVConstants.StoredProcedure.AdminRole.GetRoleById, id).FirstOrDefault();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// Sửa quyền admin
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="roleName"></param>
+        /// <returns></returns>
         [ValidateInput(false)]
         public ActionResult UpdateRole(Guid id, string roleName)
         {
@@ -172,6 +234,11 @@ namespace LinJas.Areas.AdminLinja.Controllers
             if (result < 1) text = "Chỉnh sửa Thất bại";
             return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// Xóa quyền dành cho admin
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public ActionResult DeleteRole(Guid Id)
         {
             var result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.DeleteRoleById, Id);

@@ -18,8 +18,7 @@
               columns.Bound(c => c.Area).Sortable(false).Title("Area");
               columns.Bound(c => c.Description).Sortable(false).Title("Mô tả");
               columns.Bound(c => c.TrangThai).Sortable(true).Title("Trạng thái");
-              columns.Bound(c => c.Action).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEdit(\"#=Action#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
-              columns.Bound(c => c.Action).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Action#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Action).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEditMota(\"#=Controller#\",\"#=Action#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
           })
           .ToolBar(toolbar =>
           {
@@ -87,27 +86,30 @@
     </div>
     <!--Người dùng-->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 heading">
             <h2 class="text-title">Danh sách người dùng</h2>
+        </div>
+        <div class="col-md-12 ">           
             <div id="clientsDb">
                 @(Html.Kendo().Grid<NguoiDungModel>()
           .Name("grdUser")
           .Columns(columns =>
           {
-          columns.Bound(c => c.Id).Sortable(false).Title("Id");
-          columns.Bound(c => c.Avatar).Title("Avatar");
-          columns.Bound(c => c.Email).Sortable(false).Title("Email");
-          columns.Bound(c => c.Phone).Sortable(false).Title("Phone");
-          columns.Bound(c => c.UserName).Sortable(true).Title("Tên tài khoản");
-          columns.Bound(c => c.PasswordHash).Sortable(false).Title("Mật khẩu");
-          columns.Bound(c => c.RoleName).Sortable(false).Title("Quyền");
-          columns.Bound(c => c.Activeted).Sortable(false).Title("Trạng thái").ClientTemplate("<div style=\"text-align:center;\">#=Activeted#</div>").Width(30);
-        columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEdit(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
-        columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
-    })
+              columns.Bound(c => c.Id).Sortable(false).Title("Id");
+              columns.Bound(c => c.Hoten).Title("Tên người dùng");
+              columns.Bound(c => c.Avatar).Title("Avatar");
+              columns.Bound(c => c.Email).Sortable(false).Title("Email");
+              columns.Bound(c => c.Phone).Sortable(false).Title("Phone");
+              columns.Bound(c => c.UserName).Sortable(true).Title("Tên tài khoản");
+              columns.Bound(c => c.PasswordHash).Sortable(false).Title("Mật khẩu");
+              columns.Bound(c => c.RoleName).Sortable(false).Title("Quyền");
+              columns.Bound(c => c.Activeted).Sortable(false).Title("Trạng thái").ClientTemplate("<div style=\"text-align:center;\">#=Activeted#</div>").Width(30);
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEdit(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+          })
           .ToolBar(toolbar =>
           {
-        toolbar.Template(
+          toolbar.Template(
                 @<text>
                     <div class="toolbar">
                         <table style="width:100%">
@@ -137,7 +139,7 @@
     <!--Phân quyền-->
     <div class="row">
         <div class="col-md-12 heading">
-            <h2 class="text-title">Danh sách Quyền</h2>
+            <h2 class="text-title">Phân Quyền cho quản trị viên</h2>
         </div>
         <div class="col-md-6">
             <div id="clientsDb">
@@ -196,7 +198,42 @@
         </div>
     </div>   
 </div>
-
+<!--POPUP-->
+@*Sửa mô tả cho quyền*@
+<div id="window-AddMota">
+    @(Html.Kendo().Window().Name("WindowAddMota")
+                .Title("Quản lý danh sách các quyền")
+                .Draggable()
+                .Width(550)
+                .Visible(false)
+                .Modal(true)
+                .Actions(actions => actions.Close())
+                .Content(
+    @<text>        
+        <div>
+            <table style="width: 100%;" border="0">
+                <tr>
+                    <td><label>Mô tả</label></td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.Hidden("txtControllers","")
+                        @Html.Hidden("txtActions", "")
+                        <input type="text" id="txtDescription" class='k-textbox' placeholder="Nhập mô tả cho quyền..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <hr />
+                        <button type="button" id="BtnUpdateMota" class="k-button" onclick="UpdateMotaQuyen()"><span class="k-icon k-edit"></span> Sửa</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </text>
+    )
+    )
+</div>
 @*Thêm mới Role*@
 <div id="window-Add">
     @(Html.Kendo().Window().Name("WindowAddRoleId")
@@ -299,7 +336,16 @@
             }
         });
     }
-    // thêm
+    // Sửa mô tả quyền
+    function showAddMota() {
+        $("#BtnUpdateMota").show();
+
+        if (!$("#WindowAddMota").is(":visible")) {
+            //resetAllField();
+            $("#WindowAddMota").data("kendoWindow").center().open();
+        }
+    }
+    // thêm quyền
     function showAdd() {
         $("#BtnAddNew").show();
         $("#BtnUpdate").hide();
@@ -318,6 +364,51 @@
             $("#WindowAddRoleId").data("kendoWindow").center().open();
         }
     }
+    //Lấy detail quyền để sửa mô tả
+    function showWindowEditMota(controller, action) {
+
+        $.get('@Url.Action("GetUpdateMotaQuyen", "Roles")', { _controller: controller, _action: action })
+            .done(function (data) {
+                
+                $("#txtControllers").val(data.Controller);
+                $("#txtActions").val(data.Action);
+                $("#txtDescription").val(data.Description);
+
+                showAddMota();
+       });
+    }
+    //sửa mô tả
+    function UpdateMotaQuyen() {
+
+        var _controllers= $("#txtControllers").val();
+        var _actions = $("#txtActions").val();
+        var _mota = $("#txtDescription").val();
+
+        var formData = new FormData();
+        formData.append("_controllers", _controllers);
+        formData.append("_actions", _actions);
+        formData.append("_descriptions", _mota);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UpdateMotaQuyen", "Roles")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Num == 1) {
+                    clearData();
+                    $("#WindowAddMota").data("kendoWindow").center().close();
+                    $("#grdController").data("kendoGrid").dataSource.read();
+                    $("#grdController").data("kendoGrid").refresh();
+                }
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+     }
     //lấy detail để sửa Role
     function updateItemGridRole(Id)
     {
@@ -394,7 +485,7 @@
             }
         });
      }
-    //sửa quyền
+    //xóa quyền
     function DeleteRole(Id) {
         idRole = Id;
         var formData = new FormData();
@@ -458,6 +549,7 @@
     }
     function filterActionParams() {
         return {
+            _userId: userId,
             _controller: controller
         };
     }
@@ -507,7 +599,7 @@
             if ($(keyID).is(":checked") == true) {
 
                 selectedIds.push(_action);
-              
+
             } else {
 
                 unSelectedIds.push( _action);
@@ -516,7 +608,7 @@
 
         var quyenIds = selectedIds.join(",");
         var removelQuyenIds = unSelectedIds.join(",");
-        
+
         if ((userId == null) || (userId.length == 0)) {
 
             showAlertView("Bạn cần chọn quản trị viên để cập nhật", "Đồng ý");
@@ -531,7 +623,9 @@
                 formData.append("userId", userId);
                 formData.append("controller", _controller);
                 formData.append("quyenIds", quyenIds);
+                formData.append("mota", _description);
                 formData.append("removelQuyenIds", removelQuyenIds);
+
                 $.ajax({
                     type: "POST",
                     url: '@Url.Action("UpdateQuyen", "Roles")',

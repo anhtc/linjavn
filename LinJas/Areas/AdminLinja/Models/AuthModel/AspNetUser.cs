@@ -31,5 +31,7 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
         public bool? Active { get; set; }
 
         public Guid? RoleId { get; set; }
+
+        public string Hoten { get; set; }
     }
 }

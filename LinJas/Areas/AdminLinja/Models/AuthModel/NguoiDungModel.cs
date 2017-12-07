@@ -46,5 +46,6 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
         }
 
         public string RoleName { get; set; }
+        public string Hoten { get; set; }
     }
 }
