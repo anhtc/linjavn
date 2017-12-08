@@ -80,6 +80,20 @@ input#mastercheckbox {
 #windowConfirm.checkconfirm{
     margin:15px 0px;
 }
+#WindowAddUserId label{
+    display:block;
+    float:left;
+    width:100%;
+    margin:12px 0px;
+}
+#WindowAddUserId button{
+    float:right;
+}
+#WindowAddUserId label span {
+    position: relative;
+    top: -12px;
+    left: 10px;
+}
 /*alert*/
 #windowPopup {
     text-align: center;

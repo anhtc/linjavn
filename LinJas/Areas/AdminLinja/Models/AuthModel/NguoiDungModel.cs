@@ -21,9 +21,9 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
 
         [StringLength(150)]
         public string UserName { get; set; }
-
-        [StringLength(250)]
-        public string Avatar { get; set; }
+      
+        public byte[] Avatar { get; set; }
+        public string Anh { get; set; }
 
         public DateTime? CreateDate { get; set; }
 
@@ -44,7 +44,14 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
                 return trangthai;
             }
         }
-
+        public string UrlAnh
+        {
+            get
+            {
+                return "ShowPhotoById/" + Id;
+            }
+        }
+        public Guid RoleId { get; set; }
         public string RoleName { get; set; }
         public string Hoten { get; set; }
     }

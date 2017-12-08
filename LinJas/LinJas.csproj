@@ -192,6 +192,7 @@
     <Compile Include="Areas\AdminLinja\Controllers\HomesController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\ImageBrowserController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\RolesController.cs" />
+    <Compile Include="Areas\AdminLinja\Controllers\UploadController.cs" />
     <Compile Include="Areas\AdminLinja\Models\AutherizeUser.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AddQuyenModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspController.cs" />
@@ -237,6 +238,7 @@
   <ItemGroup>
     <Content Include="App_Data\ninjadiagrams.PNG" />
     <Content Include="App_Data\script.sql" />
+    <Content Include="App_Data\scripts.sql" />
     <Content Include="Areas\AdminLinja\Content\bootstrap-select.css" />
     <Content Include="Areas\AdminLinja\Content\bootstrap-select.min.css" />
     <Content Include="Areas\AdminLinja\Content\bootstrap.css" />
@@ -522,6 +524,7 @@
     <Content Include="Areas\AdminLinja\Scripts\encoder.js" />
     <Content Include="Areas\AdminLinja\Scripts\howler.js" />
     <Content Include="App_Data\Ninja.bak" />
+    <Content Include="App_Data\Ninja-Developer.bak" />
     <None Include="Areas\AdminLinja\Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\AdminLinja\Scripts\jquery-1.10.2.js" />
     <Content Include="Areas\AdminLinja\Scripts\jquery-1.10.2.min.js" />
@@ -1534,7 +1537,9 @@
     <Content Include="Views\Roles\GetController.cshtml" />
     <Content Include="Views\Roles\AddController.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\AdminLinja\Views\Upload\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>

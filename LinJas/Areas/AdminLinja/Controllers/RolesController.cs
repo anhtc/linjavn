@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using LinJas.Areas.AdminLinja.Common;
 using Kendo.Mvc.Extensions;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace LinJas.Areas.AdminLinja.Controllers
 {
@@ -121,7 +122,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
         /// <param name="mota"></param>
         /// <param name="removelQuyenIds"></param>
         /// <returns></returns>
-        public ActionResult UpdateQuyen(Guid userId, string controller, string quyenIds,string mota, string removelQuyenIds)
+        public ActionResult UpdateQuyen(Guid userId, string controller, string quyenIds,string motas, string removelQuyenIds)
         {
             try
             {
@@ -129,12 +130,13 @@ namespace LinJas.Areas.AdminLinja.Controllers
                 var result = 0;
                 string[] arrQuyen = Regex.Split(quyenIds, ",");
                 string[] removeArrQuyen = Regex.Split(removelQuyenIds, ",");
+                string[] motaAll = Regex.Split(motas, ",");
 
                 if (removeArrQuyen[0].ToString() != "" && !string.IsNullOrEmpty(removeArrQuyen[0]))
                 {
                     for (int i = 0; i < removeArrQuyen.Length.GetHashCode(); i++)
                     {
-                        AddQuyenModel model = new AddQuyenModel { RoleId = userId, Controller = controller, Action = removeArrQuyen[i].ToString(), Description = mota};
+                        AddQuyenModel model = new AddQuyenModel { RoleId = userId, Controller = controller, Action = removeArrQuyen[i].ToString(), Description = motaAll[i].ToString()};
                         result += _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.DeletePhanquyenUserById, model.RoleId, model.Controller, model.Action, model.Description);
                     }                   
                 }
@@ -142,7 +144,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
                 {
                     for (int i = 0; i < arrQuyen.Length.GetHashCode(); i++)
                     {
-                        AddQuyenModel model = new AddQuyenModel { RoleId = userId, Controller = controller, Action = arrQuyen[i].ToString(), Description = mota};
+                        AddQuyenModel model = new AddQuyenModel { RoleId = userId, Controller = controller, Action = arrQuyen[i].ToString(), Description = motaAll[i].ToString()};
                         result += _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.UpdatePhanquyenUserById, model.RoleId, model.Controller, model.Action, model.Description);
                     }
                 }
@@ -263,7 +265,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
         /// <returns></returns>
         public ActionResult GetUpdateUserById(Guid id)
         {
-            var model = _db.Database.SqlQuery<AspNetUser>(TVConstants.StoredProcedure.AdminRole.GetUpdateUserById, id).FirstOrDefault();
+            var model = _db.Database.SqlQuery<NguoiDungModel>(TVConstants.StoredProcedure.AdminRole.GetUpdateUserById, id).FirstOrDefault();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
@@ -292,12 +294,18 @@ namespace LinJas.Areas.AdminLinja.Controllers
         /// <param name="_hoten"></param>
         /// <returns></returns>
         public ActionResult UpdateUser(Guid id, string _email, string _password, string _phone, string _userName
-            , string _avatar
+            , HttpPostedFileBase _avatar
             , bool _active
             , Guid _roleId
             , string _hoten)
         {
             var result = 0;
+            var _media = new byte[] { 0x20 };
+            if (_avatar != null)
+            {
+                var binaryReader = new BinaryReader(_avatar.InputStream);
+                _media = binaryReader.ReadBytes(_avatar.ContentLength);
+            }
 
             result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.UpdateUser
                 , id
@@ -328,26 +336,54 @@ namespace LinJas.Areas.AdminLinja.Controllers
         /// <param name="_hoten"></param>
         /// <returns></returns>
         public ActionResult InsertUser(string _email, string _password, string _phone, string _userName
-            , string _avatar
+            , HttpPostedFileBase  _avatar
             , bool _active
             , Guid _roleId
             , string _hoten)
         {
             var result = 0;
-
+            var _media = new byte[] { 0x20 };
+            if (_avatar != null)
+            {
+                var binaryReader = new BinaryReader(_avatar.InputStream);
+                _media = binaryReader.ReadBytes(_avatar.ContentLength);
+            }
             result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.InsertUser
                 , _email
                 , _password
                 , _phone
                 , _userName
-                , _avatar
+                , _media
                 , _active
                 , _roleId
                 , _hoten);
 
-            var text = "Chỉnh sửa thành công";
-            if (result < 1) text = "Chỉnh sửa Thất bại";
+            var text = "Thêm mới thành công";
+            if (result < 1) text = "Thêm mới Thất bại";
             return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetQuyenByAll([DataSourceRequest] DataSourceRequest request)
+        {
+            var listItems = _db.Database.SqlQuery<AspNetRole>(TVConstants.StoredProcedure.AdminRole.GetQuyenByAll).ToList();
+            return Json(listItems, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// Show ảnh avatar
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ShowPhotoById(Guid? id)
+        {
+            var item = _db.Database.SqlQuery<NguoiDungModel>(TVConstants.StoredProcedure.AdminRole.GetUpdateUserById, id).FirstOrDefault();
+            if (item != null && item.Avatar != null)
+            {
+                return File(item.Avatar, "image/png");
+            }
+            else
+            {
+                return File("~/Content/Images/NoImage.jpg", "image/png");
+            }
         }
     }
 }

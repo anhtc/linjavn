@@ -44,6 +44,9 @@ namespace LinJas.Areas.AdminLinja.Common
                 public const string InsertUser = @"admin_InsertUser @Email={0}, @PasswordHash={1}, @Phone={2}, @UserName={3}, @Avatar={4}, @Active={5}, @RoleId={6}, @Hoten={7}";
                 public const string UpdateUser = @"admin_UpdateUser @Id={0}, @Email={1}, @PasswordHash={2}, @Phone={3}, @UserName={4}, @Avatar={5}, @Active={6}, @RoleId={7}, @Hoten={8}";
                 public const string DeleteUserById = @"admin_DeleteUserById @Id={0}";
+                //Quyền phân cho người dùng
+                public const string GetQuyenByAll = @"admin_GetQuyenByAll";
+
             }
         }
     }

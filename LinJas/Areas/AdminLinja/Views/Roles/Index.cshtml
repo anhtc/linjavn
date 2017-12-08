@@ -97,7 +97,7 @@
           {
               columns.Bound(c => c.Id).Sortable(false).Title("Id");
               columns.Bound(c => c.Hoten).Title("Tên người dùng");
-              columns.Bound(c => c.Avatar).Title("Avatar");
+              columns.Bound(c => c.UrlAnh).Title("Ảnh đại diện").ClientTemplate("<img src='" + @Url.Content("#=UrlAnh#") + "' height='30px' width='30px'/>"); ;
               columns.Bound(c => c.Email).Sortable(false).Title("Email");
               columns.Bound(c => c.Phone).Sortable(false).Title("Phone");
               columns.Bound(c => c.UserName).Sortable(true).Title("Tên tài khoản");
@@ -115,7 +115,7 @@
                         <table style="width:100%">
                             <tr>
                                 <td width="25%" align="left">
-                                    <button type="button" id="btnPhanQuyen" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Người dùng</button>
+                                    <button type="button" id="btnAddUser" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Người dùng</button>
                                 </td>
                             </tr>
                         </table>
@@ -196,7 +196,8 @@
         ))
             </div>
         </div>
-    </div>   
+    </div>  
+    
 </div>
 <!--POPUP-->
 @*Sửa mô tả cho quyền*@
@@ -269,17 +270,117 @@
     )
     )
 </div>
+<!--Thêm mới người dùng-->
+<div id="window-Adduser">
+    @(Html.Kendo().Window().Name("WindowAddUserId")
+                .Title("Quản lý người dùng")
+                .Draggable()
+                .Width(550)
+                .Visible(false)
+                .Modal(true)
+                .Actions(actions => actions.Close())
+                .Content(
+    @<text>
+        <div><span id="ErrorMessageUser"></span></div>
+        <div style="padding: 5px;">
+            <div>
+                <table style="width: 100%;" border="0">
+                    <tr>
+                        <td>
+                            <label>Họ và tên *</label>
+                            <input type="text" id="textName" name="textName" class='form-control k-textbox' placeholder="Họ và tên..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.Hidden("Id")
+                            <label>Email *</label>
+                            <input type="email" id="email" name="email" class='form-control k-textbox' placeholder="Email..." />
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td>
+                            <label>Số điện thoại *</label>
+                            <input type="tel" id="sodienthoai" name="sodienthoai" class='form-control k-textbox' placeholder="Phone..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Tài khoản *</label>
+                            <input type="text" id="userName" name="userName" class='form-control k-textbox' placeholder="Tên tài khoản..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Mật khẩu *</label>
+                            <input type="password" id="password" name="password" class='form-control k-textbox' placeholder="Password..." />
+                        </td>
+                    </tr>                   
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label>Chọn loại ủy quyền *</label>
+                                    @(Html.Kendo().ComboBox()
+                                      .Name("listRoles")
+                                      .HtmlAttributes(new { style = "width:175px" })
+                                      .Filter("contains")
+                                      .Placeholder("--- Chọn quyền ---")
+                                      .DataTextField("RoleName")
+                                      .DataValueField("Id")
+                                      .AutoBind(false)
+                                      .DataSource(source => { source.Read(read => { read.Action("GetQuyenByAll", "Roles"); }); })
+                                      .Suggest(true)
+                                    )
+                                </div>
+                                <div class="col-md-5">
+                                    <label><input type="checkbox" id="ckActive" name="textActive" /><span> Kích hoạt</span></label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Chọn ảnh đại diện *</label>
+                            <div class="demo-section k-content">
+                                <div style="position: relative;margin-top:5px;margin-bottom:10px; width:100px;">
+                                    <img id="anhAvatar" src="~/Areas/AdminLinja/Content/images/NoImage.jpg" class="img-thumbnail img-responsive">
+                                    <div style="position: absolute; bottom: 0; right: 0; margin: 0 5px 2px 0">
+                                        <button id="xoaAnh" type="button" class="glyphicon glyphicon-remove"></button>
+                                        <button id="themAnh" type="button" class="glyphicon glyphicon-file"></button>
+                                        <input id="tepAnh" type="file" style="display:none;" />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </td>
+                    </tr>                  
+                    <tr>
+                        <td>
+                            <hr />
+                            <button type="button" id="BtnAddNewUser" class="k-button" onclick="InsertUser()"><span class="k-icon k-edit"></span> Thêm mới</button>
+                            <button type="button" id="BtnUpdateUser" class="k-button" onclick="UpdateUser()"><span class="k-icon k-edit"></span> Cập nhật</button>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+
+        </div>
+    </text>)
+    )   
+</div>
+<!--END-->
 <script>
     var controller = "Roles";
     var userId = "";
-    function onChange(arg) {
-        console.log('Event On Changer;');
+    function onChange(arg) {        
         var grid = $('#grdUser').data("kendoGrid");
         var selectedRow = grid.select();
         var selectedRowIndex = selectedRow.index();
         var data = grid.dataSource.data();
         userId = data[selectedRowIndex].Id;
-        console.log(data[selectedRowIndex].Id);
+        
         lienHeItemGrid(data[selectedRowIndex].Id);
     }
     function onDataBound(arg) {
@@ -291,14 +392,13 @@
 
     }
     //Action
-    function onChangeAction(arg) {
-        console.log('Event On Changer;');
+    function onChangeAction(arg) {      
         var grid = $('#grdQuyen').data("kendoGrid");
         var selectedRow = grid.select();
         var selectedRowIndex = selectedRow.index();
         var data = grid.dataSource.data();
         controller = data[selectedRowIndex].Controller;
-        console.log(controller);
+        
         lienHeItemGridAction(data[selectedRowIndex].Controller);
     }
     function onDataBoundAction(arg) {
@@ -313,9 +413,14 @@
 <script type="text/javascript">
     var idRole;
     $(document).ready(function () {
+        //Cập nhật quyền vào hệ thống nhanh
         $("#btnPhanQuyen").click(function () {
             getupdateroles();
-        })
+        });
+        //Hiển thị popup người dùng
+        $("#btnAddUser").click(function () {
+            showAddUser();
+        });
     })
     function getupdateroles() {
         $.ajax({
@@ -355,7 +460,7 @@
             $("#WindowAddRoleId").data("kendoWindow").center().open();
         }
     }
-    //sửa
+    //sửa quyền
     function showUpdate() {
         $("#BtnAddNew").hide();
         $("#BtnUpdate").show();
@@ -529,8 +634,7 @@
     //user
 
     function lienHeItemGrid(id) {
-        detailId = id;
-        console.log("detailId " + detailId);
+        detailId = id;       
         refreshGridQuyen();
     }
     function refreshGridQuyen() {
@@ -539,8 +643,7 @@
     }
     //Action
     function lienHeItemGridAction(id) {
-        controller = id;
-        console.log("controller " + controller);
+        controller = id;        
         refreshGridAction();
     }
     function refreshGridAction() {
@@ -562,7 +665,7 @@
 
             var itemId = data[i]["Action"];
             var itemClass = "#checkboxGroups_" + itemId;
-            console.log(itemId);
+           
             if ($(this).is(':checked')) {
                 $(itemClass).prop('checked', 'checked').attr('checked', true).change();
             }
@@ -571,7 +674,6 @@
             }
         }
     });
-
     $('#grdAction').on('change', 'input[type=checkbox][id!=mastercheckbox]', function (e) {
         var $check = $(this);
         if ($check.is(":checked") == true) {
@@ -588,6 +690,7 @@
     {
         var selectedIds = [];
         var unSelectedIds = [];
+        var motaselects = [];
         var grid = $('#grdAction').data("kendoGrid");
         var data = grid.dataSource.data();
         for (var i = 0; i < data.length; i++) {
@@ -599,15 +702,18 @@
             if ($(keyID).is(":checked") == true) {
 
                 selectedIds.push(_action);
+                motaselects.push(_description);
 
             } else {
 
-                unSelectedIds.push( _action);
+                unSelectedIds.push(_action);
+                motaselects.push(_description);
             }
         }
-
+        //tách item chuỗi bới dấu ,
         var quyenIds = selectedIds.join(",");
         var removelQuyenIds = unSelectedIds.join(",");
+        var moTas = motaselects.join(",");
 
         if ((userId == null) || (userId.length == 0)) {
 
@@ -623,7 +729,7 @@
                 formData.append("userId", userId);
                 formData.append("controller", _controller);
                 formData.append("quyenIds", quyenIds);
-                formData.append("mota", _description);
+                formData.append("motas", moTas);
                 formData.append("removelQuyenIds", removelQuyenIds);
 
                 $.ajax({
@@ -651,12 +757,36 @@
         });
 
     }
+    // check null quyền
+    function validate() {
+        var _roleName = $("#txtRolesName").val()
+
+        if (_roleName == "") {
+            $("#ErrorMessage").text("Quyền không được phép trống.");
+            return false;
+        }
+    }
     //--->Thao tác với người dùng<---
     //Thêm mới quyền
      function InsertUser() {
-        var _rolesName = $("#txtRolesName").val();
-        var formData = new FormData();
-        formData.append("roleName", _rolesName);
+         var _Name = $("#textName").val();
+         var _Email = $("#email").val();
+         var _Phone = $("#sodienthoai").val();
+         var _UserName = $("#userName").val();
+         var _Password = $("#password").val();
+         var _Avatar = document.getElementById("tepAnh").files[0];
+         var _Quyen = $("#listRoles").val();
+         var _Active = $("#ckActive").is(":checked");
+         
+         var formData = new FormData();
+         formData.append("_email", _Email);
+         formData.append("_password", _Password);
+         formData.append("_phone", _Phone);
+         formData.append("_userName", _UserName);
+         formData.append("_avatar", _Avatar);
+         formData.append("_active", _Active);
+         formData.append("_roleId", _Quyen);
+         formData.append("_hoten", _Name);
 
         $.ajax({
             type: "POST",
@@ -667,7 +797,7 @@
             processData: false,
             success: function (data) {
                 if (data.Num == 1) {
-                    clearData();
+                    clearDataUser();
                     $("#WindowAddRoleId").data("kendoWindow").center().close();
                     $("#grdRole").data("kendoGrid").dataSource.read();
                     $("#grdRole").data("kendoGrid").refresh();
@@ -678,7 +808,6 @@
                 showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
             }
         });
-
     }
     //sửa người dùng
     function UpdateUser() {
@@ -713,21 +842,23 @@
     {
         clearDataUser();
         userId = Id;
+
         $.get('@Url.Action("GetUpdateUserById", "Roles")', { id: userId })
             .done(function (data) {
-                $("#txtRolesName").val(data.RoleName);
-           showUpdate();
+                
+                $("#textName").val(data.Hoten);
+                $("#email").val(data.Email);
+                $("#sodienthoai").val(data.Phone);
+                $("#userName").val(data.UserName);
+                $("#password").val(data.PasswordHash);
+                $("#anhAvatar").attr("src", data.Anh);                
+                $("#listRoles").data("kendoComboBox").value(data.RoleName);
+                document.getElementById("ckActive").checked = data.Active;
+                console.log(data.Anh);
+                showUpdateUser();
        });
     }
-    //
-    function validate() {
-        var _roleName = $("#txtRolesName").val()
 
-        if (_roleName == "") {
-            $("#ErrorMessage").text("Quyền không được phép trống.");
-            return false;
-        }
-    }
     //Xóa người dùng
     function DeleteUser(Id) {
         userId = Id;
@@ -768,8 +899,79 @@
     }
     //Xóa text dành cho người dùng
     function clearDataUser() {
-        $('#txtRolesName').val('');
+        $('#textName').val('');
+        $("#textName").val('');
+        $("#email").val('');
+        $("#sodienthoai").val('');
+        $("#userName").val('');
+        $("#password").val('');
+        $("#files").val('');
+        $("#listRoles").val();
+        $('#ckActive').attr('checked', false);
+        $("#listRoles").data("kendoComboBox").select('');
     }
+     // Sửa mô tả quyền
+    function showAddMota() {
+        $("#BtnUpdateMota").show();
+
+        if (!$("#WindowAddMota").is(":visible")) {
+            //resetAllField();
+            $("#WindowAddMota").data("kendoWindow").center().open();
+        }
+    }
+    // Hiển thị popup người dùng
+    function showAddUser() {
+        $("#BtnAddNewUser").show();
+        $("#BtnUpdateUser").hide();
+
+        if (!$("#WindowAddUserId").is(":visible")) {
+            $("#WindowAddUserId").data("kendoWindow").center().open();
+        }
+    }
+    //sửa quyền
+    function showUpdateUser() {
+        $("#BtnAddNewUser").hide();
+        $("#BtnUpdateUser").show();
+
+        if (!$("#WindowAddUserId").is(":visible")) {
+            $("#WindowAddUserId").data("kendoWindow").center().open();
+        }
+    }
+ 
+    //--Combobox
+    function Roles_Select() {
+        var filter = $("#listRoles").data("kendoComboBox").value();
+        if (filter) {
+            alert('Thông báo' + filter);
+
+        }
+
+    }
+    //--Thêm ảnh
+    var changeImage = false;
+ 
+    $(function () {
+        // image
+        $('#themAnh').click(function (e) {
+            $('#tepAnh').click();
+        });
+
+        $('#tepAnh').bind('change', function (e) {
+            var fileReader = new FileReader();
+            fileReader.readAsDataURL(this.files[0]);
+            fileReader.onload = function (e) {
+                $("#anhAvatar").attr("src", this.result);
+                changeImage = true;
+            };
+        });
+
+        $('#xoaAnh').click(function (e) {
+            $("#anhAvatar").attr("src", "/Areas/AdminLinja/Content/images/NoImage.jpg");
+            $('#tepAnh').val('');
+            changeImage = true;
+        });
+    })
 </script>
+
 @* Thông báo *@
 @Html.Partial("_Arlert")
