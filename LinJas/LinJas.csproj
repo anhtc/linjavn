@@ -1502,6 +1502,7 @@
     <Content Include="Areas\AdminLinja\Views\Shared\_Menu.cshtml" />
     <Content Include="Areas\AdminLinja\Views\Roles\Index.cshtml" />
     <Content Include="Areas\AdminLinja\Views\Shared\_Arlert.cshtml" />
+    <Content Include="Areas\AdminLinja\Views\Upload\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1537,9 +1538,7 @@
     <Content Include="Views\Roles\GetController.cshtml" />
     <Content Include="Views\Roles\AddController.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\AdminLinja\Views\Upload\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
