@@ -97,7 +97,7 @@
           {
               columns.Bound(c => c.Id).Sortable(false).Title("Id");
               columns.Bound(c => c.Hoten).Title("Tên người dùng");
-              columns.Bound(c => c.UrlAnh).Title("Ảnh đại diện").ClientTemplate("<img src='" + @Url.Content("#=UrlAnh#") + "' height='30px' width='30px'/>"); ;
+              columns.Bound(c => c.UrlAnh).Title("Ảnh đại diện").Width(50).ClientTemplate("<img src='" + @Url.Content("#=UrlAnh#") + "' height='30px' width='30px'/>"); ;
               columns.Bound(c => c.Email).Sortable(false).Title("Email");
               columns.Bound(c => c.Phone).Sortable(false).Title("Phone");
               columns.Bound(c => c.UserName).Sortable(true).Title("Tên tài khoản");
@@ -287,13 +287,13 @@
                 <table style="width: 100%;" border="0">
                     <tr>
                         <td>
+                            @Html.Hidden("userId")
                             <label>Họ và tên *</label>
                             <input type="text" id="textName" name="textName" class='form-control k-textbox' placeholder="Họ và tên..." />
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            @Html.Hidden("Id")
+                        <td>                            
                             <label>Email *</label>
                             <input type="email" id="email" name="email" class='form-control k-textbox' placeholder="Email..." />
                         </td>
@@ -798,9 +798,9 @@
             success: function (data) {
                 if (data.Num == 1) {
                     clearDataUser();
-                    $("#WindowAddRoleId").data("kendoWindow").center().close();
-                    $("#grdRole").data("kendoGrid").dataSource.read();
-                    $("#grdRole").data("kendoGrid").refresh();
+                    $("#WindowAddUserId").data("kendoWindow").center().close();
+                    $("#grdUser").data("kendoGrid").dataSource.read();
+                    $("#grdUser").data("kendoGrid").refresh();
                 }
                 showAlertView(data.Message, "Đồng ý");
             },
@@ -810,12 +810,28 @@
         });
     }
     //sửa người dùng
-    function UpdateUser() {
+     function UpdateUser() {
+         var _id = $("#userId").val();
+        var _Name = $("#textName").val();
+        var _Email = $("#email").val();
+        var _Phone = $("#sodienthoai").val();
+        var _UserName = $("#userName").val();
+        var _Password = $("#password").val();
+        var _Avatar = document.getElementById("tepAnh").files[0];
+        var _Quyen = $("#listRoles").val();
+        var _Active = $("#ckActive").is(":checked");
 
-        var _rolesName = $("#txtRolesName").val();
         var formData = new FormData();
-        formData.append("roleName", _rolesName);
-        formData.append("id", idRole);
+        formData.append("_id", _id);
+        formData.append("_email", _Email);
+        formData.append("_password", _Password);
+        formData.append("_phone", _Phone);
+        formData.append("_userName", _UserName);
+        formData.append("_avatar", _Avatar);
+        formData.append("changeImage", changeImage);
+        formData.append("_active", _Active);
+        formData.append("_roleId", _Quyen);
+        formData.append("_hoten", _Name);
         $.ajax({
             type: "POST",
             url: '@Url.Action("UpdateUser", "Roles")',
@@ -825,10 +841,9 @@
             processData: false,
             success: function (data) {
                 if (data.Num == 1) {
-                    clearData();
-                    $("#WindowAddRoleId").data("kendoWindow").center().close();
-                    $("#grdRole").data("kendoGrid").dataSource.read();
-                    $("#grdRole").data("kendoGrid").refresh();
+                    clearDataUser();
+                    $("#grdUser").data("kendoGrid").dataSource.read();
+                    $("#grdUser").data("kendoGrid").refresh();
                 }
                 showAlertView(data.Message, "Đồng ý");
             },
@@ -845,7 +860,7 @@
 
         $.get('@Url.Action("GetUpdateUserById", "Roles")', { id: userId })
             .done(function (data) {
-                
+                $("#userId").val(data.Id);
                 $("#textName").val(data.Hoten);
                 $("#email").val(data.Email);
                 $("#sodienthoai").val(data.Phone);
@@ -854,7 +869,7 @@
                 $("#anhAvatar").attr("src", data.Anh);                
                 $("#listRoles").data("kendoComboBox").value(data.RoleName);
                 document.getElementById("ckActive").checked = data.Active;
-                console.log(data.Anh);
+                //console.log(data.Anh);
                 showUpdateUser();
        });
     }

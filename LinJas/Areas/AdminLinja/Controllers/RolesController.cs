@@ -293,13 +293,16 @@ namespace LinJas.Areas.AdminLinja.Controllers
         /// <param name="_roleId"></param>
         /// <param name="_hoten"></param>
         /// <returns></returns>
-        public ActionResult UpdateUser(Guid id, string _email, string _password, string _phone, string _userName
+        public ActionResult UpdateUser(Guid _id, string _email, string _password, string _phone, string _userName
             , HttpPostedFileBase _avatar
             , bool _active
             , Guid _roleId
-            , string _hoten)
+            , string _hoten
+            , bool changeImage)
         {
             var result = 0;
+            int _changeImage = 0;
+            if (changeImage) _changeImage = 1;
             var _media = new byte[] { 0x20 };
             if (_avatar != null)
             {
@@ -308,15 +311,16 @@ namespace LinJas.Areas.AdminLinja.Controllers
             }
 
             result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.UpdateUser
-                , id
+                , _id
                 , _email
                 , _password
                 , _phone
                 , _userName
-                , _avatar
+                , _media
                 , _active
                 , _roleId
-                , _hoten);
+                , _hoten
+                , _changeImage);
 
             var text = "Chỉnh sửa thành công";
             if (result < 1) text = "Chỉnh sửa Thất bại";
