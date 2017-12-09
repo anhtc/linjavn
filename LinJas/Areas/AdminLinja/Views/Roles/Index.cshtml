@@ -323,8 +323,8 @@
                                     <label>Chọn loại ủy quyền *</label>
                                     @(Html.Kendo().ComboBox()
                                       .Name("listRoles")
-                                      .HtmlAttributes(new { style = "width:175px" })
-                                      .Filter("contains")
+                                      .HtmlAttributes(new { style = "width:175px" })                                      
+                                      .Filter(FilterType.Contains)
                                       .Placeholder("--- Chọn quyền ---")
                                       .DataTextField("RoleName")
                                       .DataValueField("Id")
@@ -920,10 +920,11 @@
         $("#sodienthoai").val('');
         $("#userName").val('');
         $("#password").val('');
-        $("#files").val('');
-        $("#listRoles").val();
+        $("#files").val('');        
         $('#ckActive').attr('checked', false);
-        $("#listRoles").data("kendoComboBox").select('');
+        $("#listRoles").data("kendoComboBox").select(-1);
+
+        $("#anhAvatar").attr("src", "/Areas/AdminLinja/Content/images/NoImage.jpg");
     }
      // Sửa mô tả quyền
     function showAddMota() {
