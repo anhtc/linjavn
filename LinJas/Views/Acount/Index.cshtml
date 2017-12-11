@@ -25,16 +25,18 @@
                         <h3 class="panel-title">ĐĂNG NHẬP HỆ THỐNG</h3>
                     </div>
                     <div class="panel-body">
-                        @using (Html.BeginForm("Login", "Acount", FormMethod.Post))
+                        @using (Html.BeginForm("Index", "Acount", FormMethod.Post))
                         {
+                            @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true, "Thông báo", new { @class = "text-danger" })
+                            <span class="text-danger">@Html.ValidationMessage("PROGRAM_ID")</span>
                             <fieldset>
                                 <div class="form-group">
                                     @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tài khoản" } })
                                     @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
-                                    @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mật khẩu" } })
+                                    @Html.PasswordFor(model => model.PasswordHash, new {  @class = "form-control", @placeholder = "Nhập mật khẩu" })
                                     @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="checkbox">
