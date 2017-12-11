@@ -313,7 +313,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
             result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.UpdateUser
                 , _id
                 , _email
-                , _password
+                , PWUtility.GetMd5Hash(_password)
                 , _phone
                 , _userName
                 , _media
@@ -354,7 +354,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
             }
             result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminRole.InsertUser
                 , _email
-                , _password
+                , PWUtility.GetMd5Hash(_password)
                 , _phone
                 , _userName
                 , _media

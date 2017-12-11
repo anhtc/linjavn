@@ -842,6 +842,7 @@
             success: function (data) {
                 if (data.Num == 1) {
                     clearDataUser();
+                    $("#WindowAddUserId").data("kendoWindow").center().close();
                     $("#grdUser").data("kendoGrid").dataSource.read();
                     $("#grdUser").data("kendoGrid").refresh();
                 }
