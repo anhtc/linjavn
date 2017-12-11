@@ -211,28 +211,23 @@
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\ImageSize.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\ThumbnailCreator.cs" />
     <Compile Include="Common\Constants.cs" />
-    <Compile Include="Common\FuntionExtend.cs" />
     <Compile Include="Common\HtmlHelperExtension.cs" />
     <Compile Include="Common\IdentityExtension.cs" />
     <Compile Include="Common\SessionHelper.cs" />
     <Compile Include="Common\StringHelper.cs" />
     <Compile Include="Common\SubmitButtonAttribute.cs" />
     <Compile Include="Common\Utilities.cs" />
+    <Compile Include="Controllers\AcountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AsbController.cs" />
-    <Compile Include="Models\AsbNetModel.cs" />
-    <Compile Include="Models\AsbNetRole.cs" />
-    <Compile Include="Models\AsbNetUser.cs" />
-    <Compile Include="Models\AsbRoleController.cs" />
+    <Compile Include="Manager\AcountManager.cs" />
+    <Compile Include="Manager\BaseManager.cs" />
     <Compile Include="Models\AuthAttribute.cs" />
-    <Compile Include="Models\ControllerModel.cs" />
     <Compile Include="Models\IdentityModel.cs" />
-    <Compile Include="Models\AsbGetRoles.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1535,8 +1530,7 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Search\Detail.cshtml" />
-    <Content Include="Views\Roles\GetController.cshtml" />
-    <Content Include="Views\Roles\AddController.cshtml" />
+    <Content Include="Views\Acount\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
