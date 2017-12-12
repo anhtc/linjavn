@@ -67,7 +67,7 @@ namespace LinJas.Common
                     var identityModel = JsonConvert.DeserializeObject<IdentityModel>(identity.Name);
                     if (identityModel != null)
                     {
-                        userId = identityModel.UserId;
+                        userId = identityModel.Id;
                     }
                 }
 
@@ -91,7 +91,7 @@ namespace LinJas.Common
                     var identityModel = JsonConvert.DeserializeObject<IdentityModel>(identity.Name);
                     if (identityModel != null)
                     {
-                        urlPhoto = identityModel.UrlPhoto;
+                        urlPhoto = identityModel.Avatar;
                     }
                 }
 
@@ -115,7 +115,7 @@ namespace LinJas.Common
                     var identityModel = JsonConvert.DeserializeObject<IdentityModel>(identity.Name);
                     if (identityModel != null)
                     {
-                        hasUrlPhoto = !string.IsNullOrEmpty(identityModel.UrlPhoto);
+                        hasUrlPhoto = !string.IsNullOrEmpty(identityModel.Avatar);
                     }
                 }
 

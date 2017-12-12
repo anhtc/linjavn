@@ -203,3 +203,4 @@ D:\DATA\linja\xingfa\trunk\LinJas\bin\Microsoft.AI.Web.xml
 D:\DATA\linja\xingfa\trunk\LinJas\obj\Debug\LinJas.csproj.CoreCompileInputs.cache
 D:\DATA\linja\xingfa\trunk\LinJas\obj\Debug\LinJas.dll
 D:\DATA\linja\xingfa\trunk\LinJas\obj\Debug\LinJas.pdb
+D:\DATA\linja\xingfa\trunk\LinJas\obj\Debug\LinJas.csprojResolveAssemblyReference.cache
