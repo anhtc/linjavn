@@ -29,21 +29,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
         {
             return View();
         }
-        public ActionResult LoadData([DataSourceRequest] DataSourceRequest request, int? tinhId)
-        {
-            var listItems = _db.Database.SqlQuery<QuanHuyenModel>(TVConstants.StoredProcedure.AdminQuanHuyen.GetQuanHuyenByAll,tinhId).ToList();
-            return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        }
-        /// <summary>
-        /// Lấy tỉnh thành  phố
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        public ActionResult GetTinh([DataSourceRequest] DataSourceRequest request)
-        {
-            var listItems = _db.Database.SqlQuery<TinhModel>(TVConstants.StoredProcedure.AdminTinh.GetTinhByAll).ToList();
-            return Json(listItems, JsonRequestBehavior.AllowGet);        
-        }
+       
         public ActionResult Insert(string tenQuan, int sapXep, int tinhId)
         {
             try
@@ -79,7 +65,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
 
 
         }
-        public ActionResult Delete(string quanId)
+        public ActionResult Delete(int quanId)
         {
             try
             {
@@ -96,11 +82,6 @@ namespace LinJas.Areas.AdminLinja.Controllers
             }
 
         }
-        public ActionResult GetQuanById(int quanId)
-        {
-            var itemAnh = _db.Database.SqlQuery<QuanHuyen>(TVConstants.StoredProcedure.AdminQuanHuyen.GetQuanHuyenById, quanId).FirstOrDefault();
-
-            return Json(itemAnh, JsonRequestBehavior.AllowGet);
-        }
+        
     }
 }

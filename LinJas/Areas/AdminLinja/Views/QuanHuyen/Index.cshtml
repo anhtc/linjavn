@@ -26,7 +26,7 @@
                 {
                 source.Read(read =>
                 {
-                    read.Action("GetTinh", "QuanHuyen");
+                    read.Action("GetTinh", "Common");
                 }).ServerFiltering(true);
 
                 })
@@ -75,7 +75,7 @@
         .DataSource(dataSource => dataSource
         .Ajax()
         .PageSize(10)
-        .Read(read => read.Action("LoadData", "QuanHuyen").Data("filterTinhIdParams")))
+        .Read(read => read.Action("LoadDataQuanHuyen", "Common").Data("filterTinhIdParams")))
                 )
             </div>
         </div>        
@@ -211,7 +211,7 @@
 
         quanId = Id;
         clearData();
-        $.get('@Url.Action("GetQuanById", "QuanHuyen")', { quanId: Id })
+        $.get('@Url.Action("GetQuanById", "Common")', { quanId: Id })
        .done(function (data) {
 
            $("#txtTenQuan").val(data.Name);

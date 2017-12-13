@@ -1547,9 +1547,7 @@
     <Content Include="Views\Search\Detail.cshtml" />
     <Content Include="Views\Acount\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\AdminLinja\Views\Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
