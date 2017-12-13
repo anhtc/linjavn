@@ -17,6 +17,7 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<AspRoleController> AspRoleControllers { get; set; }
 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AspNetUser>()

@@ -1,0 +1,321 @@
+﻿@using LinJas.Areas.AdminLinja.Models.AuthModel
+@{
+    ViewBag.Title = "Quận huyện";
+    Layout = "~/Areas/AdminLinja/Views/Shared/_Layouts.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-title">Cập nhật quận huyện</h2>
+        </div>
+        <div class="col-md-9">
+           <div class="tabtinh">
+               <label>Tỉnh/TP: </label>
+               @(Html.Kendo().ComboBox()
+                .Name("list-tinh")
+                .HtmlAttributes(new { style = "width:175px" })
+                .Filter(FilterType.Contains)
+                .Placeholder("--- Chọn Tỉnh ---")
+                .DataTextField("Name")
+                .DataValueField("Id")
+                .MinLength(3)
+                .Events(e => e
+                .Change("Tinh_Select"))
+                .DataSource(source =>
+                {
+                source.Read(read =>
+                {
+                    read.Action("GetTinh", "QuanHuyen");
+                }).ServerFiltering(true);
+
+                })
+                .SelectedIndex(0)
+                .Suggest(true)
+               )              
+           </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">      
+        <div class="col-md-12">
+            <div id="clientsDb">
+                @(Html.Kendo().Grid<QuanHuyen>()
+          .Name("grdQuanHuyen")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.Id).Sortable(false).Title("Mã");
+              columns.Bound(c => c.Name).Title("Tên quận");
+              columns.Bound(c => c.TinhId).Sortable(false).Title("Tỉnh");
+              columns.Bound(c => c.SapXep).Sortable(false).Title("Vị trí");              
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEditMota(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGridLHDL(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Template(
+                @<text>
+                    <div class="toolbar">
+                        <table style="width:100%">
+                            <tr>
+                                <td width="25%" align="left">
+                                    <button type="button" id="btnQuanHuyen" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Quận huyện</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </text>);
+          })
+        .Pageable()
+        .Sortable()
+        .Selectable(select => select
+        .Mode(GridSelectionMode.Single)
+        .Type(GridSelectionType.Row))
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .Read(read => read.Action("LoadData", "QuanHuyen").Data("filterTinhIdParams")))
+                )
+            </div>
+        </div>        
+    </div>
+</div>
+
+<!--popup quận huyện-->
+<div id="window-Add">
+    @(Html.Kendo().Window().Name("WindowAddQuanHuyen")
+                .Title("Quản lý quận huyện")
+                .Draggable()
+                .Width(450)
+                .Visible(false)
+                .Modal(true)
+                .Actions(actions => actions.Close())
+                .Content(
+    @<text>
+        <div><span id="ErrorMessage"></span></div>
+        <div>
+            <table style="width: 100%;" border="0">                
+                <tr>
+                    <td>
+                        <label>Tên Quận/Huyện: </label>
+                        <input type="text" id="txtTenQuan" class='k-textbox' placeholder="Nhập tên Quận/Huyện..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Sắp xếp Quận/Huyện: </label>
+                        <input type="text" id="txtSapXep" class='k-textbox' placeholder="Nhập vị trí..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <hr />
+                        <button type="button" id="BtnAddNew" class="k-button" onclick="AddNewQuanHuyen()"><span class="k-icon k-edit"></span> Thêm mới</button>
+                        <button type="button" id="BtnUpdate" class="k-button" onclick="UpdateQuanHuyen()"><span class="k-icon k-edit"></span> Cập nhật</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </text>
+    )
+    )
+</div>
+
+<script>
+    var quanId;
+    $(document).ready(function () {
+        $("#btnQuanHuyen").click(function () {
+            showAdd();
+        });
+    });
+    // thêm quận huyện
+    function showAdd() {
+        $("#BtnAddNew").show();
+        $("#BtnUpdate").hide();
+
+        if (!$("#WindowAddQuanHuyen").is(":visible")) {
+            //resetAllField();
+            $("#WindowAddQuanHuyen").data("kendoWindow").center().open();
+        }
+    }
+    //sửa quận huyện
+    function showUpdate() {
+        $("#BtnAddNew").hide();
+        $("#BtnUpdate").show();
+
+        if (!$("#WindowAddQuanHuyen").is(":visible")) {
+            $("#WindowAddQuanHuyen").data("kendoWindow").center().open();
+        }
+    }
+    //lọc quận huyện theo tỉnh
+    function filterTinhIdParams() {
+        var _tinhId = $("#list-tinh").data("kendoComboBox").value();
+        if (_tinhId == null || _tinhId == '') _tinhId = 1;
+
+        return {
+            tinhId: _tinhId
+        };
+    }
+    function Tinh_Select() {
+        var filter = $("#list-tinh").data("kendoComboBox").value();
+        if (filter) {
+            $("#grdQuanHuyen").data("kendoGrid").dataSource.read();
+            $("#grdQuanHuyen").data("kendoGrid").refresh();
+
+
+        }
+    }
+    // Thêm mới quận huyện
+
+    function AddNewQuanHuyen() {
+
+        if (validate()) {
+
+            var tenQuan = $("#txtTenQuan").val();
+            var sapXep = $("#txtSapXep").val();
+            var _tinhId = $("#list-tinh").data("kendoComboBox").value();
+            if (_tinhId == null || _tinhId == '') _tinhId = 1;
+
+            var formData = new FormData();
+            formData.append("tenQuan", tenQuan);
+            formData.append("sapXep", sapXep);
+            formData.append("tinhId", _tinhId);
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Insert", "QuanHuyen")',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.Num > 0) {
+
+                        $("#WindowAddQuanHuyen").data("kendoWindow").center().close();
+                        $("#grdQuanHuyen").data("kendoGrid").dataSource.read();
+                        $("#grdQuanHuyen").data("kendoGrid").refresh();
+                        showAlertView(data.Message, "Đồng ý", "");
+                    } else {
+                        showErrorInPopup(data.Message);
+                    }
+
+                },
+                error: function () {
+
+                    showErrorInPopup("Lỗi không thể kết nối đến máy chủ.");
+                }
+            });
+        }
+    }
+    //---Cập nhật quận quyện
+    function showWindowEditMota(Id) {
+
+        quanId = Id;
+        clearData();
+        $.get('@Url.Action("GetQuanById", "QuanHuyen")', { quanId: Id })
+       .done(function (data) {
+
+           $("#txtTenQuan").val(data.Name);
+           $("#txtSapXep").val(data.SapXep);
+
+           showUpdate();
+       });
+    }
+    //Sửa quận huyện
+    function UpdateQuanHuyen() {
+
+        if (validate()) {
+
+            var tenQuan = $("#txtTenQuan").val();
+            var sapXep = $("#txtSapXep").val();
+            var _tinhId = $("#list-tinh").data("kendoComboBox").value();
+            if (_tinhId == null || _tinhId == '') _tinhId = 1;
+
+            var formData = new FormData();
+            formData.append("tenQuan", tenQuan);
+            formData.append("sapXep", sapXep);
+            formData.append("tinhId", _tinhId);
+            formData.append("quanId", quanId);
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Update", "QuanHuyen")',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.Num > 0) {
+
+                        $("#WindowAddQuanHuyen").data("kendoWindow").center().close();
+                        $("#grdQuanHuyen").data("kendoGrid").dataSource.read();
+                        $("#grdQuanHuyen").data("kendoGrid").refresh();
+                        showAlertView(data.Message, "Đồng ý", "");
+                    } else {
+                        showErrorInPopup(data.Message);
+                    }
+
+                },
+                error: function () {
+
+                    showErrorInPopup("Lỗi không thể kết nối đến máy chủ.");
+                }
+            });
+        }
+    }
+
+    // Check dữ liệu trước khi insert
+    function validate() {
+        showErrorInPopup("");
+
+        var ten = $("#txtTenQuan").val();
+
+        if (ten.length == 0) {
+            showErrorInPopup("Tên quận huyện là yêu cầu bắt buộc.");
+            return false;
+        }
+
+        return true;
+    }
+     //---Xóa quận huyện
+    function removeItemGridLHDL(Id) {
+        showAlertView("Bạn có chắc chắn ?", "Đồng ý", "Hủy", function (btnTag) {
+
+            //__OKE
+            if (btnTag == 1) {
+
+                var formData = new FormData();
+                formData.append("quanId", Id);
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete", "QuanHuyen")',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data.Num > 0) {
+
+                            $("#grdQuanHuyen").data("kendoGrid").dataSource.read();
+                            $("#grdQuanHuyen").data("kendoGrid").refresh();
+
+                        }
+                        showAlertView(data.Message, "Đồng ý", "");
+
+                    },
+                    error: function () {
+                        showAlertView("Lỗi không thể kết nối đến máy chủ", "Đồng ý", "");
+                    }
+                });
+
+            }
+        })
+    }
+    // Xóa hết dữ liệu khi cập nhật thành công
+    function clearData() {
+        showErrorInPopup("");
+        $("#txtTenQuan").val('');
+    }
+</script>

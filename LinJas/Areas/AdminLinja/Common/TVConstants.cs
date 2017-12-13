@@ -6,17 +6,17 @@ namespace LinJas.Areas.AdminLinja.Common
       
         public class StoredProcedure
         {
-            public class Admin
+            public class AdminTinh
             {
-                //
-                public const string CarMakerSelect = @"Admin_CarMaker_Select";
-                //
-                public const string ModelSelectByHangId = @"Admin_Model_SelectByHang @CarMakerId={0}";
-                public const string ModelSelectById = @"Admin_Model_SelectById @Id={0}";
-                public const string ModelInsert = @"Admin_Model_Insert @CarMarkerId={0}, @Name={1}";
-                public const string ModelUpdate = @"Admin_Model_Update @Id ={0}, @CarMarkerId={1}, @Name={2}";
-                public const string ModelDelete = @"Admin_Model_Delete @Id={0}";
-                
+                public const string GetTinhByAll = @"admin_GetTinhByAll";
+            }
+            public class AdminQuanHuyen
+            {
+                public const string GetQuanHuyenByAll = @"admin_GetQuanHuyenByAll @TinhId={0}";
+                public const string GetQuanHuyenById = @"admin_GetQuanHuyenById @Id={0}";
+                public const string AddQuanHuyen = @"admin_AddQuanHuyen @TinhId={0},@Name={1},@SapXep={2}";
+                public const string UpdateQuanHuyen = @"admin_UpdateQuanHuyen @Id={0},@TinhId={1},@Name={2},@SapXep={3}";
+                public const string DeleteQuanHuyen = @"admin_DeleteQuanHuyen @Id={0}";
             }
             public class AdminRole
             {
@@ -47,6 +47,22 @@ namespace LinJas.Areas.AdminLinja.Common
                 //Quyền phân cho người dùng
                 public const string GetQuyenByAll = @"admin_GetQuyenByAll";
 
+            }
+            public class AdminSanPham
+            {
+                public const string GetSanPhamByAll = @"admin_GetSanPhamByAll";
+                public const string GetUpdateSanPhamById = @"admin_GetUpdateSanPhamById @Id={0}";
+                public const string AddSanPham = @"admin_AddSanPham @Name={0},@TieuDe={1},@MoTa={2},@TuKhoa={3},@GiaCu={4},@GiaMoi={5},@ChietKhau={6},@KhuyenMaiId={7},@NgayBatDau={8},@NgayKetThuc={9},@DanhMucId={10},@SapSep={11},@TrangThai={12},@NoiDung={13},@Active={14},@HinhAnh={15}";
+                public const string UpdateSanPham = @"admin_UpdateSanPham @Id={0},@Name={1},@TieuDe={2},@MoTa={3},@TuKhoa={4},@GiaCu={5},@GiaMoi={6},@ChietKhau={7},@KhuyenMaiId={8},@NgayBatDau={9},@NgayKetThuc={10},@DanhMucId={11},@SapSep={12},@TrangThai={13},@NoiDung={14},@Active={15},@HinhAnh={16}";
+                public const string DeleteSanPham = @"admin_DeleteSanPham @Id={0}";
+            }
+            public class AdminDanhMuc
+            {
+                public const string GetdanhMucByAll = @"admin_GetdanhMucByAll";
+                public const string GetdanhMucById = @"admin_GetdanhMucById @Id={0}";
+                public const string addddanhMuc = @"admin_addddanhMuc @ParentId={0}, @Ma={1}, @Ten={2}, @SapSep={3}, @TinhId={4}";
+                public const string UpdatedanhMuc = @"admin_UpdatedanhMuc @Id={0},@ParentId={1}, @Ma={2}, @Ten={3}, @SapSep={4}, @TinhId={5}";
+                public const string DeleteDanhMuc = @"admin_DeleteDanhMuc @Id={0}";
             }
         }
     }

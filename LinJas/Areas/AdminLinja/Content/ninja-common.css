@@ -19,7 +19,9 @@ h2.text-title {
 #template {
     width: 380px;
 }
-
+.tabtinh{
+    padding:10px 0px;
+} 
 #template ol {
     float: left;
     margin: 0 0 0 30px;
