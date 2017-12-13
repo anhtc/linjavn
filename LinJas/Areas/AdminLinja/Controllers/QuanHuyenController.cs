@@ -31,7 +31,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
         }
         public ActionResult LoadData([DataSourceRequest] DataSourceRequest request, int? tinhId)
         {
-            var listItems = _db.Database.SqlQuery<QuanHuyen>(TVConstants.StoredProcedure.AdminQuanHuyen.GetQuanHuyenByAll,tinhId).ToList();
+            var listItems = _db.Database.SqlQuery<QuanHuyenModel>(TVConstants.StoredProcedure.AdminQuanHuyen.GetQuanHuyenByAll,tinhId).ToList();
             return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
         /// <summary>

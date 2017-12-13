@@ -217,6 +217,7 @@
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\FileBrowserEntry.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\FitImageResizer.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\ImageSize.cs" />
+    <Compile Include="Areas\AdminLinja\Models\QuanHuyenModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\ThumbnailCreator.cs" />
     <Compile Include="Areas\AdminLinja\Models\SanPhamModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\TinhModel.cs" />

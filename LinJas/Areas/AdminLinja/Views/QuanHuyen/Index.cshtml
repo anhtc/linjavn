@@ -1,4 +1,4 @@
-﻿@using LinJas.Areas.AdminLinja.Models.AuthModel
+﻿@using LinJas.Areas.AdminLinja.Models
 @{
     ViewBag.Title = "Quận huyện";
     Layout = "~/Areas/AdminLinja/Views/Shared/_Layouts.cshtml";
@@ -41,14 +41,14 @@
     <div class="row">      
         <div class="col-md-12">
             <div id="clientsDb">
-                @(Html.Kendo().Grid<QuanHuyen>()
+                @(Html.Kendo().Grid<QuanHuyenModel>()
           .Name("grdQuanHuyen")
           .Columns(columns =>
           {
               columns.Bound(c => c.Id).Sortable(false).Title("Mã");
+              columns.Bound(c => c.TenTinh).Sortable(false).Title("Tỉnh/TP");
               columns.Bound(c => c.Name).Title("Tên quận");
-              columns.Bound(c => c.TinhId).Sortable(false).Title("Tỉnh");
-              columns.Bound(c => c.SapXep).Sortable(false).Title("Vị trí");              
+              columns.Bound(c => c.SapXep).Sortable(false).Title("Vị trí");
               columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEditQuanHuyen(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
               columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGridLHDL(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
           })
