@@ -189,6 +189,7 @@
     <Compile Include="Areas\AdminLinja\Common\PWUtility.cs" />
     <Compile Include="Areas\AdminLinja\Common\StringHelper.cs" />
     <Compile Include="Areas\AdminLinja\Common\TVConstants.cs" />
+    <Compile Include="Areas\AdminLinja\Controllers\CommonController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\DanhMucController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\HomesController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\ImageBrowserController.cs" />
@@ -1546,7 +1547,9 @@
     <Content Include="Views\Search\Detail.cshtml" />
     <Content Include="Views\Acount\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\AdminLinja\Views\Common\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
