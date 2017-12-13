@@ -49,7 +49,7 @@
               columns.Bound(c => c.Name).Title("Tên quận");
               columns.Bound(c => c.TinhId).Sortable(false).Title("Tỉnh");
               columns.Bound(c => c.SapXep).Sortable(false).Title("Vị trí");              
-              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEditMota(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEditQuanHuyen(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
               columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGridLHDL(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
           })
           .ToolBar(toolbar =>
@@ -162,8 +162,6 @@
         if (filter) {
             $("#grdQuanHuyen").data("kendoGrid").dataSource.read();
             $("#grdQuanHuyen").data("kendoGrid").refresh();
-
-
         }
     }
     // Thêm mới quận huyện
@@ -209,7 +207,7 @@
         }
     }
     //---Cập nhật quận quyện
-    function showWindowEditMota(Id) {
+    function showWindowEditQuanHuyen(Id) {
 
         quanId = Id;
         clearData();
@@ -247,7 +245,7 @@
                 processData: false,
                 success: function (data) {
                     if (data.Num > 0) {
-
+                        clearData();
                         $("#WindowAddQuanHuyen").data("kendoWindow").center().close();
                         $("#grdQuanHuyen").data("kendoGrid").dataSource.read();
                         $("#grdQuanHuyen").data("kendoGrid").refresh();
@@ -255,7 +253,6 @@
                     } else {
                         showErrorInPopup(data.Message);
                     }
-
                 },
                 error: function () {
 
@@ -317,5 +314,6 @@
     function clearData() {
         showErrorInPopup("");
         $("#txtTenQuan").val('');
+        $("#txtSapXep").val('');
     }
 </script>
