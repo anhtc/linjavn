@@ -26,6 +26,7 @@ namespace LinJas.Areas.AdminLinja.Models
 		public string TrangThai { get; set; }
 		public  bool Active { get; set; }
 		public byte[] HinhAnh { get; set; }
+        public string Anh { get; set; }
 		public string Ten { get; set; }
         public string NgayBatDau { get; set; }
         public string NgayKetThuc { get; set; }

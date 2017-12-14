@@ -118,7 +118,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
         [HttpGet]
         public ActionResult ShowPhotoSanPhamById(Guid? id)
         {
-            var item = _db.Database.SqlQuery<SanPham>(TVConstants.StoredProcedure.AdminSanPham.GetUpdateSanPhamById, id).FirstOrDefault();
+            var item = _db.Database.SqlQuery<SanPhamModel>(TVConstants.StoredProcedure.AdminSanPham.GetUpdateSanPhamById, id).FirstOrDefault();
             if (item != null && item.HinhAnh != null)
             {
                 return File(item.HinhAnh, "image/png");

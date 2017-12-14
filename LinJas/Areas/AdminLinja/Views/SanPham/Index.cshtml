@@ -1,4 +1,4 @@
-﻿@using LinJas.Areas.AdminLinja.Models.AuthModel
+﻿@using LinJas.Areas.AdminLinja.Models
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/AdminLinja/Views/Shared/_Layouts.cshtml";
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12">
             <div id="clientsDb">
-                @(Html.Kendo().Grid<SanPham>()
+                @(Html.Kendo().Grid<SanPhamModel>()
           .Name("grdSanPham")
           .Columns(columns =>
           {
