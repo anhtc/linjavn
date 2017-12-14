@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using log4net;
+
 
 namespace LinJas.Areas.AdminLinja.Common
 {
     public static class StringHelper
     {
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(StringHelper));
         public static string ToSeoUrl(this string url)
         {
             var encodedUrl = (url ?? string.Empty).ToLower();
@@ -70,6 +74,20 @@ namespace LinJas.Areas.AdminLinja.Common
 
             return value.Length <= maxLength ? value : value.Substring(0, maxLength) + "...";
         }
-       
+        public static string ToCurrency(this int value)
+        {
+            try
+            {
+                var cultureInfo = CultureInfo.GetCultureInfo("vi-VN");
+                var result = value.ToString("#,###", cultureInfo);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                throw;
+            }
+        }
     }
 }

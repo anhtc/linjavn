@@ -97,7 +97,7 @@
           {
               columns.Bound(c => c.Id).Sortable(false).Title("Id");
               columns.Bound(c => c.Hoten).Title("Tên người dùng");
-              columns.Bound(c => c.UrlAnh).Title("Ảnh đại diện").Width(50).ClientTemplate("<img src='" + @Url.Content("#=UrlAnh#") + "' height='30px' width='30px'/>"); ;
+              columns.Bound(c => c.UrlAnh).Title("Ảnh đại diện").Width(50).ClientTemplate("<img src='" + @Url.Content("#=UrlAnh#") + "' height='30px' width='30px'/>"); 
               columns.Bound(c => c.Email).Sortable(false).Title("Email");
               columns.Bound(c => c.Phone).Sortable(false).Title("Phone");
               columns.Bound(c => c.UserName).Sortable(true).Title("Tên tài khoản");

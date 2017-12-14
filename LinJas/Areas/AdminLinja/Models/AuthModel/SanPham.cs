@@ -1,17 +1,18 @@
-namespace LinJas.Areas.AdminLinja.Models.AuthModel
+﻿namespace LinJas.Areas.AdminLinja.Models.AuthModel
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using LinJas.Areas.AdminLinja.Common;
 
     [Table("anhtc.SanPham")]
     public partial class SanPham
     {
         public Guid Id { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ArticleId { get; set; }
 
         [StringLength(150)]
@@ -26,10 +27,18 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
         [StringLength(170)]
         public string TuKhoa { get; set; }
 
-        public double? GiaCu { get; set; }
+        public int GiaCu { get; set; }
 
-        public double? GiaMoi { get; set; }
+        public int GiaMoi { get; set; }
+        public string Gia
+        {
+            get
+            {
+                string txtGia = "";
 
+                return txtGia += StringHelper.ToCurrency(GiaMoi) + " vnđ";
+            }
+        }
         public int? ChietKhau { get; set; }
 
         public int? KhuyenMaiId { get; set; }
@@ -53,5 +62,29 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
         public DateTime? NgayTao { get; set; }
 
         public byte[] HinhAnh { get; set; }
+        public string Anh { get; set; }
+        public string Activeted
+        {
+            get
+            {
+                string trangthai = "";
+                if (Active == true)
+                {
+                    trangthai += "<span style=\"color:#02bb10;\" class=\"glyphicon glyphicon-check\"></span>";
+                }
+                else
+                {
+                    trangthai += "<span  style=\"color:#d02028;\" class=\"glyphicon glyphicon-lock\"></span>";
+                }
+                return trangthai;
+            }
+        }
+        public string UrlAnh
+        {
+            get
+            {
+                return "Common/ShowPhotoSanPhamById/" + Id;
+            }
+        }
     }
 }

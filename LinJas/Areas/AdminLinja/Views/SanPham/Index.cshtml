@@ -1,8 +1,65 @@
-﻿
+﻿@using LinJas.Areas.AdminLinja.Models.AuthModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/AdminLinja/Views/Shared/_Layouts.cshtml";
 }
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <h2 class="text-title">Danh sách sản phẩm</h2>
+        </div>       
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="clientsDb">
+                @(Html.Kendo().Grid<SanPham>()
+          .Name("grdSanPham")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.ArticleId).Sortable(false).Title("Id");
+              columns.Bound(c => c.UrlAnh).Title("Ảnh đại diện").Width(50).ClientTemplate("<img src='" + @Url.Content("#=UrlAnh#") + "' height='30px' width='30px'/>");
+              columns.Bound(c => c.Ten).Sortable(false).Title("Danh mục");
+              columns.Bound(c => c.Name).Sortable(false).Title("Tên sản phẩm");
+              columns.Bound(c => c.NgayBatDau).Sortable(false).Title("Ngày bắt đầu");
+              columns.Bound(c => c.NgayKetThuc).Sortable(false).Title("Ngày kết thúc");
+              columns.Bound(c => c.TrangThai).Sortable(false).Title("Trạng thái");
+              columns.Bound(c => c.Gia).Sortable(false).Title("Giá mới").ClientTemplate("<div class=\"toCurrency\">#=Gia#</div>");
+              columns.Bound(c => c.Activeted).Sortable(false).Title("Kích hoạt").ClientTemplate("<div style=\"text-align:center;\">#=Activeted#</div>").Width(30);
+              columns.Bound(c => c.NgayTao).Sortable(false).Title("Ngày Tạo");
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEditDanhMuc(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGridLHDL(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+          })
+          .ToolBar(toolbar =>
+          {
+          toolbar.Template(
+                @<text>
+                    <div class="toolbar">
+                        <table style="width:100%">
+                            <tr>
+                                <td width="25%" align="left">
+                                    <button type="button" id="btnSanPham" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Sản Phẩm</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </text>);
+          })
+        .Pageable()
+        .Sortable()
+        .Selectable(select => select
+        .Mode(GridSelectionMode.Single)
+        .Type(GridSelectionType.Row))
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .Read(read => read.Action("LoadDataSanPham", "Common")))/*.Data("filterSanPhamParams")*/
+                )
+            </div>
+        </div>
+    </div>
+</div>
 
-<h2>Index</h2>
+
 

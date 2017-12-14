@@ -102,5 +102,32 @@ namespace LinJas.Areas.AdminLinja.Controllers
             return Json(itemAnh, JsonRequestBehavior.AllowGet);
         }
         #endregion
+        #region Sản Phẩm
+        public ActionResult LoadDataSanPham([DataSourceRequest] DataSourceRequest request)
+        {
+            var listItems = _db.Database.SqlQuery<SanPhamModel>(TVConstants.StoredProcedure.AdminSanPham.GetSanPhamByAll).ToList();
+            return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+        #region lấy ảnh avatar
+        /// <summary>
+        /// Show ảnh avatar
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ShowPhotoSanPhamById(Guid? id)
+        {
+            var item = _db.Database.SqlQuery<SanPham>(TVConstants.StoredProcedure.AdminSanPham.GetUpdateSanPhamById, id).FirstOrDefault();
+            if (item != null && item.HinhAnh != null)
+            {
+                return File(item.HinhAnh, "image/png");
+            }
+            else
+            {
+                return File("~/Content/Images/NoImage.jpg", "image/png");
+            }
+        }
+        #endregion
     }
 }
