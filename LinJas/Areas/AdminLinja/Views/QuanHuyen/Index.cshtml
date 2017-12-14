@@ -30,7 +30,7 @@
                 }).ServerFiltering(true);
 
                 })
-                .SelectedIndex(0)
+                .SelectedIndex(-1)
                 .Suggest(true)
                )              
            </div>
@@ -151,7 +151,7 @@
     //lọc quận huyện theo tỉnh
     function filterTinhIdParams() {
         var _tinhId = $("#list-tinh").data("kendoComboBox").value();
-        if (_tinhId == null || _tinhId == '') _tinhId = 1;
+        if (_tinhId == null || _tinhId == '') _tinhId = 0;
 
         return {
             tinhId: _tinhId

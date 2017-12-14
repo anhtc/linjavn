@@ -10,6 +10,7 @@ using LinJas.Areas.AdminLinja.Common;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 
+
 namespace LinJas.Areas.AdminLinja.Controllers
 {
     public class DanhMucController : Controller
@@ -32,10 +33,12 @@ namespace LinJas.Areas.AdminLinja.Controllers
             _db.Dispose();
         }      
         
-        public ActionResult Insert(int parentId, string ma, string name, int sapXep, int tinhId)
+        public ActionResult Insert(int parentId, string name, int sapXep, int tinhId)
         {
             try
             {
+                string ma = Common.StringHelper.ToUnsignTrim(name);
+
                 var result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminDanhMuc.addddanhMuc, parentId, ma, name, sapXep, tinhId);
 
                 var text = "Thêm mới thành công";
@@ -48,11 +51,11 @@ namespace LinJas.Areas.AdminLinja.Controllers
                 return Json(new { Num = 0, Message = "Thêm mới thất bại" }, JsonRequestBehavior.AllowGet);
             }
         }
-
-        public ActionResult Update(int id, int parentId, string ma, string name, int sapXep, int tinhId)
+        public ActionResult Update(int id, int parentId, string name, int sapXep, int tinhId)
         {
             try
             {
+                string ma = Common.StringHelper.ToUnsignTrim(name);
                 var result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminDanhMuc.UpdatedanhMuc, id,parentId,ma,name,sapXep, tinhId);
 
                 var text = "Cập nhật thành công";
@@ -64,8 +67,6 @@ namespace LinJas.Areas.AdminLinja.Controllers
             {
                 return Json(new { Num = 0, Message = "Cập nhật thất bại" }, JsonRequestBehavior.AllowGet);
             }
-
-
         }
         public ActionResult Delete(int danhmucId)
         {

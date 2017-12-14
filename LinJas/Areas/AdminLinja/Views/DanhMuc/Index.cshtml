@@ -1,4 +1,4 @@
-﻿@using LinJas.Areas.AdminLinja.Models
+﻿@using LinJas.Areas.AdminLinja.Models.AuthModel
 @{
     ViewBag.Title = "Danh mục";
     Layout = "~/Areas/AdminLinja/Views/Shared/_Layouts.cshtml";
@@ -9,7 +9,7 @@
         <div class="col-md-4">
             <h2 class="text-title">Cập nhật danh mục sản phẩm</h2>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-2">
             <div class="tabtinh">
                 <label>Tỉnh/TP: </label>
                 @(Html.Kendo().ComboBox()
@@ -19,7 +19,6 @@
                 .Placeholder("--- Chọn Tỉnh ---")
                 .DataTextField("Name")
                 .DataValueField("Id")
-                .MinLength(3)
                 .Events(e => e
                 .Change("Tinh_Select"))
                 .DataSource(source =>
@@ -27,11 +26,36 @@
                     source.Read(read =>
                     {
                         read.Action("GetTinh", "Common");
-                    }).ServerFiltering(true);
+                    });
 
                 })
-                .SelectedIndex(0)
-                .Suggest(true)
+                )
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="tabtinh">
+                <label>Danh mục: </label>
+
+                @(Html.Kendo().ComboBox()
+              .Name("list-danhmuc")
+              .HtmlAttributes(new { style = "width:200px;" })
+              .Placeholder("--- Chọn danh mục ---")
+              .DataTextField("Ten")
+              .DataValueField("Id")
+              .Filter(FilterType.Contains)
+              .Events(e => e
+              .Change("Danhmuc_Select"))
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetDataDanhMuc", "Common").Data("filterDanhMuc");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Enable(false)
+              .AutoBind(false)
+              .CascadeFrom("list-tinh")
                 )
             </div>
         </div>
@@ -41,15 +65,15 @@
     <div class="row">
         <div class="col-md-12">
             <div id="clientsDb">
-                @(Html.Kendo().Grid<QuanHuyenModel>()
-          .Name("grdQuanHuyen")
+                @(Html.Kendo().Grid<DanhMuc>()
+          .Name("grdDanhMuc")
           .Columns(columns =>
           {
-              columns.Bound(c => c.Id).Sortable(false).Title("Mã");
-              columns.Bound(c => c.TenTinh).Sortable(false).Title("Tỉnh/TP");
-              columns.Bound(c => c.Name).Title("Tên quận");
-              columns.Bound(c => c.SapXep).Sortable(false).Title("Vị trí");
-              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEditQuanHuyen(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Id).Sortable(false).Title("Id");
+              columns.Bound(c => c.Ma).Sortable(false).Title("Mã");
+              columns.Bound(c => c.Ten).Sortable(false).Title("Tên Danh mục");              
+              columns.Bound(c => c.SapSep).Sortable(false).Title("Vị trí");
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEditDanhMuc(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
               columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGridLHDL(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
           })
           .ToolBar(toolbar =>
@@ -60,7 +84,7 @@
                         <table style="width:100%">
                             <tr>
                                 <td width="25%" align="left">
-                                    <button type="button" id="btnQuanHuyen" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Quận huyện</button>
+                                    <button type="button" id="btnDanhMuc" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Danh Mục</button>
                                 </td>
                             </tr>
                         </table>
@@ -75,7 +99,7 @@
         .DataSource(dataSource => dataSource
         .Ajax()
         .PageSize(10)
-        .Read(read => read.Action("LoadDataDanhMuc", "Common").Data("filterTinhIdParams")))
+        .Read(read => read.Action("LoadDataDanhMuc", "Common").Data("filterDanhMucIdParams")))
                 )
             </div>
         </div>
@@ -84,7 +108,7 @@
 
 <!--popup quận huyện-->
 <div id="window-Add">
-    @(Html.Kendo().Window().Name("WindowAddQuanHuyen")
+    @(Html.Kendo().Window().Name("WindowAddDanhMuc")
                 .Title("Quản lý quận huyện")
                 .Draggable()
                 .Width(450)
@@ -98,13 +122,59 @@
             <table style="width: 100%;" border="0">
                 <tr>
                     <td>
-                        <label>Tên Quận/Huyện: </label>
-                        <input type="text" id="txtTenQuan" class='k-textbox' placeholder="Nhập tên Quận/Huyện..." />
+                        <label>Tỉnh/TP: </label><br />
+                        @(Html.Kendo().ComboBox()
+                            .Name("cbtinh")
+                            .HtmlAttributes(new { style = "width:100%;" })
+                            .Filter(FilterType.Contains)
+                            .Placeholder("--- Chọn Tỉnh ---")
+                            .DataTextField("Name")
+                            .DataValueField("Id")                            
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetTinh", "Common");
+                                });
+                            })
+                        )
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>Sắp xếp Quận/Huyện: </label>
+                        <label>Danh mục: </label><br />
+
+                        @(Html.Kendo().ComboBox()
+                          .Name("cbdanhmuc")
+                          .HtmlAttributes(new { style = "width:width:100%;" })
+                          .Placeholder("--- Chọn danh mục ---")
+                          .DataTextField("Ten")
+                          .DataValueField("Id")
+                          .Filter(FilterType.Contains)
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("GetDataDanhMuc", "Common").Data("filterDanhMuc");
+                              })
+                              .ServerFiltering(true);
+                          })
+                          .Enable(false)
+                          .AutoBind(false)
+                          .CascadeFrom("list-tinh")
+                        )
+                    </td>
+
+                </tr>
+                <tr>                    
+                    <td>
+                        <label>Tên danh mục: </label>
+                        <input type="text" id="txtDanhMuc" class='k-textbox' placeholder="Nhập tên danh mục..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Sắp xếp danh mục: </label>
                         <input type="text" id="txtSapXep" class='k-textbox' placeholder="Nhập vị trí..." />
                     </td>
                 </tr>
@@ -123,9 +193,9 @@
 </div>
 
 <script>
-    var quanId;
+    var idcha;
     $(document).ready(function () {
-        $("#btnQuanHuyen").click(function () {
+        $("#btnDanhMuc").click(function () {
             showAdd();
         });
     });
@@ -134,9 +204,9 @@
         $("#BtnAddNew").show();
         $("#BtnUpdate").hide();
 
-        if (!$("#WindowAddQuanHuyen").is(":visible")) {
+        if (!$("#WindowAddDanhMuc").is(":visible")) {
             //resetAllField();
-            $("#WindowAddQuanHuyen").data("kendoWindow").center().open();
+            $("#WindowAddDanhMuc").data("kendoWindow").center().open();
         }
     }
     //sửa quận huyện
@@ -144,45 +214,66 @@
         $("#BtnAddNew").hide();
         $("#BtnUpdate").show();
 
-        if (!$("#WindowAddQuanHuyen").is(":visible")) {
-            $("#WindowAddQuanHuyen").data("kendoWindow").center().open();
+        if (!$("#WindowAddDanhMuc").is(":visible")) {
+            $("#WindowAddDanhMuc").data("kendoWindow").center().open();
         }
     }
-    //lọc quận huyện theo tỉnh
-    function filterTinhIdParams() {
-        var _tinhId = $("#list-tinh").data("kendoComboBox").value();
-        if (_tinhId == null || _tinhId == '') _tinhId = 1;
-
-        return {
-            tinhId: _tinhId
-        };
-    }
+    //chọn danh mục
     function Tinh_Select() {
         var filter = $("#list-tinh").data("kendoComboBox").value();
         if (filter) {
-            $("#grdQuanHuyen").data("kendoGrid").dataSource.read();
-            $("#grdQuanHuyen").data("kendoGrid").refresh();
+            $("#grdDanhMuc").data("kendoGrid").dataSource.read();
+            $("#grdDanhMuc").data("kendoGrid").refresh();
         }
     }
+    function Danhmuc_Select(){
+        var filter = $("#list-danhmuc").data("kendoComboBox").value();
+        if (filter) {
+            $("#grdDanhMuc").data("kendoGrid").dataSource.read();
+            $("#grdDanhMuc").data("kendoGrid").refresh();
+        }
+    }
+    //lọc quận huyện theo tỉnh
+    function filterDanhMucIdParams() {
+        var _tinhId = $("#list-tinh").data("kendoComboBox").value();
+        var _danhmucId = $("#list-danhmuc").data("kendoComboBox").value();
+        if (_tinhId == null || _tinhId == '') _tinhId = 0;
+        if (_danhmucId == null || _danhmucId == '') _danhmucId = 0;
+        return {
+            tinhId: _tinhId,
+            danhmucId:_danhmucId
+        };
+    }
+  
+    //CHỌN DANH MỤC THEO TỈNH
+    function filterDanhMuc() {
+        var _tinhId = $("#list-tinh").data("kendoComboBox").value();
+        return {
+            tinhId: _tinhId          
+        };
+    }
+  
+   
     // Thêm mới quận huyện
 
     function AddNewQuanHuyen() {
 
         if (validate()) {
-
-            var tenQuan = $("#txtTenQuan").val();
+            var danhmucId = $("#cbdanhmuc").data("kendoComboBox").value();
+            var tenQuan = $("#txtDanhMuc").val();
             var sapXep = $("#txtSapXep").val();
-            var _tinhId = $("#list-tinh").data("kendoComboBox").value();
-            if (_tinhId == null || _tinhId == '') _tinhId = 1;
+            var _tinhId = $("#cbtinh").data("kendoComboBox").value();
+            if (_tinhId == null || _tinhId == '') _tinhId = 0;
 
             var formData = new FormData();
-            formData.append("tenQuan", tenQuan);
+            formData.append("parentId", danhmucId);
+            formData.append("name", tenQuan);
             formData.append("sapXep", sapXep);
             formData.append("tinhId", _tinhId);
 
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("Insert", "QuanHuyen")',
+                url: '@Url.Action("Insert", "DanhMuc")',
                 data: formData,
                 dataType: 'json',
                 contentType: false,
@@ -190,9 +281,9 @@
                 success: function (data) {
                     if (data.Num > 0) {
 
-                        $("#WindowAddQuanHuyen").data("kendoWindow").center().close();
-                        $("#grdQuanHuyen").data("kendoGrid").dataSource.read();
-                        $("#grdQuanHuyen").data("kendoGrid").refresh();
+                        $("#WindowAddDanhMuc").data("kendoWindow").center().close();
+                        $("#grdDanhMuc").data("kendoGrid").dataSource.read();
+                        $("#grdDanhMuc").data("kendoGrid").refresh();
                         showAlertView(data.Message, "Đồng ý", "");
                     } else {
                         showErrorInPopup(data.Message);
@@ -207,17 +298,18 @@
         }
     }
     //---Cập nhật quận quyện
-    function showWindowEditQuanHuyen(Id) {
+    function showWindowEditDanhMuc(Id) {
 
-        quanId = Id;
+        idcha = Id;
         clearData();
-        $.get('@Url.Action("GetQuanById", "QuanHuyen")', { quanId: Id })
-       .done(function (data) {
+        $.get('@Url.Action("GetDanhMucById", "Common")', { danhmucId: Id })
+            .done(function (data) {
+            $("#cbtinh").data("kendoComboBox").value(data.TinhId);
+            $("#cbdanhmuc").data("kendoComboBox").value(data.ParentId);
+            $("#txtDanhMuc").val(data.Ten);
+            $("#txtSapXep").val(data.SapSep);
 
-           $("#txtTenQuan").val(data.Name);
-           $("#txtSapXep").val(data.SapXep);
-
-           showUpdate();
+            showUpdate();
        });
     }
     //Sửa quận huyện
@@ -225,20 +317,22 @@
 
         if (validate()) {
 
-            var tenQuan = $("#txtTenQuan").val();
+            var danhmucId = $("#cbdanhmuc").data("kendoComboBox").value();
+            var tenQuan = $("#txtDanhMuc").val();
             var sapXep = $("#txtSapXep").val();
-            var _tinhId = $("#list-tinh").data("kendoComboBox").value();
-            if (_tinhId == null || _tinhId == '') _tinhId = 1;
+            var _tinhId = $("#cbtinh").data("kendoComboBox").value();
+            if (_tinhId == null || _tinhId == '') _tinhId = 0;
 
             var formData = new FormData();
-            formData.append("tenQuan", tenQuan);
+            formData.append("id", idcha);
+            formData.append("parentId", danhmucId);
+            formData.append("name", tenQuan);
             formData.append("sapXep", sapXep);
             formData.append("tinhId", _tinhId);
-            formData.append("quanId", quanId);
 
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("Update", "QuanHuyen")',
+                url: '@Url.Action("Update", "DanhMuc")',
                 data: formData,
                 dataType: 'json',
                 contentType: false,
@@ -246,9 +340,9 @@
                 success: function (data) {
                     if (data.Num > 0) {
                         clearData();
-                        $("#WindowAddQuanHuyen").data("kendoWindow").center().close();
-                        $("#grdQuanHuyen").data("kendoGrid").dataSource.read();
-                        $("#grdQuanHuyen").data("kendoGrid").refresh();
+                        $("#WindowAddDanhMuc").data("kendoWindow").center().close();
+                        $("#grdDanhMuc").data("kendoGrid").dataSource.read();
+                        $("#grdDanhMuc").data("kendoGrid").refresh();
                         showAlertView(data.Message, "Đồng ý", "");
                     } else {
                         showErrorInPopup(data.Message);
@@ -266,7 +360,7 @@
     function validate() {
         showErrorInPopup("");
 
-        var ten = $("#txtTenQuan").val();
+        var ten = $("#txtDanhMuc").val();
 
         if (ten.length == 0) {
             showErrorInPopup("Tên quận huyện là yêu cầu bắt buộc.");
@@ -283,11 +377,11 @@
             if (btnTag == 1) {
 
                 var formData = new FormData();
-                formData.append("quanId", Id);
+                formData.append("danhmucId", Id);
 
                 $.ajax({
                     type: "POST",
-                    url: '@Url.Action("Delete", "QuanHuyen")',
+                    url: '@Url.Action("Delete", "DanhMuc")',
                     data: formData,
                     dataType: 'json',
                     contentType: false,
@@ -295,8 +389,8 @@
                     success: function (data) {
                         if (data.Num > 0) {
 
-                            $("#grdQuanHuyen").data("kendoGrid").dataSource.read();
-                            $("#grdQuanHuyen").data("kendoGrid").refresh();
+                            $("#grdDanhMuc").data("kendoGrid").dataSource.read();
+                            $("#grdDanhMuc").data("kendoGrid").refresh();
 
                         }
                         showAlertView(data.Message, "Đồng ý", "");
@@ -313,7 +407,9 @@
     // Xóa hết dữ liệu khi cập nhật thành công
     function clearData() {
         showErrorInPopup("");
-        $("#txtTenQuan").val('');
+        $("#cbdanhmuc").data("kendoComboBox").value(-1);
+        $("#cbtinh").data("kendoComboBox").value(-1)
+        $("#txtDanhMuc").val('');
         $("#txtSapXep").val('');
     }
 </script>

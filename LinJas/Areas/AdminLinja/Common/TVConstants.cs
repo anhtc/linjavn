@@ -58,6 +58,7 @@ namespace LinJas.Areas.AdminLinja.Common
             }
             public class AdminDanhMuc
             {
+                public const string GetdanhMucBySelect = @"admin_GetdanhMucBySelect @TinhId={0}, @ParentId={1}";
                 public const string GetdanhMucByAll = @"admin_GetdanhMucByAll @TinhId={0},@Id={1}";
                 public const string GetdanhMucById = @"admin_GetdanhMucById @Id={0}";
                 public const string addddanhMuc = @"admin_addddanhMuc @ParentId={0}, @Ma={1}, @Ten={2}, @SapSep={3}, @TinhId={4}";

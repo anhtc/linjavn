@@ -40,7 +40,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
         {
             var listItems = _db.Database.SqlQuery<TinhModel>(TVConstants.StoredProcedure.AdminTinh.GetTinhByAll).ToList();
             TinhModel model = new TinhModel { Id = 0, Name = "Tất cả" };
-            listItems.Add(model);
+            listItems.Insert(0,model);
             return Json(listItems, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -48,12 +48,42 @@ namespace LinJas.Areas.AdminLinja.Controllers
 
         public ActionResult LoadDataDanhMuc([DataSourceRequest] DataSourceRequest request, int? tinhId, int? danhmucId)
         {
-            var listItems = _db.Database.SqlQuery<QuanHuyenModel>(TVConstants.StoredProcedure.AdminDanhMuc.GetdanhMucByAll, tinhId, danhmucId).ToList();
+            var listItems = _db.Database.SqlQuery<DanhMuc>(TVConstants.StoredProcedure.AdminDanhMuc.GetdanhMucByAll, tinhId, danhmucId).ToList();
             return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// Lấy danh sách danh mục
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="danhmucId"></param>
+        /// <returns></returns>
+        public ActionResult GetDataDanhMuc(int? tinhId)
+        {
+            var listDanhMucs = new List<DanhMuc>();
+            if (tinhId == null)
+                tinhId = 0;
+
+            var listParents = _db.Database.SqlQuery<DanhMuc>(TVConstants.StoredProcedure.AdminDanhMuc.GetdanhMucBySelect, tinhId, 0).ToList();
+            foreach (var items in listParents)
+            {
+                items.Ten = "+ " + items.Ten;
+                listDanhMucs.Add(items);
+
+                var childenDanhMucs = _db.Database.SqlQuery<DanhMuc>(TVConstants.StoredProcedure.AdminDanhMuc.GetdanhMucBySelect, tinhId, items.Id).ToList();
+                foreach (var childenitem in childenDanhMucs)
+                {
+                    childenitem.Ten = " -------- " + childenitem.Ten;
+                    listDanhMucs.Add(childenitem);
+                }
+            }
+            var model = new DanhMuc { Id = 0, Ten = "-- Chuyên mục cha --" };
+            listDanhMucs.Insert(0, model);
+
+            return Json(listDanhMucs, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetDanhMucById(int danhmucId)
         {
-            var itemAnh = _db.Database.SqlQuery<QuanHuyen>(TVConstants.StoredProcedure.AdminDanhMuc.GetdanhMucById, danhmucId).FirstOrDefault();
+            var itemAnh = _db.Database.SqlQuery<DanhMuc>(TVConstants.StoredProcedure.AdminDanhMuc.GetdanhMucById, danhmucId).FirstOrDefault();
 
             return Json(itemAnh, JsonRequestBehavior.AllowGet);
         }

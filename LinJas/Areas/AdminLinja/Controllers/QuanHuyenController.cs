@@ -34,9 +34,16 @@ namespace LinJas.Areas.AdminLinja.Controllers
         {
             try
             {
-                var result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminQuanHuyen.AddQuanHuyen, tinhId, tenQuan, sapXep);
-
                 var text = "Thêm mới thành công";
+                var result = 0;
+                if (tinhId == 0)
+                {
+                    text = "Bạn cần chọn tỉnh thành  phố trước khi thêm mới quận huyện.";
+                    return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+                }
+                result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminQuanHuyen.AddQuanHuyen, tinhId, tenQuan, sapXep);
+
+                
                 if (result <= 0) text = "Thêm mới thất bại";
 
                 return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
@@ -46,14 +53,19 @@ namespace LinJas.Areas.AdminLinja.Controllers
                 return Json(new { Num = 0, Message = "Thêm mới thất bại" }, JsonRequestBehavior.AllowGet);
             }
         }
-
         public ActionResult Update(string tenQuan, int sapXep, int tinhId, int quanId)
         {
             try
             {
-                var result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminQuanHuyen.UpdateQuanHuyen, quanId, tinhId, tenQuan, sapXep);
-
                 var text = "Cập nhật thành công";
+                var result = 0;
+                if (tinhId==0)
+                {
+                    text = "Bạn cần chọn tỉnh thành  phố trước khi sửa.";
+                    return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+                }
+                result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminQuanHuyen.UpdateQuanHuyen, quanId, tinhId, tenQuan, sapXep);
+
                 if (result <= 0) text = "Cập nhật thất bại";
 
                 return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);

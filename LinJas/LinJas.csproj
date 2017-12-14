@@ -1513,6 +1513,7 @@
     <Content Include="Areas\AdminLinja\Views\DanhMuc\Index.cshtml" />
     <Content Include="Areas\AdminLinja\Views\QuanHuyen\Index.cshtml" />
     <Content Include="Areas\AdminLinja\Views\SanPham\Index.cshtml" />
+    <Content Include="Areas\AdminLinja\Views\Common\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

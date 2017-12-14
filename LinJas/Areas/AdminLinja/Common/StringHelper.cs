@@ -22,7 +22,18 @@ namespace LinJas.Areas.AdminLinja.Common
 
             return encodedUrl;
         }
+        public static string ToUnsignTrim(this string url)
+        {
+            var encodedUrl = (url ?? string.Empty).ToLower();
+            encodedUrl = encodedUrl.ToUnSign();
+            encodedUrl = Regex.Replace(encodedUrl, @"\&+", "and");
+            encodedUrl = encodedUrl.Replace("'", "");
+            encodedUrl = Regex.Replace(encodedUrl, @"[^a-z0-9]", "");
+            encodedUrl = Regex.Replace(encodedUrl, @"-+", "");
+            encodedUrl = encodedUrl.Trim('-');
 
+            return encodedUrl;
+        }
         public static string ToUnSign(this string url)
         {
             url = (url ?? string.Empty).ToLower();
