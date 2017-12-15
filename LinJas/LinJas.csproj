@@ -1012,6 +1012,7 @@
     <None Include="Areas\AdminLinja\Scripts\_references.js" />
     <Content Include="Areas\AdminLinja\Views\ImageBrowser\logo-ninja.png" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\Images\NoImage.jpg" />
     <Content Include="Content\Prices\logo-ninja.png" />
     <Content Include="Content\Uploads\Articles\logo-ninja.png" />
     <Content Include="css\bootstrap.css" />
