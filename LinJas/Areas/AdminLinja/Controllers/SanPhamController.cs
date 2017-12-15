@@ -13,5 +13,9 @@ namespace LinJas.Areas.AdminLinja.Controllers
         {
             return View();
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
     }
 }

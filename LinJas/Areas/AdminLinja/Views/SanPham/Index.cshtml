@@ -3,9 +3,26 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/AdminLinja/Views/Shared/_Layouts.cshtml";
 }
+
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-7">
+
+            <textarea rows="4" id="txtContent" style="min-width: 100%; height:400px;"></textarea>
+
+        </div>
+        <div class="col-md-5">
+            <div class="k-frame">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 text-center">
             <h2 class="text-title">Danh sách sản phẩm</h2>
         </div>       
     </div>
@@ -39,7 +56,7 @@
                         <table style="width:100%">
                             <tr>
                                 <td width="25%" align="left">
-                                    <button type="button" id="btnSanPham" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Sản Phẩm</button>
+                                    <a href="@Url.Action("Create","SanPham",new{Area="AdminLinja"})" target="_blank" id="btnSanPham" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Sản Phẩm</a>
                                 </td>
                             </tr>
                         </table>
@@ -50,16 +67,127 @@
         .Sortable()
         .Selectable(select => select
         .Mode(GridSelectionMode.Single)
-        .Type(GridSelectionType.Row))
+        .Type(GridSelectionType.Row))        
         .DataSource(dataSource => dataSource
         .Ajax()
-        .PageSize(10)
+        .PageSize(10)       
         .Read(read => read.Action("LoadDataSanPham", "Common")))/*.Data("filterSanPhamParams")*/
                 )
             </div>
         </div>
     </div>
 </div>
+
+<div class="well">
+    <div class="panel">
+        @(Html.Kendo().Grid<SanPhamModel>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.Activeted);
+        columns.Bound(p => p.Gia).Width(120);
+        columns.Bound(p => p.NgayBatDau).Width(120);
+        columns.Bound(p => p.NgayKetThuc).Width(120);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+    })
+    .ToolBar(toolbar => toolbar.Create())
+    .Editable(editable => editable.Mode(GridEditMode.PopUp)))
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    .HtmlAttributes(new { style = "height:550px;" })
+
+    .DataSource(dataSource => dataSource
+        .Ajax().Total(1)
+        .PageSize(20)
+        .Events(events => events.Error("error_handler"))
+        .Model(model => model.Id(p => p.ArticleId))
+        .Create(update => update.Action("EditingPopup_Create", "Grid"))
+        .Read(read => read.Action("LoadDataSanPham", "Common"))
+        .Update(update => update.Action("EditingPopup_Update", "Grid"))
+        .Destroy(update => update.Action("EditingPopup_Destroy", "Grid"))
+    )
+        )
+    </div>
+</div>
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>
+<!--js-->
+<script>
+    //phần này dành cho Image
+    var urlHost = "@Url.Content("~/Content/uploads/articles/")";
+    $("#txtContent").kendoEditor(
+                {
+                    imageBrowser: {
+                        transport: {
+                            read: "@Url.Action("Read", "ImageBrowser")",
+                        destroy: {
+                            url: "@Url.Action("Destroy", "ImageBrowser")",
+                        type: "POST"
+                    },
+                    create: {
+                        url: "@Url.Action("Create", "ImageBrowser")",
+                    type: "POST"
+                },
+    thumbnailUrl: "@Url.Action("Thumbnail", "ImageBrowser")",
+    uploadUrl: "@Url.Action("Upload", "ImageBrowser")",
+    imageUrl: function (options) {
+        return urlHost + options;
+    }
+
+    }
+
+    },
+    tools: [
+        "bold",
+        "italic",
+        "underline",
+        "strikethrough",
+        "justifyLeft",
+        "justifyCenter",
+        "justifyRight",
+        "justifyFull",
+        "insertUnorderedList",
+        "insertOrderedList",
+        "indent",
+        "outdent",
+        "createLink",
+        "unlink",
+        "insertImage",
+        "insertFile",
+        "subscript",
+        "superscript",
+        "createTable",
+        "addRowAbove",
+        "addRowBelow",
+        "addColumnLeft",
+        "addColumnRight",
+        "deleteRow",
+        "deleteColumn",
+        "viewHtml",
+        "formatting",
+        "cleanFormatting",
+        "fontName",
+        "fontSize",
+        "foreColor",
+        "backColor"
+    ]
+    }
+        );
+</script>
 
 
 
