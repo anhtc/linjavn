@@ -6,32 +6,214 @@
 
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-7">
-
-            <textarea rows="4" id="txtContent" style="min-width: 100%; height:400px;"></textarea>
-
+    <div class="row well">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">Nội dung sản phẩm:</div>
+                <div class="panel-body">
+                    <label>Tên sản phẩm:</label>
+                    <textarea rows="1" id="txtName" class="form-control" placeholder="Tên sản phẩm..."></textarea>
+                    <label>Nội dung:</label>
+                    <textarea rows="10" id="txtContent" class="form-control" placeholder="Nội dung chi tiết..."></textarea>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Phần dành cho SEO:</div>
+                <div class="panel-body">
+                    <label>Tiêu đề:</label>
+                    <textarea rows="2" id="txtTieuDeSeo" class="form-control" placeholder="Tiêu đề seo..."></textarea>
+                    <label>Mô tả:</label>
+                    <textarea rows="4" id="txtMotaSeo" class="form-control" placeholder="Mô tả seo..."></textarea>
+                    <label>Từ khóa:</label>
+                    <textarea rows="2" id="txtTukhoaSeo" class="form-control" placeholder="Từ khóa seo..."></textarea>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Nhập từ khóa tìm kiếm trên hệ thống:(vd: sản phẩm a, sản phẩm,...)</div>
+                <div class="panel-body">
+                    <label>Từ khóa tìm  kiếm:</label>
+                    <textarea rows="2" id="txtTukhoaSeo" class="form-control" placeholder="Từ khóa tìm kiếm..."></textarea>
+                </div>
+            </div>      
         </div>
-        <div class="col-md-5">
-            <div class="k-frame">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Thông tin sản phẩm</div>
+                <div class="panel-body">
+                    <label>Danh mục:</label>
+                    @(Html.Kendo().ComboBox()
+                  .Name("cbDanhMuc")
+                  .Filter("contains")
+                  .Placeholder("Chọn danh mục sản phẩm...")
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .BindTo(new List<SelectListItem>() {
+                      new SelectListItem() {
+                        Text = "Cotton", Value = "1"
+                      },
+                      new SelectListItem() {
+                        Text = "Polyester", Value = "2"
+                      },
+                      new SelectListItem() {
+                        Text = "Cotton/Polyester", Value = "3"
+                      },
+                      new SelectListItem() {
+                        Text = "Rib Knit", Value = "4"
+                      }
+                  })
+                  .SelectedIndex(-1)
+                  .Suggest(true)
+                  .HtmlAttributes(new { style = "width:100%;" })
+                    )
+                    <label>Trạng thái:</label>
+                    @(Html.Kendo().ComboBox()
+                  .Name("cbTrangThai")
+                  .Filter("contains")
+                  .Placeholder("Chọn trạng thái...")
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .BindTo(new List<SelectListItem>() {
+                      new SelectListItem() {
+                        Text = "Cotton", Value = "1"
+                      },
+                      new SelectListItem() {
+                        Text = "Polyester", Value = "2"
+                      },
+                      new SelectListItem() {
+                        Text = "Cotton/Polyester", Value = "3"
+                      },
+                      new SelectListItem() {
+                        Text = "Rib Knit", Value = "4"
+                      }
+                  })
+                  .SelectedIndex(-1)
+                  .Suggest(true)
+                  .HtmlAttributes(new { style = "width:100%;" })
+                    )
+                    <label>Giá cũ:</label>
+                    <input type="number" id="txtGiaCu" placeholder="Giá cũ..." class="form-control"/>
+                    <label>Giá mới:</label>
+                    <input type="number" id="txtGiaMoi" placeholder="Giá mới..." class="form-control"/>
+                    <label>Giảm giá:</label>
+                    <input type="number" id="txtChietKhau" placeholder="Chiết khấu (vd: 10->'10%')..." class="form-control"/>
+                    <label>Ngày bắt đầu:</label>
+                    @(Html.Kendo().DateTimePicker()
+                    .Name("dateNgaybatdau")
+                    .Value(DateTime.Now)
+                    .HtmlAttributes(new { style = "width: 100%", title = "Ngày bắt đầu" })                    
+                    )
+                   
+                    <label>Ngày kết thúc:</label>                    
+                    @(Html.Kendo().DateTimePicker()
+                    .Name("dateNgayketthuc")
+                    .Value(DateTime.Now)
+                    .HtmlAttributes(new { style = "width: 100%", title = "Ngày kết thúc" })
+                    )
 
+                    <label>Sản phẩm khuyến mại:</label>
+                    @(Html.Kendo().ComboBox()
+                  .Name("cbKhuyenMaiId")
+                  .Filter("contains")
+                  .Placeholder("Chọn khuyến mại...")
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .BindTo(new List<SelectListItem>() {
+                      new SelectListItem() {
+                        Text = "Cotton", Value = "1"
+                      },
+                      new SelectListItem() {
+                        Text = "Polyester", Value = "2"
+                      },
+                      new SelectListItem() {
+                        Text = "Cotton/Polyester", Value = "3"
+                      },
+                      new SelectListItem() {
+                        Text = "Rib Knit", Value = "4"
+                      }
+                  })
+                  .SelectedIndex(-1)
+                  .Suggest(true)
+                  .HtmlAttributes(new { style = "width:100%;" })
+                    )
+                    <label>Sắp Xếp:</label>
+                    <input type="number" id="txtSapxep" placeholder="Vị trí sản phẩm..." class="form-control" />
+                    <br />                    
+                    <label><span class="text-active">Kích hoạt: </span><input type="checkbox" id="txtActive" /></label>
+                    <br />
+                    <label>Ảnh đại diện:</label>
+                    <div class="demo-section k-content">
+                        <div style="position: relative;margin-top:5px;margin-bottom:10px; width:100px;">
+                            <img id="anhAvatar" src="~/Areas/AdminLinja/Content/images/NoImage.jpg" class="img-thumbnail img-responsive">
+                            <div style="position: absolute; bottom: 0; right: 0; margin: 0 5px 2px 0">
+                                <button id="xoaAnh" type="button" class="glyphicon glyphicon-remove"></button>
+                                <button id="themAnh" type="button" class="glyphicon glyphicon-file"></button>
+                                <input id="tepAnh" type="file" style="display:none;" />
+                            </div>
+                        </div>
+                    </div><!--end img-->
+                   <div class="form-save">
+                       <button type="button" id="saveButton" class="k-button k-button-icontext"><span class="k-icon k-i-plus"></span> Thêm mới</button>
+                       <button type="button" id="editButton" class="k-button k-button-icontext"><span class="k-icon k-edit"></span> Sửa</button>
+                   </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Ảnh dành cho slide</div>
+                <div class="panel-body">
+                    @(Html.Kendo().Grid<SanPhamModel>()
+                        .Name("gridanhslide")
+                        .Columns(columns =>
+                        {
+                            columns.Bound(c => c.ArticleId).Title("Ảnh")
+                            .ClientTemplate(
+                                @"<div class='customer-photo'
+                                    style='background-image: url(" + @Url.Content("~/Areas/AdminLinja/Content/images/NoImage.jpg") + ");'></div><div class='customer-name'>#: Name #</div>")
+                            .Width(240);
+                            columns.Bound(c => c.Name);
+                            columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEditDanhMuc(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+                            columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGridLHDL(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+                        })
+                        .ToolBar(toolbar =>
+                        {
+                            toolbar.Template(
+                            @<text>
+                                <div class="toolbar">
+                                    <table style="width:100%">
+                                        <tr>
+                                            <td width="25%" align="left">
+                                                <a href="@Url.Action("Create","SanPham",new{Area="AdminLinja"})" target="_blank" id="btnSanPham" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Ảnh</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </text>);
+                        })                        
+                        .Pageable()
+                        .Sortable()
+                        .Selectable(select => select
+                        .Mode(GridSelectionMode.Single)
+                        .Type(GridSelectionType.Row))
+                        .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .PageSize(10)
+                        .Read(read => read.Action("LoadDataSanPham", "Common")))/*.Data("filterSanPhamParams")*/
+                    )
+                    <hr />
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <h2 class="text-title">Danh sách sản phẩm</h2>
-        </div>       
-    </div>
-</div>
+<!--Danh sách sản phẩm-->
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <div id="clientsDb">
-                @(Html.Kendo().Grid<SanPhamModel>()
+            <div class="well">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><h2 class="text-title">Danh sách sản phẩm</h2></div>
+                    <div class="panel-body" id="clientsDb">
+                        @(Html.Kendo().Grid<SanPhamModel>()
           .Name("grdSanPham")
           .Columns(columns =>
           {
@@ -51,80 +233,37 @@
           .ToolBar(toolbar =>
           {
           toolbar.Template(
-                @<text>
-                    <div class="toolbar">
-                        <table style="width:100%">
-                            <tr>
-                                <td width="25%" align="left">
-                                    <a href="@Url.Action("Create","SanPham",new{Area="AdminLinja"})" target="_blank" id="btnSanPham" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Sản Phẩm</a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </text>);
+            @<text>
+                <div class="toolbar">
+                    <table style="width:100%">
+                        <tr>
+                            <td width="25%" align="left">
+                                <a href="@Url.Action("Create","SanPham",new{Area="AdminLinja"})" target="_blank" id="btnSanPham" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Sản Phẩm</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </text>);
           })
         .Pageable()
         .Sortable()
         .Selectable(select => select
         .Mode(GridSelectionMode.Single)
-        .Type(GridSelectionType.Row))        
+        .Type(GridSelectionType.Row))
         .DataSource(dataSource => dataSource
         .Ajax()
-        .PageSize(10)       
+        .PageSize(10)
         .Read(read => read.Action("LoadDataSanPham", "Common")))/*.Data("filterSanPhamParams")*/
-                )
+                        )
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="well">
-    <div class="panel">
-        @(Html.Kendo().Grid<SanPhamModel>()
-    .Name("grid")
-    .Columns(columns =>
-    {
-        columns.Bound(p => p.Activeted);
-        columns.Bound(p => p.Gia).Width(120);
-        columns.Bound(p => p.NgayBatDau).Width(120);
-        columns.Bound(p => p.NgayKetThuc).Width(120);
-        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
-    })
-    .ToolBar(toolbar => toolbar.Create())
-    .Editable(editable => editable.Mode(GridEditMode.PopUp)))
-    .Pageable()
-    .Sortable()
-    .Scrollable()
-    .HtmlAttributes(new { style = "height:550px;" })
 
-    .DataSource(dataSource => dataSource
-        .Ajax().Total(1)
-        .PageSize(20)
-        .Events(events => events.Error("error_handler"))
-        .Model(model => model.Id(p => p.ArticleId))
-        .Create(update => update.Action("EditingPopup_Create", "Grid"))
-        .Read(read => read.Action("LoadDataSanPham", "Common"))
-        .Update(update => update.Action("EditingPopup_Update", "Grid"))
-        .Destroy(update => update.Action("EditingPopup_Destroy", "Grid"))
-    )
-        )
-    </div>
-</div>
-<script type="text/javascript">
-    function error_handler(e) {
-        if (e.errors) {
-            var message = "Errors:\n";
-            $.each(e.errors, function (key, value) {
-                if ('errors' in value) {
-                    $.each(value.errors, function () {
-                        message += this + "\n";
-                    });
-                }
-            });
-            alert(message);
-        }
-    }
-</script>
 <!--js-->
 <script>
     //phần này dành cho Image

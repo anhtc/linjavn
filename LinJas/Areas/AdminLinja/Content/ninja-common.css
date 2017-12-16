@@ -1,6 +1,10 @@
 ﻿.container-fluid {
-    overflow:hidden;
-    padding:0px 1px;
+    overflow: hidden;
+    padding: 0px 1px;
+    background: #efefef;
+}
+.panel-body table.k-editor {
+    height: 500px;
 }
 h2.text-title {
     text-transform: uppercase;
@@ -10,7 +14,14 @@ h2.text-title {
     color: #1460b1;
     padding-left: 15px;
 }
-
+.panel-body label {
+    margin-top: 5px;
+} 
+.text-active {
+    position: relative;
+    top: -13px;
+    margin-right: 15px;
+}
 #template img {
     margin: 5px 20px 0 0;
     float: left;
@@ -137,4 +148,31 @@ input#mastercheckbox {
     padding: 10px;
     color: red;
     font-size: 13px;
+}
+/*ảnh slide show gird*/
+.customer-photo {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-size: 32px 35px;
+    background-position: center center;
+    vertical-align: middle;
+    line-height: 32px;
+    box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+    margin-left: 5px;
+}
+
+.customer-name {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 32px;
+    padding-left: 3px;
+}
+.form-save {
+    position: relative;
+    display: block;
+    float: right;
+    bottom: 39px;
+    right: 80px;
 }
