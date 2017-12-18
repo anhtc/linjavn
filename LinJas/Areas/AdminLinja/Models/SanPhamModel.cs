@@ -23,7 +23,7 @@ namespace LinJas.Areas.AdminLinja.Models
         }
 		public int ChietKhau { get; set; }
 		public int SapSep { get; set; }
-		public string TrangThai { get; set; }
+		public int TrangThai { get; set; }
 		public  bool Active { get; set; }
 		public byte[] HinhAnh { get; set; }
         public string Anh { get; set; }
@@ -31,6 +31,7 @@ namespace LinJas.Areas.AdminLinja.Models
         public string NgayBatDau { get; set; }
         public string NgayKetThuc { get; set; }
         public string NgayTao { get; set; }
+        public string TuKhoaTimKiem { get; set; }
         public string Activeted
         {
             get

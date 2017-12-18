@@ -52,7 +52,7 @@ namespace LinJas.Areas.AdminLinja.Common
             {
                 public const string GetSanPhamByAll = @"admin_GetSanPhamByAll";
                 public const string GetUpdateSanPhamById = @"admin_GetUpdateSanPhamById @Id={0}";
-                public const string AddSanPham = @"admin_AddSanPham @Name={0},@TieuDe={1},@MoTa={2},@TuKhoa={3},@GiaCu={4},@GiaMoi={5},@ChietKhau={6},@KhuyenMaiId={7},@NgayBatDau={8},@NgayKetThuc={9},@DanhMucId={10},@SapSep={11},@TrangThai={12},@NoiDung={13},@Active={14},@HinhAnh={15}";
+                public const string AddSanPham = @"admin_AddSanPham @Name={0},@TieuDe={1},@MoTa={2},@TuKhoa={3},@GiaCu={4},@GiaMoi={5},@ChietKhau={6},@KhuyenMaiId={7},@NgayBatDau={8},@NgayKetThuc={9},@DanhMucId={10},@SapSep={11},@TrangThai={12},@NoiDung={13},@Active={14},@HinhAnh={15},@TuKhoaTimKiem={16}";
                 public const string UpdateSanPham = @"admin_UpdateSanPham @Id={0},@Name={1},@TieuDe={2},@MoTa={3},@TuKhoa={4},@GiaCu={5},@GiaMoi={6},@ChietKhau={7},@KhuyenMaiId={8},@NgayBatDau={9},@NgayKetThuc={10},@DanhMucId={11},@SapSep={12},@TrangThai={13},@NoiDung={14},@Active={15},@HinhAnh={16}";
                 public const string DeleteSanPham = @"admin_DeleteSanPham @Id={0}";
             }

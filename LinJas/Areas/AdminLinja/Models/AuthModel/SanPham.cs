@@ -63,6 +63,7 @@
 
         public byte[] HinhAnh { get; set; }
         public string Anh { get; set; }
+        public string TuKhoaTimKiem { get; set; }
         public string Activeted
         {
             get

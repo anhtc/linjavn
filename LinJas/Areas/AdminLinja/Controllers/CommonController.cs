@@ -108,6 +108,28 @@ namespace LinJas.Areas.AdminLinja.Controllers
             var listItems = _db.Database.SqlQuery<SanPhamModel>(TVConstants.StoredProcedure.AdminSanPham.GetSanPhamByAll).ToList();
             return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetDanhMucSanPham(int? tinhId)
+        {
+            var listDanhMucs = new List<DanhMuc>();
+            if (tinhId == null)
+                tinhId = 0;
+
+            var listParents = _db.Database.SqlQuery<DanhMuc>(TVConstants.StoredProcedure.AdminDanhMuc.GetdanhMucBySelect, tinhId, 0).ToList();
+            foreach (var items in listParents)
+            {
+                items.Ten = "+ " + items.Ten;
+                listDanhMucs.Add(items);
+
+                var childenDanhMucs = _db.Database.SqlQuery<DanhMuc>(TVConstants.StoredProcedure.AdminDanhMuc.GetdanhMucBySelect, tinhId, items.Id).ToList();
+                foreach (var childenitem in childenDanhMucs)
+                {
+                    childenitem.Ten = " -------- " + childenitem.Ten;
+                    listDanhMucs.Add(childenitem);
+                }
+            }          
+            
+            return Json(listDanhMucs, JsonRequestBehavior.AllowGet);
+        }
         #endregion
         #region lấy ảnh avatar
         /// <summary>

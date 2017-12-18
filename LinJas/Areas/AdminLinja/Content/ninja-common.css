@@ -148,6 +148,8 @@ input#mastercheckbox {
     padding: 10px;
     color: red;
     font-size: 13px;
+    display: block;
+    width: 100%;
 }
 /*ảnh slide show gird*/
 .customer-photo {
@@ -175,4 +177,12 @@ input#mastercheckbox {
     float: right;
     bottom: 39px;
     right: 80px;
+}
+#text-messemgerfoTieuDeSeo, #text-messemgerfoMotaSeo, #text-messemgerfoTukhoaSeo {
+    text-align: left;
+    color: #1460b1;
+    font-size: 14px;
+}
+#text-messemgerfoTieuDeSeo span, #text-messemgerfoMotaSeo span, #text-messemgerfoTukhoaSeo span{
+    color: #dd0404;
 }
