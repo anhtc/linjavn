@@ -45,21 +45,15 @@
                   .Name("cbDanhMuc")
                   .Filter("contains")
                   .Placeholder("Chọn danh mục sản phẩm...")
-                  .DataTextField("Text")
-                  .DataValueField("Value")
-                  .BindTo(new List<SelectListItem>() {
-                      new SelectListItem() {
-                        Text = "Cotton", Value = "1"
-                      },
-                      new SelectListItem() {
-                        Text = "Polyester", Value = "2"
-                      },
-                      new SelectListItem() {
-                        Text = "Cotton/Polyester", Value = "3"
-                      },
-                      new SelectListItem() {
-                        Text = "Rib Knit", Value = "4"
-                      }
+                  .DataTextField("Ten")
+                  .DataValueField("Id")
+                  .DataSource(source =>
+                  {
+                      source.Read(read =>
+                      {
+                          read.Action("GetDataDanhMuc", "Common");
+                      }).ServerFiltering(true);
+
                   })
                   .SelectedIndex(-1)
                   .Suggest(true)
@@ -74,16 +68,16 @@
                   .DataValueField("Value")
                   .BindTo(new List<SelectListItem>() {
                       new SelectListItem() {
-                        Text = "Cotton", Value = "1"
+                        Text = "Hàng mới về", Value = "1"
                       },
                       new SelectListItem() {
-                        Text = "Polyester", Value = "2"
+                        Text = "Bán chạy", Value = "2"
                       },
                       new SelectListItem() {
-                        Text = "Cotton/Polyester", Value = "3"
+                        Text = "Hết hàng", Value = "3"
                       },
                       new SelectListItem() {
-                        Text = "Rib Knit", Value = "4"
+                        Text = "Đang về", Value = "4"
                       }
                   })
                   .SelectedIndex(-1)
@@ -119,16 +113,10 @@
                   .DataValueField("Value")
                   .BindTo(new List<SelectListItem>() {
                       new SelectListItem() {
-                        Text = "Cotton", Value = "1"
+                        Text = "Khuyến mại hot", Value = "1"
                       },
                       new SelectListItem() {
-                        Text = "Polyester", Value = "2"
-                      },
-                      new SelectListItem() {
-                        Text = "Cotton/Polyester", Value = "3"
-                      },
-                      new SelectListItem() {
-                        Text = "Rib Knit", Value = "4"
+                        Text = "Chưa có khuyến mại", Value = "2"
                       }
                   })
                   .SelectedIndex(-1)
@@ -266,6 +254,12 @@
 
 <!--js-->
 <script>
+    //
+
+
+
+
+
     //phần này dành cho Image
     var urlHost = "@Url.Content("~/Content/uploads/articles/")";
     $("#txtContent").kendoEditor(
