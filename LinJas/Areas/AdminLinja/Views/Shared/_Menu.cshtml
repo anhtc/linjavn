@@ -1,8 +1,28 @@
 ﻿<div id="headmenu">
     <div id="megaStore">
         <ul id="menu">
+            <li><a href="@Url.Action("Index","Roles",new { Area="AdminLinja" })">Phân Quyền</a></li>
             <li>
-               Phân quyền
+             Danh mục
+                <ul>
+                    <li><a href="@Url.Action("Index","QuanHuyen",new { Area="AdminLinja" })">Quận Huyện</a></li>
+                    <li><a href="@Url.Action("Index","DanhMuc",new { Area="AdminLinja" })">Danh Mục Sản Phẩm</a></li>
+                    <li><a href="@Url.Action("Index","SanPham",new { Area="AdminLinja" })">Sản Phẩm</a></li>
+                    <li>Children's Furniture</li>
+                    <li>Beds</li>
+                </ul>
+            </li>
+            <li>
+                Blog
+            </li>
+            <li>
+                Company
+            </li>
+            <li>
+                Events
+            </li>
+            <li disabled="disabled">
+                News
                 <ul>
                     <li>
                         Furniture
@@ -53,28 +73,6 @@
                         </ul>
                     </li>
                 </ul>
-            </li>
-            <li>
-             Danh mục
-                <ul>
-                    <li><a href="@Url.Action("Index","QuanHuyen",new { Area="AdminLinja" })">Quận Huyện</a></li>
-                    <li><a href="@Url.Action("Index","DanhMuc",new { Area="AdminLinja" })">Danh Mục Sản Phẩm</a></li>
-                    <li><a href="@Url.Action("Index","SanPham",new { Area="AdminLinja" })">Sản Phẩm</a></li>
-                    <li>Children's Furniture</li>
-                    <li>Beds</li>
-                </ul>
-            </li>
-            <li>
-                Blog
-            </li>
-            <li>
-                Company
-            </li>
-            <li>
-                Events
-            </li>
-            <li disabled="disabled">
-                News
             </li>
         </ul>
     </div>
