@@ -43,23 +43,21 @@
 
         public int? KhuyenMaiId { get; set; }
 
-        public DateTime? NgayBatDau { get; set; }
+        public string NgayBatDau { get; set; }
 
-        public DateTime? NgayKetThuc { get; set; }
+        public string NgayKetThuc { get; set; }
 
         public int? DanhMucId { get; set; }
 
-        public int? SapSep { get; set; }
-
-        [StringLength(150)]
-        public string TrangThai { get; set; }
+        public int? SapSep { get; set; }        
+        public int TrangThai { get; set; }
 
         [Column(TypeName = "ntext")]
         public string NoiDung { get; set; }
 
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
 
-        public DateTime? NgayTao { get; set; }
+        public string NgayTao { get; set; }
 
         public byte[] HinhAnh { get; set; }
         public string Anh { get; set; }

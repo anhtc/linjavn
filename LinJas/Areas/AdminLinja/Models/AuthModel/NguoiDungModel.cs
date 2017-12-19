@@ -48,7 +48,7 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
         {
             get
             {
-                return "Roles/ShowPhotoById/" + Id;
+                return "ShowPhotoById/" + Id;
             }
         }
         public Guid RoleId { get; set; }

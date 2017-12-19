@@ -89,5 +89,77 @@ namespace LinJas.Areas.AdminLinja.Controllers
                 throw ex;
             }            
         }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Update(
+            Guid Id
+            , string tenSanPham
+            , string title
+            , string description
+            , string keyword
+            , int? giaCu
+            , int? giaMoi
+            , int? chietKhau
+            , int? khuyenMaiId
+            , string tuNgay
+            , string denNgay
+            , int? danhMuc
+            , int? sapXep
+            , int? trangThai
+            , string noiDung
+            , bool active
+            , HttpPostedFileBase mediaFile
+            , bool changeImage
+            , string tuKhoa
+            )
+        {
+            try
+            {
+                var result = 0;
+                var _media = new byte[] { 0x20 };
+                if (mediaFile != null)
+                {
+                    var binaryReader = new BinaryReader(mediaFile.InputStream);
+                    _media = binaryReader.ReadBytes(mediaFile.ContentLength);
+                }
+                result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminSanPham.UpdateSanPham,Id
+                    , tenSanPham
+                    , title
+                    , description
+                    , description
+                    , keyword
+                    , giaCu
+                    , giaMoi
+                    , chietKhau
+                    , khuyenMaiId
+                    , tuNgay
+                    , denNgay
+                    , danhMuc
+                    , sapXep
+                    , trangThai
+                    , noiDung
+                    , active
+                    , _media
+                    , changeImage
+                    , tuKhoa
+                    );
+
+                var text = "Thêm mới thành công";
+                if (result < 1) text = "Thêm mới Thất bại";
+                return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public ActionResult Delete(Guid? id)
+        {
+            var result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminSanPham.DeleteSanPham, id);
+            var text = "Đã xóa thành công";
+            if (result < 1) text = "Xóa thất bại";
+            return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

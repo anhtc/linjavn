@@ -130,6 +130,12 @@ namespace LinJas.Areas.AdminLinja.Controllers
             
             return Json(listDanhMucs, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetUpdateSanPhamById(Guid? _id)
+        {
+            var itemSanPham = _db.Database.SqlQuery<SanPham>(TVConstants.StoredProcedure.AdminSanPham.GetUpdateSanPhamById, _id).FirstOrDefault();
+
+            return Json(itemSanPham, JsonRequestBehavior.AllowGet);
+        }
         #endregion
         #region lấy ảnh avatar
         /// <summary>

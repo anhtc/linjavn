@@ -144,7 +144,7 @@
                     </div><!--end img-->
                    <div class="form-save">
                        <button type="button" id="saveButton" class="k-button k-button-icontext" onclick="insertSanPham()"><span class="k-icon k-i-plus"></span> Thêm mới</button>
-                       <button type="button" id="editButton" class="k-button k-button-icontext"><span class="k-icon k-edit"></span> Sửa</button>
+                       <button type="button" id="editButton" class="k-button k-button-icontext" onclick="updatesanpham()"><span class="k-icon k-edit"></span> Sửa</button>
                    </div>
                 </div>
             </div>
@@ -218,8 +218,8 @@
               columns.Bound(c => c.Gia).Sortable(false).Title("Giá mới").ClientTemplate("<div class=\"toCurrency\">#=Gia#</div>");
               columns.Bound(c => c.Activeted).Sortable(false).Title("Kích hoạt").ClientTemplate("<div style=\"text-align:center;\">#=Activeted#</div>").Width(30);
               columns.Bound(c => c.NgayTao).Sortable(false).Title("Ngày Tạo");
-              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showWindowEditDanhMuc(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
-              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGridLHDL(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showeditSanPham(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
           })
           .ToolBar(toolbar =>
           {
@@ -257,6 +257,8 @@
 
 <!--js-->
 <script>
+    var idProduct;
+    var changeImage = false;
     $(document).ready(function () {
         $("#product").hide();
     })
@@ -379,8 +381,8 @@
         }
         var file = document.getElementById("tepAnh").files[0];
 
-        var formData = new FormData();     
-        
+        var formData = new FormData();
+
         formData.append("tenSanPham", $("#txtName").val());
         formData.append("noiDung", $("#txtContent").data("kendoEditor").value());
         formData.append("danhMuc", $("#cbDanhMuc").data("kendoComboBox").value());
@@ -391,18 +393,18 @@
         formData.append("chietKhau", $("#txtChietKhau").val());
         formData.append("tuNgay", $("#dateNgaybatdau").val());
         formData.append("denNgay", $("#dateNgayketthuc").val());
-        formData.append("khuyenMaiId", $("#cbKhuyenMaiId").data("kendoComboBox").value());        
+        formData.append("khuyenMaiId", $("#cbKhuyenMaiId").data("kendoComboBox").value());
         formData.append("active", $("#txtActive").is(":checked"));
-        formData.append("sapXep", $("#txtSapxep").val());        
+        formData.append("sapXep", $("#txtSapxep").val());
 
         //--- Các trường dữ liệu dùng cho SEO
         formData.append("title", $("#txtTieuDeSeo").val());
         formData.append("description", $("#txtMotaSeo").val());
         formData.append("keyword", $("#txtTukhoaSeo").val());
-        
+
         //----từ khóa tìm kiếm
         formData.append("tuKhoa", $("#txtTukhoaTimKiem").val());
-      
+
 
         $.ajax({
             type: "POST",
@@ -414,7 +416,7 @@
             success: function (data) {
                 //log(data.Num + '' + data.Message);
                 if (data.Num == 1) {
-                    cleardatasanpham();                    
+                    cleardatasanpham();
                     $("#grdSanPham").data("kendoGrid").dataSource.read();
                     $("#grdSanPham").data("kendoGrid").refresh();
                 }
@@ -425,6 +427,128 @@
             }
         });
     }
+
+    function showeditSanPham(id) {
+
+         idProduct = id;
+         $.get('@Url.Action("GetUpdateSanPhamById", "Common")', { _id: idProduct })
+            .done(function (data) {
+                $("#txtName").val(data.Name);
+                $("#txtContent").data("kendoEditor").value(data.NoiDung);
+                $("#txtTieuDeSeo").val(data.TieuDe);
+                $("#txtMotaSeo").val(data.MoTa);
+                $("#txtTukhoaSeo").val(data.TuKhoa);
+                $("#txtTukhoaTimKiem").val(data.TuKhoaTimKiem);
+                $("#cbDanhMuc").data("kendoComboBox").value(data.DanhMucId);
+                $("#cbTrangThai").data("kendoComboBox").value(data.TrangThai);
+                $("#txtGiaCu").val(data.GiaCu);
+                $("#txtGiaMoi").val(data.GiaMoi);
+                $("#txtChietKhau").val(data.ChietKhau);
+                $("#dateNgaybatdau").val(data.NgayBatDau);
+                $("#dateNgayketthuc").val(data.NgayKetThuc);
+                $("#cbKhuyenMaiId").data("kendoComboBox").value(data.KhuyenMaiId);
+                document.getElementById('txtActive').checked = data.Active;
+                $("#txtSapxep").val(data.SapSep);
+                $("#anhAvatar").attr("src", data.UrlAnh);
+
+                showEdit();
+       });
+    }
+    function updatesanpham() {
+         if (!validatesanpham()) {
+             return;
+         }
+        var file = document.getElementById("tepAnh").files[0];
+        
+        var formData = new FormData();
+        formData.append("id", idProduct);
+        formData.append("tenSanPham", $("#txtName").val());
+        formData.append("noiDung", $("#txtContent").data("kendoEditor").value());
+        formData.append("danhMuc", $("#cbDanhMuc").data("kendoComboBox").value());
+        formData.append("trangThai", $("#cbTrangThai").data("kendoComboBox").value());
+        formData.append("mediaFile", file);
+        formData.append("changeImage", changeImage);
+        formData.append("giaCu", $("#txtGiaCu").val());
+        formData.append("giaMoi", $("#txtGiaMoi").val());
+        formData.append("chietKhau", $("#txtChietKhau").val());
+        formData.append("tuNgay", $("#dateNgaybatdau").val());
+        formData.append("denNgay", $("#dateNgayketthuc").val());
+        formData.append("khuyenMaiId", $("#cbKhuyenMaiId").data("kendoComboBox").value());
+        formData.append("active", $("#txtActive").is(":checked"));
+        formData.append("sapXep", $("#txtSapxep").val());
+
+        //--- Các trường dữ liệu dùng cho SEO
+        formData.append("title", $("#txtTieuDeSeo").val());
+        formData.append("description", $("#txtMotaSeo").val());
+        formData.append("keyword", $("#txtTukhoaSeo").val());
+
+        //----từ khóa tìm kiếm
+        formData.append("tuKhoa", $("#txtTukhoaTimKiem").val());
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Update", "SanPham")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Num === 1) {
+                    cleardatasanpham();                    
+                    $("#grdSanPham").data("kendoGrid").dataSource.read();
+                    $("#grdSanPham").data("kendoGrid").refresh();
+                }
+
+                if (data.Num === -2) {
+                    removeText();
+                    win.close();
+                }
+
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+    }
+    //Xóa sản phẩm
+    function removeItemGrid(id) {
+        $("#windowConfirm").data("kendoWindow").center().open();
+        $("#confirmYes").unbind();
+        $('#confirmYes').click(function () {
+            $("#windowConfirm").data("kendoWindow").close();
+            deleteInfo(id);
+        });
+
+        $('#confirmNo').click(function () {
+            $("#windowConfirm").data("kendoWindow").close();
+        });
+    }
+     function deleteInfo(detailId) {
+
+        var formData = new FormData();
+        formData.append("id", detailId);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Delete", "SanPham")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+
+                if (data.Num == 1) {
+                    cleardatasanpham();
+                    $("#grdSanPham").data("kendoGrid").dataSource.read();
+                    $("#grdSanPham").data("kendoGrid").refresh();
+                }
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+    };
     // Hiển thị nút add
     function showAdd() {
         $("#saveButton").show();
@@ -506,8 +630,7 @@
         $("#ErrorMessage").show();
         document.getElementById("ErrorMessage").innerHTML = message;
     }
-    //--Thêm ảnh avatar sp
-    var changeImage = false;
+    //--Thêm ảnh avatar sp  
 
     $(function () {
         // image
@@ -532,6 +655,7 @@
     })
 
 </script>
-
+@* Thông báo *@
+@Html.Partial("_Arlert")
 
 
