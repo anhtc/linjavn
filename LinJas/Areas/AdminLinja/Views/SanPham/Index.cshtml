@@ -494,15 +494,10 @@
             processData: false,
             success: function (data) {
                 if (data.Num === 1) {
-                    cleardatasanpham();                    
+                    cleardatasanpham();
                     $("#grdSanPham").data("kendoGrid").dataSource.read();
                     $("#grdSanPham").data("kendoGrid").refresh();
-                }
-
-                if (data.Num === -2) {
-                    removeText();
-                    win.close();
-                }
+                }               
 
                 showAlertView(data.Message, "Đồng ý");
             },

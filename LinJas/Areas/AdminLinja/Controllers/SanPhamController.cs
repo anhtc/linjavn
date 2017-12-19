@@ -62,8 +62,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
                     , tenSanPham
                     , title
                     , description
-                    , description
-                    , keyword
+                    , keyword                    
                     , giaCu
                     , giaMoi
                     , chietKhau
@@ -78,7 +77,6 @@ namespace LinJas.Areas.AdminLinja.Controllers
                     , _media
                     , tuKhoa
                     );
-
                 var text = "Thêm mới thành công";
                 if (result < 1) text = "Thêm mới Thất bại";
                 return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
@@ -125,8 +123,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
                 result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminSanPham.UpdateSanPham,Id
                     , tenSanPham
                     , title
-                    , description
-                    , description
+                    , description                    
                     , keyword
                     , giaCu
                     , giaMoi
@@ -143,9 +140,9 @@ namespace LinJas.Areas.AdminLinja.Controllers
                     , changeImage
                     , tuKhoa
                     );
-
-                var text = "Thêm mới thành công";
-                if (result < 1) text = "Thêm mới Thất bại";
+                 
+                var text = "Cập nhật thành công";
+                if (result < 1) text = "Cập nhật Thất bại";
                 return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
