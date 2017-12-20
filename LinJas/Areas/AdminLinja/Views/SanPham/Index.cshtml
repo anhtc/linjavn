@@ -635,6 +635,7 @@
             processData: false,
             success: function (data) {
                 if (data.Num == 1) {
+                    $("#WindowAddAnhSanPham").data("kendoWindow").center().close();
                     $("#gridanhslide").data("kendoGrid").dataSource.read();
                     $("#gridanhslide").data("kendoGrid").refresh();
                 }
@@ -665,6 +666,7 @@
             processData: false,
             success: function (data) {
                 if (data.Num == 1) {
+                    $("#WindowAddAnhSanPham").data("kendoWindow").center().close();
                     $("#gridanhslide").data("kendoGrid").dataSource.read();
                     $("#gridanhslide").data("kendoGrid").refresh();
                 }
