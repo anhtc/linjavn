@@ -186,3 +186,8 @@ input#mastercheckbox {
 #text-messemgerfoTieuDeSeo span, #text-messemgerfoMotaSeo span, #text-messemgerfoTukhoaSeo span{
     color: #dd0404;
 }
+.monney-giacu, .monney-giamoi{
+    color:#dd0404;
+    font-size:14px;
+    font-weight:bold;
+}

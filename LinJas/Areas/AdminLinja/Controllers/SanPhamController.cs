@@ -38,8 +38,8 @@ namespace LinJas.Areas.AdminLinja.Controllers
 			, int? giaMoi
 			, int? chietKhau
 			, int? khuyenMaiId
-            , string tuNgay
-            , string denNgay
+            , DateTime? tuNgay
+            , DateTime? denNgay
             , int? danhMuc
             , int? sapXep
             , int? trangThai
@@ -99,8 +99,8 @@ namespace LinJas.Areas.AdminLinja.Controllers
             , int? giaMoi
             , int? chietKhau
             , int? khuyenMaiId
-            , string tuNgay
-            , string denNgay
+            , DateTime? tuNgay
+            , DateTime? denNgay
             , int? danhMuc
             , int? sapXep
             , int? trangThai
