@@ -1,0 +1,51 @@
+﻿<div id="window-Adduser">
+    @(Html.Kendo().Window().Name("WindowAddAnhSanPham")
+                .Title("Ảnh sản phẩm")
+                .Draggable()
+                .Width(260)
+                .Visible(false)
+                .Modal(true)
+                .Actions(actions => actions.Close())
+                .Content(
+    @<text>
+        <div><span id="ErrorMessageUser"></span></div>
+        <div style="padding: 5px;">
+            <div>
+                <table style="width: 100%;" border="0">                 
+                    <tr>
+                        <td>
+                            <label>Chọn ảnh * @Html.Hidden("idAnh")</label>
+                            <div class="demo-section k-content">
+                                <div style="position: relative;margin-top:5px;margin-bottom:10px; width:100px;">
+                                    <img id="anhSanPham" src="~/Areas/AdminLinja/Content/images/NoImage.jpg" class="img-thumbnail img-responsive">
+                                    <div style="position: absolute; bottom: 0; right: 0; margin: 0 5px 2px 0">
+                                        <button id="xoaAnhsp" type="button" class="glyphicon glyphicon-remove"></button>
+                                        <button id="themAnhsp" type="button" class="glyphicon glyphicon-file"></button>
+                                        <input id="tepAnhsp" type="file" style="display:none;" />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" class="k-textbox" id="txtsapxep" placeholder="vị trí..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <hr />
+                            <button type="button" id="BtnAddAnhSanPham" class="k-button" onclick="InsertAnhSanPham()"><span class="k-icon k-edit"></span> Thêm mới</button>
+                            <button type="button" id="BtnUpdateAnhSanPham" class="k-button" onclick="UpdateAnhSanPham()"><span class="k-icon k-edit"></span> Cập nhật</button>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+
+        </div>
+    </text>)
+    )
+</div>
+

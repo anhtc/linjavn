@@ -158,5 +158,83 @@ namespace LinJas.Areas.AdminLinja.Controllers
             if (result < 1) text = "Xóa thất bại";
             return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult CreateAnh(
+             string tenAnhSanPham
+            , Guid? sanphamId
+            , HttpPostedFileBase mediaFile
+            , int sapXep
+            )
+        {
+            try
+            {
+                var result = 0;
+                var _media = new byte[] { 0x20 };
+                if (mediaFile != null)
+                {
+                    var binaryReader = new BinaryReader(mediaFile.InputStream);
+                    _media = binaryReader.ReadBytes(mediaFile.ContentLength);
+                }
+                result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminAnhSanPham.AddAnhSanPham
+                    , tenAnhSanPham
+                    , sanphamId
+                    , _media
+                    , sapXep
+                    );
+                var text = "Thêm mới thành công";
+                if (result < 1) text = "Thêm mới Thất bại";
+                return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult UpdateAnh(
+            Guid? id
+            , string tenAnh
+            , Guid? sanphamId
+            , HttpPostedFileBase mediaFile
+            , int sapxep
+            , bool changeAnh
+            )
+        {
+            try
+            {
+                var result = 0;
+                var _media = new byte[] { 0x20 };
+                if (mediaFile != null)
+                {
+                    var binaryReader = new BinaryReader(mediaFile.InputStream);
+                    _media = binaryReader.ReadBytes(mediaFile.ContentLength);
+                }
+                result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminAnhSanPham.UpdateAnhSanPham
+                    ,id
+                    , tenAnh
+                    , sanphamId
+                    , _media
+                    , sapxep
+                    , changeAnh
+                    );
+                var text = "Sửa thành công";
+                if (result < 1) text = "Sửa Thất bại";
+                return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public ActionResult DeleteAnh(Guid? id)
+        {
+            var result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminAnhSanPham.DeleteAnhSanPham, id);
+            var text = "Đã xóa thành công";
+            if (result < 1) text = "Xóa thất bại";
+            return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

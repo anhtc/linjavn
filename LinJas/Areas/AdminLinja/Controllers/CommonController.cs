@@ -136,6 +136,31 @@ namespace LinJas.Areas.AdminLinja.Controllers
 
             return Json(itemSanPham, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetAnhSanPhamId([DataSourceRequest] DataSourceRequest request, Guid? _id)
+        {
+            var itemSanPham = _db.Database.SqlQuery<AnhSanPhamModel>(TVConstants.StoredProcedure.AdminAnhSanPham.GetAnhSanPhamId, _id).ToList();
+
+            return Json(itemSanPham.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetAnhSanPhamById(Guid? Id)
+        {
+            var itemAnhSanPham = _db.Database.SqlQuery<AnhSanPham>(TVConstants.StoredProcedure.AdminAnhSanPham.GetAnhSanPhamById, Id).FirstOrDefault();
+
+            return Json(itemAnhSanPham, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult ShowPhotoAnhSanPham(Guid? id)
+        {
+            var item = _db.Database.SqlQuery<AnhSanPham>(TVConstants.StoredProcedure.AdminSanPham.GetUpdateSanPhamById, id).FirstOrDefault();
+            if (item != null && item.HinhAnh != null)
+            {
+                return File(item.HinhAnh, "image/png");
+            }
+            else
+            {
+                return File("~/Content/Images/NoImage.jpg", "image/png");
+            }
+        }
         #endregion
         #region lấy ảnh avatar
         /// <summary>

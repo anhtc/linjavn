@@ -197,8 +197,10 @@
     <Compile Include="Areas\AdminLinja\Controllers\RolesController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\SanPhamController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\UploadController.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AnhSanPhamModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AutherizeUser.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AddQuyenModel.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AuthModel\AnhSanPham.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspController.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspNetRole.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspNetRoleModel.cs" />
@@ -1538,6 +1540,7 @@
     <Content Include="Areas\AdminLinja\Views\SanPham\Index.cshtml" />
     <Content Include="Areas\AdminLinja\Views\Common\Index.cshtml" />
     <Content Include="Areas\AdminLinja\Views\SanPham\Create.cshtml" />
+    <Content Include="Areas\AdminLinja\Views\SanPham\_PartialAnhSanPham.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
