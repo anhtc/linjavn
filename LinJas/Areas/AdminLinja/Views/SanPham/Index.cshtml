@@ -622,7 +622,7 @@
         var file = document.getElementById("tepAnhsp").files[0];
         var formData = new FormData();
 
-        formData.append("tenAnhSanPham",$('#anhSanPham').attr('src').filename());
+        formData.append("tenAnhSanPham", $('#anhSanPham').attr('src'));
         formData.append("mediaFile", file);
         formData.append("sanphamId", idProduct);
         formData.append("sapXep", $("#txtsapxep").val());
@@ -651,7 +651,7 @@
         var file = document.getElementById("tepAnhsp").files[0];
         var formData = new FormData();
         formData.append("id", $("#idAnh").val());
-        formData.append("tenAnhSanPham",$('#anhSanPham').attr('src').filename());
+        formData.append("tenAnhSanPham", $('#anhSanPham').attr('src'));
         formData.append("mediaFile", file);
         formData.append("sanphamId", idProduct);
         formData.append("sapXep", $("#txtsapxep").val());
