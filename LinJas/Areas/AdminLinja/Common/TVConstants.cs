@@ -73,6 +73,14 @@ namespace LinJas.Areas.AdminLinja.Common
                 public const string UpdateAnhSanPham = @"admin_UpdateAnhSanPham @Id={0}, @Name={1},@SanPhamId={2},@HinhAnh={3} ,@SapXep={4},@IsChangeImage={5}";
                 public const string DeleteAnhSanPham = @"admin_DeleteAnhSanPham @Id={0}";
             }
+            public class AdminBlog
+            {
+                public const string GetBlogByAll = @"admin_GetBlogByAll";
+                public const string GetBlogById = @"admin_GetBlogById @id={0}";
+                public const string AddBlog = @"admin_AddBlog @DanhMucId={0} ,@Name={1} ,@NoiDung={2} ,@TieuDe={3} ,@MoTa={4} ,@TuKhoa={5} ,@SapXep={6} ,@NgayDang={7} ,@HinhAnh={8} ,@Active={9}";
+                public const string UpdateBlog = @"admin_UpdateBlog  @id={0},@DanhMucId={1} ,@Name={2} ,@NoiDung={3} ,@TieuDe={4} ,@MoTa={5} ,@TuKhoa={6} ,@SapXep={7} ,@NgayDang={8} ,@HinhAnh={9} ,@Active={10}";
+                public const string DeleteBlog = @"admin_DeleteBlog @id={0}";
+            }
         }
     }
 }

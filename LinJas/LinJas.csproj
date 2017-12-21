@@ -189,6 +189,7 @@
     <Compile Include="Areas\AdminLinja\Common\PWUtility.cs" />
     <Compile Include="Areas\AdminLinja\Common\StringHelper.cs" />
     <Compile Include="Areas\AdminLinja\Common\TVConstants.cs" />
+    <Compile Include="Areas\AdminLinja\Controllers\BlogController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\CommonController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\DanhMucController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\HomesController.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspNetRoleModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspNetUser.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspRoleController.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AuthModel\Blog.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\CheckQuyenModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\ControllerViewModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\DanhMuc.cs" />
@@ -1541,6 +1543,7 @@
     <Content Include="Areas\AdminLinja\Views\Common\Index.cshtml" />
     <Content Include="Areas\AdminLinja\Views\SanPham\Create.cshtml" />
     <Content Include="Areas\AdminLinja\Views\SanPham\_PartialAnhSanPham.cshtml" />
+    <Content Include="Areas\AdminLinja\Views\Blog\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
