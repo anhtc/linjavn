@@ -23,10 +23,10 @@
                 <div class="panel-body" id="spseo">
                     <label>Tiêu đề:</label>
                     <p id="text-messemgerfoTieuDeSeo">Kí tự tiêu đề: <span></span> /65 kí tự</p>
-                    <textarea rows="2" id="txtTieuDeSeo" class="form-control" placeholder="Tiêu đề seo..." ></textarea>
+                    <textarea rows="2" id="txtTieuDeSeo" class="form-control" placeholder="Tiêu đề seo..." onkeyup="countChar(this,1)"></textarea>
                     <label>Mô tả:</label>
                     <p id="text-messemgerfoMotaSeo">Kí tự mô tả: <span></span> /170 kí tự</p>
-                    <textarea rows="4" id="txtMotaSeo" class="form-control" placeholder="Mô tả seo..." ></textarea>
+                    <textarea rows="4" id="txtMotaSeo" class="form-control" placeholder="Mô tả seo..." onkeyup="countChar(this,2)"></textarea>
                     <label>Từ khóa:</label>
                     <p id="text-messemgerfoTukhoaSeo">Kí tự từ khóa: <span></span> /170 kí tự</p>
                     <textarea rows="2" id="txtTukhoaSeo" class="form-control" placeholder="Từ khóa seo..." onkeyup="countChar(this,3)"></textarea>
@@ -88,7 +88,7 @@
                   .HtmlAttributes(new { style = "width:100%;" })
                     )
                     <label>Giá cũ: <span class="monney-giacu"></span> .vnđ</label>                   
-                    <input type="number" id="txtGiaCu" placeholder="Giá cũ..." class="form-control"/>
+                    <input type="number" id="txtGiaCu" placeholder="Giá cũ..." class="form-control"/>                    
                     <label>Giá mới: <span class="monney-giamoi"></span> .vnđ</label>                    
                     <input type="number" id="txtGiaMoi" placeholder="Giá mới..." class="form-control"/>
                     <label>Giảm giá:</label>
