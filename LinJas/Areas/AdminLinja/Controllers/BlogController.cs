@@ -87,6 +87,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
             , DateTime? ngayDang
             , HttpPostedFileBase mediaFile
             , bool active
+            , bool changeImage
             )
         {
             try
@@ -110,6 +111,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
                     , ngayDang
                     , _media
                     , active
+                    , changeImage
                     );
                 var text = "Cập nhật thành công";
                 if (result < 1) text = "Cập nhật Thất bại";
