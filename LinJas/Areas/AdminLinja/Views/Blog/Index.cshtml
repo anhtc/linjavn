@@ -1,8 +1,63 @@
-﻿
+﻿@using LinJas.Areas.AdminLinja.Models.AuthModel
 @{
     ViewBag.Title = "blog";
     Layout = "~/Areas/AdminLinja/Views/Shared/_Layouts.cshtml";
 }
 
-<h2>Index</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><h2 class="text-title">Danh sách Bài Blog</h2></div>
+                    <div class="panel-body" id="clientsDb">
+                        @(Html.Kendo().Grid<Blog>()
+          .Name("grdBlog")
+          .EnableCustomBinding(true)
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.ArticleId).Title("Id").Width(60);
+              columns.Bound(c => c.UrlAnh).Filterable(false).Title("Ảnh đại diện").Width(90).ClientTemplate("<img src='" + @Url.Content("#=UrlAnh#") + "' height='30px' width='30px'/>");
+              columns.Bound(c => c.Name).Title("Tiêu đề");              
+              columns.Bound(c => c.NgayDang).Title("Ngày đăng");
+              columns.Bound(c => c.NgayTao).Title("Ngày tạo");           
+              columns.Bound(c => c.Active).Title("Kích hoạt").Filterable(false).ClientTemplate("<div style=\"text-align:center;\">#=Activeted#</div>").Width(30);              
+              columns.Bound(c => c.id).Title("Sửa").Filterable(false).ClientTemplate("<a onclick='showeditSanPham(\"#=id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.id).Title("Xóa").Filterable(false).ClientTemplate("<a onclick='removeItemGrid(\"#=id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+          })
+          .ToolBar(toolbar =>
+          {
+          toolbar.Template(
+            @<text>
+                <div class="toolbar">
+                    <table style="width:100%">
+                        <tr>
+                            <td width="25%" align="left">
+                                <a onclick="cleardatasanpham();" id="btnSanPham" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Blog</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </text>);
+          })
+        .Pageable()
+        .Filterable()
+        .Selectable(select => select
+        .Mode(GridSelectionMode.Single)
+        .Type(GridSelectionType.Row))
+        //.Events(events => events.Change("onChange").DataBound("onDataBound").DataBinding("onDataBinding"))
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .Read(read => read.Action("LoadDataBlog", "Common")))
+                        )
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 

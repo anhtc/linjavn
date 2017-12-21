@@ -28,5 +28,21 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
                 return "Common/ShowPhotoBlogById/" + id;
             }
         }
+        public string Activeted
+        {
+            get
+            {
+                string trangthai = "";
+                if (Active == true)
+                {
+                    trangthai += "<span style=\"color:#02bb10;\" class=\"glyphicon glyphicon-check\"></span>";
+                }
+                else
+                {
+                    trangthai += "<span  style=\"color:#d02028;\" class=\"glyphicon glyphicon-lock\"></span>";
+                }
+                return trangthai;
+            }
+        }
     }
 }
