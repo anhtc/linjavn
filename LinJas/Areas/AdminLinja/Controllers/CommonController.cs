@@ -138,9 +138,19 @@ namespace LinJas.Areas.AdminLinja.Controllers
         }
         public ActionResult GetAnhSanPhamId([DataSourceRequest] DataSourceRequest request, Guid? _id)
         {
-            var itemSanPham = _db.Database.SqlQuery<AnhSanPhamModel>(TVConstants.StoredProcedure.AdminAnhSanPham.GetAnhSanPhamId, _id).ToList();
-
-            return Json(itemSanPham.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            try
+            {
+                if (_id==null)
+                {
+                    _id = new Guid();
+                }
+                var itemSanPham = _db.Database.SqlQuery<AnhSanPhamModel>(TVConstants.StoredProcedure.AdminAnhSanPham.GetAnhSanPhamId, _id).ToList();
+                return Json(itemSanPham.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public ActionResult GetAnhSanPhamById(Guid? Id)
         {
@@ -151,7 +161,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
         [HttpGet]
         public ActionResult ShowPhotoAnhSanPham(Guid? id)
         {
-            var item = _db.Database.SqlQuery<AnhSanPham>(TVConstants.StoredProcedure.AdminSanPham.GetUpdateSanPhamById, id).FirstOrDefault();
+            var item = _db.Database.SqlQuery<AnhSanPham>(TVConstants.StoredProcedure.AdminAnhSanPham.GetAnhSanPhamById, id).FirstOrDefault();
             if (item != null && item.HinhAnh != null)
             {
                 return File(item.HinhAnh, "image/png");

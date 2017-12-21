@@ -185,7 +185,7 @@
                     .DataSource(dataSource => dataSource
                     .Ajax()
                     .PageSize(10)
-                   .Read(read => read.Action("GetAnhSanPhamId", "Common").Data("filterAnhParams")))
+                    .Read(read => read.Action("GetAnhSanPhamId", "Common").Data("filterAnhParams")))
                                 )                    
                     <hr />
                 </div>
@@ -204,20 +204,21 @@
                     <div class="panel-body" id="clientsDb">
                         @(Html.Kendo().Grid<SanPhamModel>()
           .Name("grdSanPham")
+          .EnableCustomBinding(true)
           .Columns(columns =>
           {
-              columns.Bound(c => c.ArticleId).Sortable(false).Title("Id");
-              columns.Bound(c => c.UrlAnh).Title("Ảnh đại diện").Width(50).ClientTemplate("<img src='" + @Url.Content("#=UrlAnh#") + "' height='30px' width='30px'/>");
-              columns.Bound(c => c.Ten).Sortable(false).Title("Danh mục");
-              columns.Bound(c => c.Name).Sortable(false).Title("Tên sản phẩm");
-              columns.Bound(c => c.NgayBatDau).Sortable(false).Title("Ngày bắt đầu");
-              columns.Bound(c => c.NgayKetThuc).Sortable(false).Title("Ngày kết thúc");
-              columns.Bound(c => c.TrangThai).Sortable(false).Title("Trạng thái");
-              columns.Bound(c => c.Gia).Sortable(false).Title("Giá mới").ClientTemplate("<div class=\"toCurrency\">#=Gia#</div>");
-              columns.Bound(c => c.Activeted).Sortable(false).Title("Kích hoạt").ClientTemplate("<div style=\"text-align:center;\">#=Activeted#</div>").Width(30);
-              columns.Bound(c => c.NgayTao).Sortable(false).Title("Ngày Tạo");
-              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='showeditSanPham(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
-              columns.Bound(c => c.Id).Sortable(false).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.ArticleId).Title("Id").Width(60);
+              columns.Bound(c => c.UrlAnh).Filterable(false).Title("Ảnh đại diện").Width(90).ClientTemplate("<img src='" + @Url.Content("#=UrlAnh#") + "' height='30px' width='30px'/>");
+              columns.Bound(c => c.Ten).Title("Danh mục");
+              columns.Bound(c => c.Name).Title("Tên sản phẩm");
+              columns.Bound(c => c.NgayBatDau).Title("Ngày bắt đầu");
+              columns.Bound(c => c.NgayKetThuc).Title("Ngày kết thúc");
+              columns.Bound(c => c.TrangThai).Title("Trạng thái");
+              columns.Bound(c => c.Gia).Title("Giá mới").ClientTemplate("<div class=\"toCurrency\">#=Gia#</div>");
+              columns.Bound(c => c.Activeted).Title("Kích hoạt").Filterable(false).ClientTemplate("<div style=\"text-align:center;\">#=Activeted#</div>").Width(30);
+              columns.Bound(c => c.NgayTao).Title("Ngày Tạo");
+              columns.Bound(c => c.Id).Title("Sửa").Filterable(false).ClientTemplate("<a onclick='showeditSanPham(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.Id).Title("Xóa").Filterable(false).ClientTemplate("<a onclick='removeItemGrid(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
           })
           .ToolBar(toolbar =>
           {
@@ -234,8 +235,8 @@
                 </div>
             </text>);
           })
-        .Pageable()
-        .Sortable()
+        .Pageable()       
+        .Filterable()              
         .Selectable(select => select
         .Mode(GridSelectionMode.Single)
         .Type(GridSelectionType.Row))
@@ -589,8 +590,9 @@
     }
     function filterAnhParams() {
         return {
-            _id: idAnh
+            _id: idProduct
         };
+       
     }
     // get sửa by id ảnh
     function updateItemGridanhsanpham(Id)
@@ -598,6 +600,7 @@
         $.get('@Url.Action("GetAnhSanPhamById", "Common")', { id: Id })
             .done(function (data) {
                 $("#idAnh").val(data.Id);
+                $("#txtNameAnh").val(data.Name)
                 $("#txtsapxep").val(data.SapXep);
                 $("#anhSanPham").attr("src", data.UrlAnh);
                 // ẩn hiện button
@@ -622,7 +625,7 @@
         var file = document.getElementById("tepAnhsp").files[0];
         var formData = new FormData();
 
-        formData.append("tenAnhSanPham", $('#anhSanPham').attr('src'));
+        formData.append("tenAnhSanPham", $("#txtNameAnh").val());
         formData.append("mediaFile", file);
         formData.append("sanphamId", idProduct);
         formData.append("sapXep", $("#txtsapxep").val());
@@ -648,11 +651,11 @@
     }
     //sửa ảnh sản  phẩm
     function UpdateAnhSanPham() {
-
+       
         var file = document.getElementById("tepAnhsp").files[0];
         var formData = new FormData();
         formData.append("id", $("#idAnh").val());
-        formData.append("tenAnhSanPham", $('#anhSanPham').attr('src'));
+        formData.append("tenAnhSanPham", $("#txtNameAnh").val());
         formData.append("mediaFile", file);
         formData.append("sanphamId", idProduct);
         formData.append("sapXep", $("#txtsapxep").val());

@@ -196,7 +196,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
         [ValidateInput(false)]
         public ActionResult UpdateAnh(
             Guid? id
-            , string tenAnh
+            , string tenAnhSanPham
             , Guid? sanphamId
             , HttpPostedFileBase mediaFile
             , int sapxep
@@ -214,7 +214,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
                 }
                 result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminAnhSanPham.UpdateAnhSanPham
                     ,id
-                    , tenAnh
+                    , tenAnhSanPham
                     , sanphamId
                     , _media
                     , sapxep
