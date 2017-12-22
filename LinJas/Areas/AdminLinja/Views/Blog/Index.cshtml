@@ -34,21 +34,18 @@
                         <tr>
                             <td>
                                 <a onclick="showWindowAddNew();" id="btnAddBlog" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Blog</a>
-                            </td>
-                            <td>
-                                <a onclick="refreshBlog();" class="k-button"><span class="k-icon k-i-plus"></span>Refresh</a>
-                            </td>
+                            </td>                            
                         </tr>
                     </table>
                 </div>
             </text>);
-          })
-        .Pageable()
+          })        
+        .Pageable(p => p.Refresh(true))
         .Filterable()
         .Selectable(select => select
         .Mode(GridSelectionMode.Single)
         .Type(GridSelectionType.Row))
-        .Events(events => events.Change("onChange").DataBound("onDataBound").DataBinding("onDataBinding"))
+        .Events(events => events.Change("onChange"))
         .DataSource(dataSource => dataSource
         .Ajax()
         .PageSize(10)
@@ -117,13 +114,7 @@
         idBlog = data[selectedRowIndex].Id;
         
     }
-    function onDataBound(arg) {        
-        //refreshBlog();
-    }
-
-    function onDataBinding(arg) {
-
-    }
+    
     //
     function cleardatablog() {
         $("#Id").val('');
