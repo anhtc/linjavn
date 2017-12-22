@@ -180,7 +180,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
         }
         public ActionResult GetBlogById(Guid? id)
         {
-            var itemBlog = _db.Database.SqlQuery<DanhMuc>(TVConstants.StoredProcedure.AdminBlog.GetBlogById, id).FirstOrDefault();
+            var itemBlog = _db.Database.SqlQuery<Blog>(TVConstants.StoredProcedure.AdminBlog.GetBlogById, id).FirstOrDefault();
             return Json(itemBlog, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]

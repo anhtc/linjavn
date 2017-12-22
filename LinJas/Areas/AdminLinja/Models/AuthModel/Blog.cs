@@ -15,8 +15,8 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
 		public string MoTa { get; set; }
 		public string TuKhoa { get; set; }
 		public int? SapXep { get; set; }
-		public DateTime? NgayTao { get; set; }
-		public DateTime? NgayDang { get; set; }
+		public string NgayTao { get; set; }
+		public string NgayDang { get; set; }
 		public byte[] HinhAnh { get; set; }
 		public int ArticleId { get; set; }
 		public bool Active { get; set; }

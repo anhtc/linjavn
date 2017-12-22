@@ -20,9 +20,9 @@
               columns.Bound(c => c.UrlAnh).Filterable(false).Title("Ảnh đại diện").Width(90).ClientTemplate("<img src='" + @Url.Content("#=UrlAnh#") + "' height='30px' width='30px'/>");
               columns.Bound(c => c.Name).Title("Tiêu đề");              
               columns.Bound(c => c.NgayDang).Title("Ngày đăng");
-              columns.Bound(c => c.NgayTao).Title("Ngày tạo");           
+              columns.Bound(c => c.SapXep).Title("Vị trí");           
               columns.Bound(c => c.Active).Title("Kích hoạt").Filterable(false).ClientTemplate("<div style=\"text-align:center;\">#=Activeted#</div>").Width(30);              
-              columns.Bound(c => c.id).Title("Sửa").Filterable(false).ClientTemplate("<a onclick='showeditSanPham(\"#=id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
+              columns.Bound(c => c.id).Title("Sửa").Filterable(false).ClientTemplate("<a onclick='showWindowEdit(\"#=id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
               columns.Bound(c => c.id).Title("Xóa").Filterable(false).ClientTemplate("<a onclick='removeItemGrid(\"#=id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
           })
           .ToolBar(toolbar =>
@@ -32,8 +32,11 @@
                 <div class="toolbar">
                     <table style="width:100%">
                         <tr>
-                            <td width="25%" align="left">
-                                <a onclick="cleardatasanpham();" id="btnSanPham" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Blog</a>
+                            <td>
+                                <a onclick="showWindowAddNew();" id="btnAddBlog" class="k-button"><span class="k-icon k-i-plus"></span>Thêm Blog</a>
+                            </td>
+                            <td>
+                                <a onclick="refreshBlog();" class="k-button"><span class="k-icon k-i-plus"></span>Refresh</a>
                             </td>
                         </tr>
                     </table>
@@ -45,7 +48,7 @@
         .Selectable(select => select
         .Mode(GridSelectionMode.Single)
         .Type(GridSelectionType.Row))
-        //.Events(events => events.Change("onChange").DataBound("onDataBound").DataBinding("onDataBinding"))
+        .Events(events => events.Change("onChange").DataBound("onDataBound").DataBinding("onDataBinding"))
         .DataSource(dataSource => dataSource
         .Ajax()
         .PageSize(10)
@@ -59,5 +62,352 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    var idBlog='', changeImage=false;
 
+    function showWindowAddNew() {
+        showAdd();
+        $("#WindowAddNew").data("kendoWindow").center().toFront().maximize();
+        win = $("#WindowAddNew").data("kendoWindow");
+        if (!$("#WindowAddNew").is(":visible")) {
+            win.center().open();
+        }
+    }
+    function showWindowEdit(id) {     
+           
+        $("#WindowAddNew").data("kendoWindow").center().toFront().maximize();
+        win = $("#WindowAddNew").data("kendoWindow");
+        if (!$("#WindowAddNew").is(":visible")) {
+            win.center().open();
+            showeditBlog(id);           
+        }
+    }
+    //--- Check kí tự SEO
+    function countChar(val,e) {
+        var len = val.value.length;
+        switch (e){
+            case 1:
+                if (len >= 65) {
+                    val.value = val.value.substring(0, 65);
+                } else {
+                    $('#text-messemgerfoTieuDeSeo span').text(65 - len);
+                }
+                break;
+            case 2:
+                if (len >= 170) {
+                    val.value = val.value.substring(0, 170);
+                } else {
+                    $('#text-messemgerfoMotaSeo span').text(170 - len);
+                }
+                break;
+            case 3:
+                if (len >= 170) {
+                    val.value = val.value.substring(0, 170);
+                } else {
+                    $('#text-messemgerfoTukhoaSeo span').text(170 - len);
+                }
+                break;
+        }
+    };
+    function onChange(arg) {
+        var grid = $('#grdBlog').data("kendoGrid");
+        var selectedRow = grid.select();
+        var selectedRowIndex = selectedRow.index();
+        var data = grid.dataSource.data();
+        idBlog = data[selectedRowIndex].Id;
+        
+    }
+    function onDataBound(arg) {        
+        //refreshBlog();
+    }
 
+    function onDataBinding(arg) {
+
+    }
+    //
+    function cleardatablog() {
+        $("#Id").val('');
+        $("#cbDanhMuc").data("kendoComboBox").select(0);   
+        $("#txtTieuDe").val('');
+        $("#txtContent").data("kendoEditor").value('');
+        $("#txtTieuDeSeo").val('');
+        $("#txtMoTaSeo").val('');
+        $("#txtTuKhoaSeo").val('');  
+        $("#dateNgaydang").val('');
+        $('#txtActive').prop('checked', false);
+        $("#txtSapxep").val('');
+        $("#anhAvatar").attr("src", "/Areas/AdminLinja/Content/images/NoImage.jpg");
+        
+        showAdd();
+    }
+    function validatebaiblog() {
+        var cbDanhMuc = $("#cbDanhMuc").data("kendoComboBox").value();
+        var txtTieuDe = $("#txtTieuDe").val();
+        var txtNoiDung = $("#txtContent").data("kendoEditor").value();
+        var txttieudeseo = $("#txtTieuDeSeo").val();
+        var txtMoTaSeo = $("#txtMotaSeo").val();        
+        var txtTukhoaSeo= $("#txtTukhoaSeo").val();        
+        showErrorInPopup('');
+
+        if (txtTieuDe.length == 0) {
+            showErrorInPopup('Tên sản phẩm là bắt buộc.');
+            return false;
+        }
+        if (txtNoiDung.length == 0) {
+            showErrorInPopup('Nội dung là bắt buộc.');
+            return false;
+        }       
+        if (cbDanhMuc.length == 0) {
+            showErrorInPopup('Danh mục sản phẩm là bắt buộc.');
+            return false;
+        }       
+
+        return true;
+    }
+   
+    function insertBlog() {
+        if (!validatebaiblog()) {
+            return;
+        }
+        var file = document.getElementById("tepAnh").files[0];
+
+        var formData = new FormData();        
+        formData.append("danhMucId", $("#cbDanhMuc").data("kendoComboBox").value());
+        formData.append("name", $("#txtTieuDe").val());
+        formData.append("noiDung", $("#txtContent").data("kendoEditor").value());
+        //--- Các trường dữ liệu dùng cho SEO
+        formData.append("tieuDe", $("#txtTieuDeSeo").val());
+        formData.append("moTa", $("#txtMoTaSeo").val());
+        formData.append("tuKhoa", $("#txtTuKhoaSeo").val());
+        formData.append("sapXep", $("#txtSapxep").val());
+        formData.append("ngayDang", $("#dateNgaydang").val());
+        formData.append("mediaFile", file);        
+        formData.append("active", $("#txtActive").is(":checked"));
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Create", "Blog")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                //log(data.Num + '' + data.Message);
+                if (data.Num >= 1) {
+                    cleardatablog();
+                    $("#WindowAddNew").data("kendoWindow").center().close();
+                    $("#grdBlog").data("kendoGrid").dataSource.read();
+                    $("#grdBlog").data("kendoGrid").refresh();
+                }
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+    }
+
+    function showeditBlog(_id) {
+       
+        $.get('@Url.Action("GetBlogById", "Common")', { id: _id })
+             .done(function (data) {
+                 $("#Id").val(data.id);
+                 $("#cbDanhMuc").data("kendoComboBox").value(data.DanhMucId);
+                 $("#txtTieuDe").val(data.Name);
+                 $("#txtContent").data("kendoEditor").value(data.NoiDung);
+                 $("#txtTieuDeSeo").val(data.TieuDe);
+                 $("#txtMoTaSeo").val(data.MoTa);
+                 $("#txtTuKhoaSeo").val(data.TuKhoa);
+                 $("#dateNgaydang").val(data.NgayDang); console.log(data.NgayDang);
+                 document.getElementById('txtActive').checked = data.Active;
+                 $("#txtSapxep").val(data.SapXep);
+                 $("#anhAvatar").attr("src", data.UrlAnh);
+                showEdit();
+       });
+    }
+    function updateBlog() {
+        if (!validatebaiblog()) {
+             return;
+         }
+        var file = document.getElementById("tepAnh").files[0];
+
+        var formData = new FormData();
+        formData.append("id", $("#Id").val());
+        formData.append("danhMucId", $("#cbDanhMuc").data("kendoComboBox").value());
+        formData.append("name", $("#txtTieuDe").val());
+        formData.append("noiDung", $("#txtContent").data("kendoEditor").value());
+        //--- Các trường dữ liệu dùng cho SEO
+        formData.append("tieuDe", $("#txtTieuDeSeo").val());
+        formData.append("moTa", $("#txtMoTaSeo").val());
+        formData.append("tuKhoa", $("#txtTuKhoaSeo").val());
+        formData.append("sapXep", $("#txtSapxep").val());
+        formData.append("ngayDang", $("#dateNgaydang").val());
+        formData.append("mediaFile", file);
+        formData.append("changeImage", changeImage);            
+        formData.append("active", $("#txtActive").is(":checked"));
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Update", "Blog")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Num >= 1) {
+                    cleardatablog();
+                    $("#WindowAddNew").data("kendoWindow").center().close();
+                    $("#grdBlog").data("kendoGrid").dataSource.read();
+                    $("#grdBlog").data("kendoGrid").refresh();
+                }
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+    }
+    //Xóa sản phẩm
+    function removeItemGrid(id) {
+        $("#windowConfirm").data("kendoWindow").center().open();
+        $("#confirmYes").unbind();
+        $('#confirmYes').click(function () {
+            $("#windowConfirm").data("kendoWindow").close();
+            deleteInfo(id);
+        });
+
+        $('#confirmNo').click(function () {
+            $("#windowConfirm").data("kendoWindow").close();
+        });
+    }
+     function deleteInfo(detailId) {
+
+        var formData = new FormData();
+        formData.append("id", detailId);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Delete", "Blog")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+
+                if (data.Num >= 1) {
+                    cleardatablog();
+                    $("#grdBlog").data("kendoGrid").dataSource.read();
+                    $("#grdBlog").data("kendoGrid").refresh();
+                }
+                showAlertView(data.Message, "Đồng ý");
+            },
+            error: function () {
+                showAlertView("Lỗi không thể kết nối đến máy chủ.", "Đồng ý");
+            }
+        });
+    };
+    //làm  mới data
+    function refreshBlog() {
+        $("#grdBlog").data("kendoGrid").dataSource.read();
+        $("#grdBlog").data("kendoGrid").refresh();
+    }
+    // Hiển thị nút add
+    function showAdd() {
+        $("#BtnInsert").show();
+        $("#BtnUpdate").hide();
+    }
+    //hiển thị nút update
+    function showEdit() {        
+        $('#BtnInsert').hide();
+        $('#BtnUpdate').show();
+    }
+    //===----xử lý editor
+    $(function () {
+        var urlHost = "@Url.Content("~/Content/uploads/articles/")";
+        $("#txtContent").kendoEditor(
+            {
+                imageBrowser: {
+                    transport: {
+                        read: "@Url.Action("Read", "ImageBrowser")",
+                        destroy: {
+                            url: "@Url.Action("Destroy", "ImageBrowser")",
+                            type: "POST"
+                        },
+                        create: {
+                            url: "@Url.Action("Create", "ImageBrowser")",
+                            type: "POST"
+                        },
+                        thumbnailUrl: "@Url.Action("Thumbnail", "ImageBrowser")",
+                        uploadUrl: "@Url.Action("Upload", "ImageBrowser")",
+                        imageUrl: function (options) {
+                            return urlHost + options;
+                        }
+
+                    }
+
+                },
+                tools: [
+                    "bold",
+                    "italic",
+                    "underline",
+                    "strikethrough",
+                    "justifyLeft",
+                    "justifyCenter",
+                    "justifyRight",
+                    "justifyFull",
+                    "insertUnorderedList",
+                    "insertOrderedList",
+                    "indent",
+                    "outdent",
+                    "createLink",
+                    "unlink",
+                    "insertImage",
+                    "insertFile",
+                    "subscript",
+                    "superscript",
+                    "createTable",
+                    "addRowAbove",
+                    "addRowBelow",
+                    "addColumnLeft",
+                    "addColumnRight",
+                    "deleteRow",
+                    "deleteColumn",
+                    "viewHtml",
+                    "formatting",
+                    "cleanFormatting",
+                    "fontName",
+                    "fontSize",
+                    "foreColor",
+                    "backColor"
+                ]
+            }
+        );
+        // image
+        $('#themAnh').click(function (e) {
+            $('#tepAnh').click();
+        });
+
+        $('#tepAnh').bind('change', function (e) {
+            var fileReader = new FileReader();
+            fileReader.readAsDataURL(this.files[0]);
+            fileReader.onload = function (e) {
+                $("#anhAvatar").attr("src", this.result);
+                changeImage = true;
+            };
+        });
+
+        $('#xoaAnh').click(function (e) {
+            $("#anhAvatar").attr("src", "/Areas/AdminLinja/Content/images/NoImage.jpg");
+            $('#tepAnh').val('');
+            changeImage = true;
+        });
+    });
+    //_Hiển thị thông báo lỗi ngay trên popup.
+    function showErrorInPopup(message) {
+        $("#ErrorMessage").show();
+        document.getElementById("ErrorMessage").innerHTML = message;
+    }
+</script>
+@* Thêm mới *@
+@Html.Partial("_PartialAddBlog")
+@* Thông báo *@
+@Html.Partial("_Arlert")

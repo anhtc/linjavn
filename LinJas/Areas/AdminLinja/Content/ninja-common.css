@@ -125,11 +125,34 @@ input#mastercheckbox {
     text-align: center;
     margin: 15px 0px;
 }
-
+#WindowAddNew{
+    padding:0;
+}
+.k-editor, #txtSapxep {
+    width: 100%;
+    height: auto;
+    min-height: 34px;    
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+#txtSapxep {
+    margin:10px 0px;
+    padding:0px 10px;
+    height:30px;
+    width: 100px;
+}
 /*.k-window-action {
 
 }*/
-
 #BTN1 {
     width: 50px;
 }

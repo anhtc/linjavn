@@ -36,7 +36,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
             , string tieuDe
             , string moTa
             , string tuKhoa
-            , int SapXep
+            , int sapXep
             , DateTime? ngayDang                      
             , HttpPostedFileBase mediaFile
             , bool active            
@@ -58,7 +58,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
                     , tieuDe
                     , moTa
                     , tuKhoa
-                    , SapXep
+                    , sapXep
                     , ngayDang                   
                     , _media
                     , active
@@ -83,7 +83,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
             , string tieuDe
             , string moTa
             , string tuKhoa
-            , int SapXep
+            , int sapXep
             , DateTime? ngayDang
             , HttpPostedFileBase mediaFile
             , bool active
@@ -107,7 +107,7 @@ namespace LinJas.Areas.AdminLinja.Controllers
                     , tieuDe
                     , moTa
                     , tuKhoa
-                    , SapXep
+                    , sapXep
                     , ngayDang
                     , _media
                     , active

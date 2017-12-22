@@ -1544,6 +1544,7 @@
     <Content Include="Areas\AdminLinja\Views\SanPham\Create.cshtml" />
     <Content Include="Areas\AdminLinja\Views\SanPham\_PartialAnhSanPham.cshtml" />
     <Content Include="Areas\AdminLinja\Views\Blog\Index.cshtml" />
+    <Content Include="Areas\AdminLinja\Views\Blog\_PartialAddBlog.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
