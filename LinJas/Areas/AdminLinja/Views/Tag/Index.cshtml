@@ -1,0 +1,366 @@
+﻿@using LinJas.Areas.AdminLinja.Models
+@{
+    ViewBag.Title = "Tag";
+    Layout = "~/Areas/AdminLinja/Views/Shared/_Layouts.cshtml";
+}
+
+<table id="panelInfo">
+    <tr>
+        <td style="height: 40px;">
+            &nbsp;  Thông tin tìm kiếm
+            &nbsp;&nbsp;
+            @(Html.Kendo().ComboBox()
+                  .Name("listLoaiSearch")
+                  .HtmlAttributes(new { style = "width:130px" })
+                  .Filter("contains")
+                  .Placeholder("--- Tất cả ---")
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .BindTo(new List<SelectListItem>() {
+
+                      new SelectListItem() {
+                        Text = "Tất cả", Value = "0"
+                      },
+                      new SelectListItem() {
+                        Text = "Sản phẩm", Value = "1"
+                      },
+                      new SelectListItem() {
+                        Text = "Blog", Value = "2"
+                      }
+                  })
+                  .MinLength(3)
+                  .Events(e => e
+                  .Change("Type_Select_Search"))
+                  .SelectedIndex(0)
+                  .Suggest(true)
+            )
+
+            &nbsp;
+            <input type="text" id="txtThongTinTimKiem" style="width: 250px;" class="k-textbox" value="" placeholder="Nhập tên tìm kiếm" />
+            <i>(Tên)</i>
+            &nbsp;&nbsp;&nbsp;
+            <button id="search-SearchContent" type="button" style="width:100px;" class="k-button k-button-icontext"><span class="glyphicon glyphicon-search"></span> Tìm kiếm</button>
+            &nbsp;
+            <span class="labelTitle">Quản lý Tag </span>
+        </td>
+    </tr>
+</table>
+<div>
+    @(Html.Kendo().Window()
+        .Name("windowConfirm")
+        .Title("Thông báo")
+         .Visible(false)
+         .Draggable()
+        .Resizable()
+        .Modal(true)
+        .Width(420)
+
+        .Actions(actions => actions.Close())
+        .AutoFocus(true)
+        .Content(@<text>
+            <h4>
+                Bạn có chắc chắn không?
+            </h4>
+            <div>
+                <button type="button" id="confirmYes" class="btn btn-primary">Yes</button>
+                <button type="button" id="confirmNo" class="btn btn-default">No</button>
+            </div>
+        </text>)
+    )
+
+</div>
+<div id="clientsDb">
+    @(Html.Kendo().Grid<TagModel>()
+          .Name("grid")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.Name).Title("Tên Tag");
+              columns.Bound(c => c.SortOrder).Title("Sắp xếp");
+              columns.Bound(c => c.TypeName).Title("Loại Tag");
+              columns.Bound(c => c.Id).Title("").ClientTemplate("<a onclick='showWindowEdit(\"#=Id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").Width(30);
+              columns.Bound(c => c.Id).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").Width(30);
+
+          })
+
+          .ToolBar(toolbar =>
+          {
+              toolbar.Template(@<text>
+        <div class="toolbar">
+
+            <table style="width:100%">
+                <tr>
+                    <td width="50%" align="left">
+                        <button type="button" id="BtnCreate" onclick="showWindowAddNew()" class="k-button"><span class="k-icon k-i-plus"></span>Thêm mới</button>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+            </text>);
+          })
+        .Pageable()
+        .Selectable(select => select
+            .Mode(GridSelectionMode.Single)
+            .Type(GridSelectionType.Row))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(15)
+            .Model(model =>
+            {
+                model.Id(p => p.Id);
+            }
+            )
+            .Read(read => read.Action("LoadData", "Tag").Data("loadData"))
+            .ServerOperation(true)
+        )
+
+    )
+</div>
+
+<div id="window-datchotruoc">
+    @(Html.Kendo().Window().Name("WindowAddNew")
+        .Title("Tag")
+        .Draggable()
+        .Width(350)
+        .Visible(false)
+                        .Actions(actions => actions.Minimize().Maximize().Close())
+        .Content(
+    @<text>
+        <div style="width: 95%; align-content: center; padding: 5px;">
+            <table>
+                <tr>
+                    <td>Loại Tag</td>
+                    <td>
+                        @(Html.Kendo().ComboBox()
+                              .Name("listLoaiAdd")
+                              .HtmlAttributes(new { style = "width:130px" })
+                              .Filter("contains")
+                              .DataTextField("Text")
+                              .DataValueField("Value")
+                              .BindTo(new List<SelectListItem>() {
+                                  new SelectListItem() {
+                                    Text = "Sản Phẩm", Value = "1"
+                                  },
+                                  new SelectListItem() {
+                                    Text = "Blog", Value = "2"
+                                  }
+                              })
+                              .MinLength(3)
+                              .Events(e => e
+                              .Change("Type_Select_Search"))
+                              .SelectedIndex(0)
+                              .Suggest(true)
+                        )
+                    </td>
+                </tr>
+                <tr>
+                    <td width="80px">Tên Tag</td>
+                    <td height="40px">
+                        <input type="text" id="txtName" style="width: 220px;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100px">Sắp xếp</td>
+                    <td height="30px">
+                        <input type="number" id="txtSapXep" style="width:170px;" value="0" onkeypress='validateNumberInt(event)' />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="vertical-align: bottom;" height="30px">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" id="BtnInsert" onclick="insertInfo()" class="k-button"><span class="k-icon k-i-plus"></span> Thêm mới</button>
+                        <button type="button" id="BtnUpdate" onclick="updateInfo()" class="k-button" style="width:90px;"><span class="k-icon k-edit"></span> Sửa</button>
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+    </text>)
+    )
+</div>
+<script type="text/javascript">
+    var detailId;
+    function loadData() {
+        var loai = $("#listLoaiSearch").data("kendoComboBox").value();
+        if (!loai) loai = 0;
+        return {
+            inputSearch: $("#txtThongTinTimKiem").val(),
+            loai: loai
+        };
+    }
+    $(function () {
+        $("#search-SearchContent").click(function (e) {
+            $("#grid").data("kendoGrid").dataSource.page(1);
+            $("#grid").data("kendoGrid").dataSource.read();
+            $("#grid").data("kendoGrid").refresh();
+            e.preventDefault();
+        });
+    });
+    function Type_Select_Search() {
+
+        var filter = $("#listLoaiSearch").data("kendoComboBox").value();
+        if (filter) {
+
+            $("#grid").data("kendoGrid").dataSource.page(1);
+            $("#grid").data("kendoGrid").dataSource.read();
+            $("#grid").data("kendoGrid").refresh();
+        }
+
+    }
+
+    function showWindowAddNew() {
+        removeText();
+        $('#BtnInsert').show();
+        $('#BtnUpdate').hide();
+        win = $("#WindowAddNew").data("kendoWindow");
+        if (!$("#WindowAddNew").is(":visible")) {
+            win.center().open();
+        }
+    }
+    function showWindowEdit(Id) {
+        detailId = Id;
+        changeImage = false;
+        removeText();
+        $('#BtnInsert').hide();
+        $('#BtnUpdate').show();
+        func_Edit();
+        win = $("#WindowAddNew").data("kendoWindow");
+        if (!$("#WindowAddNew").is(":visible")) {
+            win.center().open();
+        }
+    }
+    function func_Edit() {
+
+        $.get('@Url.Action("GetDetail", "Tag")', { id: detailId })
+        .done(function (data) {
+            $('#txtName').val(data.Name);
+            $("#txtSapXep").val(data.SortOrder);
+            $("#listLoaiAdd").data("kendoComboBox").value(data.Type);
+        });
+    }
+    function removeText() {
+        $('#txtName').val('');
+        $("#txtSapXep").val('0');
+        $("#listLoaiAdd").data("kendoComboBox").value(2);
+    }
+    function ValidateInput() {
+        var ten = $("#txtName").val();
+        var sortOrder = $("#txtSapXep").val();
+        if (ten.length == 0) {
+            alert('Nhập tên Tag.');
+            return false;
+        }
+        return true;
+    }
+    function insertInfo() {
+        if (!ValidateInput())
+            return;
+        var loai = $("#listLoaiAdd").data("kendoComboBox").value();
+        if (!loai) loai = 1;
+        var sortOrder = $("#txtSapXep").val();
+        var formData = new FormData();
+        formData.append("name", $("#txtName").val());
+        formData.append("sortOrder", sortOrder);
+        formData.append("loai", loai);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("InsertTag", "Tag")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Num > 0) {
+                    removeText();
+                    win.close();
+                    $("#grid").data("kendoGrid").dataSource.read();
+                    $("#grid").data("kendoGrid").refresh();
+                }
+                alert(data.Message);
+            },
+            error: function () {
+                alert('Lỗi không thể kết nối đến máy chủ.');
+            }
+        });
+    };
+    function removeItemGrid(id) {
+        $("#windowConfirm").data("kendoWindow").center().open();
+        $("#confirmYes").unbind();
+        $('#confirmYes').click(function () {
+            $("#windowConfirm").data("kendoWindow").close();
+            deleteInfo(id);
+        });
+
+        $('#confirmNo').click(function () {
+            $("#windowConfirm").data("kendoWindow").close();
+        });
+
+    }
+    function updateInfo() {
+        if (!ValidateInput())
+            return;
+        var loai = $("#listLoaiAdd").data("kendoComboBox").value();
+        if (!loai) loai = 1;
+        var formData = new FormData();
+        formData.append("id", detailId);
+        formData.append("name", $("#txtName").val());
+        formData.append("sortOrder", $("#txtSapXep").val());
+        formData.append("loai", loai);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UpdateTag", "Tag")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Num > 0) {
+                    removeText();
+                    win.close();
+                    $("#grid").data("kendoGrid").dataSource.read();
+                    $("#grid").data("kendoGrid").refresh();
+                }
+                alert(data.Message);
+            },
+            error: function () {
+                alert('Lỗi không thể kết nối đến máy chủ.');
+            }
+        });
+    };
+    function deleteInfo(detailId) {
+        var formData = new FormData();
+        formData.append("id", detailId);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteTag", "Tag")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Num == 1) {
+                    removeText();
+                    $("#grid").data("kendoGrid").dataSource.read();
+                    $("#grid").data("kendoGrid").refresh();
+                }
+                alert(data.Message);
+            },
+            error: function () {
+                alert('Lỗi không thể kết nối đến máy chủ.');
+            }
+        });
+    };
+    function validateNumberInt(evt) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+        var regex = /[0-9]/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+</script>
+

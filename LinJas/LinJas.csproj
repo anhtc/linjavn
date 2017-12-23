@@ -197,6 +197,7 @@
     <Compile Include="Areas\AdminLinja\Controllers\QuanHuyenController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\RolesController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\SanPhamController.cs" />
+    <Compile Include="Areas\AdminLinja\Controllers\TagController.cs" />
     <Compile Include="Areas\AdminLinja\Controllers\UploadController.cs" />
     <Compile Include="Areas\AdminLinja\Models\AnhSanPhamModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AutherizeUser.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Areas\AdminLinja\Models\AuthModel\NhomQuyenModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\QuanHuyen.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\SanPham.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AuthModel\Tag.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\Tinh.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\DirectoryBrowser.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\EntryType.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="Areas\AdminLinja\Models\QuanHuyenModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\CkEditorModel\ThumbnailCreator.cs" />
     <Compile Include="Areas\AdminLinja\Models\SanPhamModel.cs" />
+    <Compile Include="Areas\AdminLinja\Models\TagModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\TinhModel.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\HtmlHelperExtension.cs" />
@@ -254,7 +257,6 @@
     <Content Include="Areas\AdminLinja\Content\bootstrap-select.min.css" />
     <Content Include="Areas\AdminLinja\Content\bootstrap.css" />
     <Content Include="Areas\AdminLinja\Content\bootstrap.min.css" />
-    <Content Include="Areas\AdminLinja\Content\EmailTemplate.html" />
     <Content Include="Areas\AdminLinja\Content\fonts\DejaVu\LICENSE.txt" />
     <Content Include="Areas\AdminLinja\Content\fonts\glyphs\KendoUIGlyphs.svg" />
     <Content Include="Areas\AdminLinja\Content\fonts\glyphs\WebComponentsIcons.svg" />
@@ -1545,6 +1547,7 @@
     <Content Include="Areas\AdminLinja\Views\SanPham\_PartialAnhSanPham.cshtml" />
     <Content Include="Areas\AdminLinja\Views\Blog\Index.cshtml" />
     <Content Include="Areas\AdminLinja\Views\Blog\_PartialAddBlog.cshtml" />
+    <Content Include="Areas\AdminLinja\Views\Tag\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
