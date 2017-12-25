@@ -214,3 +214,6 @@ input#mastercheckbox {
     font-size:14px;
     font-weight:bold;
 }
+#WindowAddDanhMuc {
+    overflow: hidden;
+}

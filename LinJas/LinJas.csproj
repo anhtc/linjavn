@@ -1548,6 +1548,7 @@
     <Content Include="Areas\AdminLinja\Views\Blog\Index.cshtml" />
     <Content Include="Areas\AdminLinja\Views\Blog\_PartialAddBlog.cshtml" />
     <Content Include="Areas\AdminLinja\Views\Tag\Index.cshtml" />
+    <Content Include="Areas\AdminLinja\Views\Blog\_Tag.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

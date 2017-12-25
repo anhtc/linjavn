@@ -5,17 +5,19 @@
             <li>
              Danh mục
                 <ul>
-                    <li><a href="@Url.Action("Index","QuanHuyen",new { Area="AdminLinja" })">Quận Huyện</a></li>
-                    <li><a href="@Url.Action("Index","DanhMuc",new { Area="AdminLinja" })">Danh Mục Sản Phẩm</a></li>
-                    <li><a href="@Url.Action("Index","SanPham",new { Area="AdminLinja" })">Sản Phẩm</a></li>
-                    <li>Children's Furniture</li>
+                    <li><a href="@Url.Action("Index","QuanHuyen",new { Area="AdminLinja" })">Quận Huyện</a></li>                    
+                    <li><a href="@Url.Action("Index","Tag",new { Area="AdminLinja" })">Thẻ Tag</a></li>
                     <li>Beds</li>
+                </ul>
+            </li>            
+            <li>
+               Sản phẩm
+                <ul>
+                    <li><a href="@Url.Action("Index","DanhMuc",new { Area="AdminLinja" })">Chuyên mục</a></li>
+                    <li><a href="@Url.Action("Index","SanPham",new { Area="AdminLinja" })">Sản phẩm</a></li>
                 </ul>
             </li>
             <li><a href="@Url.Action("Index","Blog",new { Area="AdminLinja" })">Blog</a></li>
-            <li>
-                Company
-            </li>
             <li>
                 Events
             </li>

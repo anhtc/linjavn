@@ -1,0 +1,70 @@
+﻿@using LinJas.Areas.AdminLinja.Models
+<div id="window-tagdoitackhuyenmai">
+    @(Html.Kendo().Window().Name("windowTag")
+                .Title("Gán tag cho blog")
+                .Draggable()
+                .Width(500)
+                .Visible(false)
+                .Actions(actions => actions.Minimize().Maximize().Close())
+                .Content(
+    @<text>
+        <div style="width: 98%; align-content: center; padding: 5px;">
+            <table border="0" width="100%">
+                <tr style="vertical-align: top;">
+                    <td style="height: 40px;">
+                        <input type="text" id="txtThongTinTimKiemTag" style="width: 250px;" class="k-textbox" value="" placeholder="Nhập tên tìm kiếm" />
+                        &nbsp;&nbsp;
+                        <button id="search-SearchContent-tag" type="button" style="width:100px;" class="k-button k-button-icontext"><span class="glyphicon glyphicon-search"></span> Tìm kiếm</button>
+                        &nbsp;
+                        <br />
+                    </td>
+                </tr>
+                <tr style="vertical-align: top;" colspan="2" align="left" height="600px" width="50px">
+                    <td>
+                        <div id="clientsDb">
+                            @(Html.Kendo().Grid<TagModel>()
+                            .Name("grid-tag")
+                            .HtmlAttributes(new { style = "width:100%;height:700px;" })
+                            .Columns(columns =>
+                            {
+                                columns.Bound(c => c.Id).HeaderTemplate("<span class='k-link'><input id='mastercheckbox' name='all' type='checkbox'/></span>")
+                                    .ClientTemplate("<input name='checkedRecords' type='checkbox' value='#=Id#' id='checkboxGroups_#=Id#' #=IsCheckFormat# />")
+                                    .Sortable(true).Width(50);
+                                columns.Bound(c => c.Name).Title("Tên Tag");
+                                columns.Bound(c => c.SortOrder).Title("Sắp xếp").ClientTemplate("<input type='number' name='SortOrder' value='#=SortOrder#' id='SortOrder_#=Id#' class='k-textbox'/>");
+                                columns.Bound(c => c.IsCheck).Title("Tag").Width(50).HtmlAttributes(new { style = "text-align: center;" })
+                                    .ClientTemplate(
+                                        "# if (IsCheck==1) { #" +
+                                        "<img src='/Content/images/checkbox_true.png' style='width:25px;height:25px;'/>" +
+                                        "# } else {# <img src='/Content/images/checkbox_false.png' style='width:25px;height:25px;'/> #}#").Visible(false);
+
+                            })
+                            .Pageable()
+                            .Selectable(select => select
+                            .Mode(GridSelectionMode.Single)
+                            .Type(GridSelectionType.Row))
+                            .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .PageSize(15)
+                            .Model(model =>
+                            {
+                                model.Id(p => p.Id);
+                            }
+                            )
+                            .Read(read => read.Action("LoadListTag", "Tag").Data("loadDataTag"))
+                            .ServerOperation(true)
+                            )
+                            )
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" colspan="2" align="left" height="60px" width="50px">
+                        <button type="button" id="BtnUpdateTag" onclick="setTagTinTuc()" class="k-button" style="width: 120px; margin-top: 5px;">Gán tag</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </text>)
+    )
+</div>

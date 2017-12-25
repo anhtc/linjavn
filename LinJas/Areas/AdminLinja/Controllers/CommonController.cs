@@ -196,6 +196,11 @@ namespace LinJas.Areas.AdminLinja.Controllers
                 return File("~/Content/Images/NoImage.jpg", "image/png");
             }
         }
+        public ActionResult LoadListTag([DataSourceRequest] DataSourceRequest request, string inputSearch, int tinTucId)
+        {
+            var listItems = _db.Database.SqlQuery<TagModel>(TVConstants.StoredProcedure.AdminBlog.GetBlogById, inputSearch, tinTucId).ToList();
+            return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
         #endregion
         #region lấy ảnh avatar
         /// <summary>

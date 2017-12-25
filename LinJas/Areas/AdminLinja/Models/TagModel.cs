@@ -27,5 +27,18 @@ namespace LinJas.Areas.AdminLinja.Models
                 return "Sản phẩm";
             }
         }
+        public int IsCheck { get; set; }
+
+        public string IsCheckFormat
+        {
+            get
+            {
+                if (IsCheck == 1)
+                {
+                    return "checked=true";
+                }
+                return "";
+            }
+        }
     }
 }
