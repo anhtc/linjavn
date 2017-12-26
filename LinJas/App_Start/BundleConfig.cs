@@ -18,8 +18,11 @@ namespace LinJas
                      "~/js/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/css/home.index.desktop.css").Include(
-                     "~/css/bootstrap.min.css",
-                     "~/css/linja.common.desktop.css"));
+                     "~/css/lessbootstrap.css",
+                     "~/css/linja.common.desktop.css",
+                     "~/css/xingfa.home.desktop.css",
+                     "~/css/rm.common.desktop.css",
+                     "~/css/rm.home.index.desktop.css"));
             //Contact
             bundles.Add(new ScriptBundle("~/bundles/js/contact.desktop.js").Include(
                     "~/js/bootstrap.min.js"));
