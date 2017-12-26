@@ -1077,9 +1077,11 @@
     <Content Include="Images\avatar\avatar-8.jpg" />
     <Content Include="Images\avatar\avatar-9.jpg" />
     <Content Include="Images\avatar\avatar-new.png" />
+    <Content Include="Images\avatar\blog-rm.jpg" />
     <Content Include="Images\avatar\cp-tiet-kiem-vtk.jpg" />
     <Content Include="Images\avatar\1cpn-avata.jpg" />
     <Content Include="Images\avatar\2-hoa-toc.jpg" />
+    <Content Include="Images\avatar\Rounded-Rectangle.jpg" />
     <Content Include="Images\background\bg_footer-ninja.png" />
     <Content Include="Images\banner\avatar-21.jpg" />
     <Content Include="Images\banner\banner-truck-tipsg.jpg" />
