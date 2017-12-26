@@ -196,10 +196,20 @@ namespace LinJas.Areas.AdminLinja.Controllers
                 return File("~/Content/Images/NoImage.jpg", "image/png");
             }
         }
-        public ActionResult LoadListTag([DataSourceRequest] DataSourceRequest request, string inputSearch, int tinTucId)
+        public ActionResult LoadListTag([DataSourceRequest] DataSourceRequest request, string inputSearch, int? tinTucId)
         {
-            var listItems = _db.Database.SqlQuery<TagModel>(TVConstants.StoredProcedure.AdminBlog.GetBlogById, inputSearch, tinTucId).ToList();
+            var listItems = _db.Database.SqlQuery<TagModel>(TVConstants.StoredProcedure.AdminTag.BlogTags_SelectByBlogId, inputSearch, tinTucId).ToList();
             return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult CapNhatTagTinTuc(string tagIds, string unTagIds, int? tinTucId, string SortOrder)
+        {
+            var result = 0;
+            result =
+                _db.Database.ExecuteSqlCommand(
+                TVConstants.StoredProcedure.AdminBlog.BlogTags_CapNhat, tinTucId, tagIds, unTagIds, SortOrder);
+            var text = "Cập nhật thành công";
+            if (result < 0) text = "Cập nhật thất bại";
+            return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
         }
         #endregion
         #region lấy ảnh avatar

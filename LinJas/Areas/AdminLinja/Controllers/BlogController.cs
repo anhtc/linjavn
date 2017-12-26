@@ -129,33 +129,6 @@ namespace LinJas.Areas.AdminLinja.Controllers
             if (result < 1) text = "Xóa thất bại";
             return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
         }
-        /// <summary>
-        /// update thẻ tag cho bài blog
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="sortOrder"></param>
-        /// <param name="loai"></param>
-        /// <returns></returns>
-        public ActionResult UpdateTag(int id, string name, int sortOrder, int loai)
-        {
-            var mediaData = new byte[] { 0x20 };
-            var moTa = "";
-            var result = 0;
-            result =
-                _db.Database.ExecuteSqlCommand(
-                TVConstants.StoredProcedure.AdminTag.TagBlogUpdate, id, name, sortOrder, loai, moTa, mediaData);
-            var text = "Sửa thành công";
-            if (result == 0) text = "Sửa Thất bại";
-            return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult DeleteTag(int id)
-        {
-            var result = _db.Database.ExecuteSqlCommand(TVConstants.StoredProcedure.AdminTag.TagBlogDelete, id);
-            var text = "Đã xóa thành công";
-            if (result == -1)
-                text = "Không được xóa đối tác này";
-            return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
-        }
+       
     }
 }

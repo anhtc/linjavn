@@ -22,7 +22,7 @@
               columns.Bound(c => c.NgayDang).Title("Ngày đăng");
               columns.Bound(c => c.SapXep).Title("Vị trí");
               columns.Bound(c => c.Active).Title("Kích hoạt").Filterable(false).ClientTemplate("<div style=\"text-align:center;\">#=Activeted#</div>").Width(30);
-              columns.Command(command => command.Custom("Tag").Click("showTag"));
+              columns.Command(command => command.Custom("Tag").Click("showTag")).Width(60).Title("Gắn tag");
               columns.Bound(c => c.id).Title("Sửa").Filterable(false).ClientTemplate("<a onclick='showWindowEdit(\"#=id#\")' ><span class='glyphicon glyphicon-pencil'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
               columns.Bound(c => c.id).Title("Xóa").Filterable(false).ClientTemplate("<a onclick='removeItemGrid(\"#=id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").HtmlAttributes(new { style = "text-align:center;width:30px;" });
           })
@@ -61,7 +61,8 @@
 </div>
 
 <script type="text/javascript">
-    var idBlog='', changeImage=false;
+    var idBlog = 0, changeImage = false;
+    var win, tinTucId = 0;
 
     function showWindowAddNew() {
         showAdd();
@@ -72,7 +73,7 @@
         }
     }
     function showWindowEdit(id) {
-
+        tinTucId = id;
         $("#WindowAddNew").data("kendoWindow").center().toFront();
         win = $("#WindowAddNew").data("kendoWindow");
         if (!$("#WindowAddNew").is(":visible")) {
@@ -399,10 +400,11 @@
         document.getElementById("ErrorMessage").innerHTML = message;
     }
     //Thẻ tag
-    var win;
+  
     function showTag(e) {
         e.preventDefault();
-        var id = this.dataItem($(e.currentTarget).closest("tr")).Id;
+        var id = this.dataItem($(e.currentTarget).closest("tr")).ArticleId;
+        console.log(id);
         tinTucId = id;
         win = $("#windowTag").data("kendoWindow");
         if (!$("#windowTag").is(":visible")) {
@@ -446,7 +448,7 @@
 
         $.ajax({
             type: "POST",
-            url: '@Url.Action("UpdateTag", "Blog")',
+            url: '@Url.Action("CapNhatTagTinTuc", "Common")',
             data: formData,
             dataType: 'json',
             contentType: false,
@@ -454,17 +456,63 @@
             success: function (data) {
                 selectedIds = [];
                 if (data.Num > 0) {
-                    alert(data.Message);
+                   
                     $("#grid-tag").data("kendoGrid").dataSource.read();
                     $("#grid-tag").data("kendoGrid").refresh();
-
                 }
-
+                showAlertView(data.Message, "Đồng ý");
             },
             error: function () {
                 alert('Lỗi không thể kết nối đến máy chủ.');
             }
         });
+    }
+
+    $(function () {
+        // Script dung cho ben su kien
+        $('#mastercheckbox').click(function () {
+
+            var data = $("#grid-tag").data("kendoGrid").dataSource.data();
+
+            for (var i = 0; i < data.length; i++) {
+
+                var itemId = data[i]["Id"];
+                var itemClass = "#checkboxGroups_" + itemId;
+
+                if ($(this).is(':checked')) {
+                    $(itemClass).prop('checked', 'checked').attr('checked', true).change();
+                }
+                else {
+                    $(itemClass).removeAttr('checked').change();
+                }
+            }
+        });
+        //wire up checkboxes.
+        $('#grid-tag').on('change', 'input[type=checkbox][id!=mastercheckbox]', function (e) {
+
+            var $check = $(this);
+            if ($check.is(":checked") == true) {
+
+                $(this).attr('checked', true);
+            }
+            else {
+                $(this).removeAttr('checked');
+            }
+        });
+        //tìm kiếm tag
+        $("#search-SearchContent-tag").click(function (e) {
+            $("#grid-tag").data("kendoGrid").dataSource.page(1);
+            $("#grid-tag").data("kendoGrid").dataSource.read();
+            $("#grid-tag").data("kendoGrid").refresh();
+            e.preventDefault();
+        });
+    });
+    
+    function loadDataTag() {
+        return {
+            inputSearch: $("#txtThongTinTimKiemTag").val(),
+            tinTucId: tinTucId,
+        };
     }
 </script>
 @* Thêm mới *@

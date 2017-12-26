@@ -80,17 +80,17 @@ namespace LinJas.Areas.AdminLinja.Common
                 public const string AddBlog = @"admin_AddBlog @DanhMucId={0} ,@Name={1} ,@NoiDung={2} ,@TieuDe={3} ,@MoTa={4} ,@TuKhoa={5} ,@SapXep={6} ,@NgayDang={7} ,@HinhAnh={8} ,@Active={9}";
                 public const string UpdateBlog = @"admin_UpdateBlog  @id={0},@DanhMucId={1} ,@Name={2} ,@NoiDung={3} ,@TieuDe={4} ,@MoTa={5} ,@TuKhoa={6} ,@SapXep={7} ,@NgayDang={8} ,@HinhAnh={9} ,@Active={10}";
                 public const string DeleteBlog = @"admin_DeleteBlog @id={0}";
+                public const string BlogTags_CapNhat= @"aadmin_BlogTags_CapNhat @BlogId ={0}, @TagIds={1}, @UnTagIds={2},@SortOrder={3}";
             }
             public class AdminTag
             {
                 public const string TagBlogSelectAll = @"[admin_Tag_select] @Search={0}, @Loai={1}";
                 public const string TagBlogSelectById = @"[admin_Tag_select_ById] @Id={0}";
-                public const string TagBlogInsert = @"[PartnrtManager_Tag_Insert] @Name={0}, @SortOrder={1}, @Loai={2}";
-                public const string TagBlogDelete = @"[PartnrtManager_Tag_Delete] @Id={0}";
-                public const string TagBlogUpdate = @"[PartnrtManager_Tag_Update] @Id={0}, @Name={1}, @SortOrder={2}, @Loai={3}";//
+                public const string TagBlogInsert = @"[admin_Tag_Insert] @Name={0}, @SortOrder={1}, @Loai={2}";
+                public const string TagBlogDelete = @"[admin_Tag_Delete] @Id={0}";
+                public const string TagBlogUpdate = @"[admin_Tag_Update] @Id={0}, @Name={1}, @SortOrder={2}, @Loai={3}";//
+                public const string BlogTags_SelectByBlogId = @"admin_BlogTags_SelectByBlogId @Search={0}, @BlogId={1}";
             }
-
-
         }
     }
 }
