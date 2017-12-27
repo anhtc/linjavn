@@ -48,7 +48,7 @@ body {
 #main-content {
     overflow: hidden;
 }
-.fa { font-family: FontAwesome !important; }
+.fa { font-family: FontAwesome !important;font-style:normal; }
 
 .fa-angle-left:before { content: "\f104"; }
 

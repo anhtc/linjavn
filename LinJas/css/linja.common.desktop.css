@@ -34,11 +34,15 @@ nav.navbar-default .navbar-nav > li > a, nav.navbar-default .navbar-nav > li > a
     font-weight: bold;
 }
 /*footer */
-.footer1 {   
+.footer1 .fa{
+    color:#d82b25; 
+    padding-right:15px;
+}
+.footer1 {
     padding-top: 40px;
     padding-right: 0;
     padding-bottom: 20px;
-    padding-left: 0; 
+    padding-left: 0;
     background: #f7f7f7;
     color: #666;
     font-weight: 300;
@@ -94,13 +98,16 @@ nav.navbar-default .navbar-nav > li > a, nav.navbar-default .navbar-nav > li > a
     padding-bottom: 7px;
     width: 95%;
 }
+.widget_nav_menu ul li a:hover{
+    color:#d82b25;
+    text-decoration:none;
+}
 .title-median {
     color: #636363;
     font-size: 20px;
-    line-height: 20px;
-    margin: 0 0 15px;
-    text-transform: uppercase;
-    font-family: 'Fjalla One', sans-serif;
+    line-height: 24px;
+    margin: 0 0 15px;    
+    font-family: Roboto-Medium, sans-serif;
 }
 
 .footerp p {
