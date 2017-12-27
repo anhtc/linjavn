@@ -3,8 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">   
-    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico">
-    
+    @*<link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico">*@
+
+    <link rel="icon" href="~/Images/icon/xingfa-icon.png" sizes="32x32" />
+    <link rel="icon" href="~/Images/icon/xingfa-icon.png" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="~/Images/icon/xingfa-icon.png" />
+    <meta name="msapplication-TileImage" content="~/Images/icon/xingfa-icon.png" />
     @RenderSection("Metas",false)
     @RenderSection("css",false)
 </head>
@@ -16,7 +20,8 @@
     <div class="main-content">
         @RenderBody()
     </div>
-
+    <!--Model-->
+    @Html.Partial("_PartialModel")
     <!--Footer-->
     <footer id="footer" class="container-fluid">
        @Html.Partial("_Footer")

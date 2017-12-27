@@ -15,7 +15,8 @@ namespace LinJas
                     "~/js/jquery-1.10.2.min.js"));
             //Home
             bundles.Add(new ScriptBundle("~/bundles/js/home.index.desktop.js").Include(
-                     "~/js/bootstrap.min.js"));
+                     "~/js/bootstrap.min.js",
+                     "~/js/xingfa.common.desktop.js"));
 
             bundles.Add(new StyleBundle("~/css/home.index.desktop.css").Include(
                      "~/css/lessbootstrap.css",

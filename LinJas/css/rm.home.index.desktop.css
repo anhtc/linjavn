@@ -156,6 +156,7 @@
     font-size: 14px;
     font-family: roboto-regular;
     color: #4e4d4d;
+    margin-top:3px;
 }
 .rm-left{
     padding-left:0px;
@@ -340,7 +341,7 @@ all and (min-width: 992px) and (-webkit-transform-3d) {
 .rm-blog h2 a,.rmtv h2 a{
     font-size:16px;
     font-family:Roboto-Medium;
-    line-height:18px;
+    line-height:20px;
     color:#151515;
     text-decoration:none;
 }

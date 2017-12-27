@@ -1,0 +1,45 @@
+﻿
+<div class="modal fade xingfa-modal-sm" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="modal-title">
+                    <img src="~/Images/logo/logo.png" class="img-responsive" alt="logo xingfa quảng đông"/>
+                </div>
+            </div>
+            @using (Html.BeginForm("", "", FormMethod.Post))
+            {
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            ĐĂNG KÝ XEM BÁO GIÁ
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label>Họ và tên:<sup>*</sup></label>
+                                <input type="text" id="txtName" name="txtName" placeholder="Họ và tên.." class="form-control" required>
+                                <label>Email:<sup>*</sup></label>
+                                <input type="email" id="txtEmail" name="txtEmail" placeholder="Email.." class="form-control" required>
+                                <label>Số điện thoại:<sup>*</sup></label>
+                                <input type="number" id="txtPhone" name="txtPhone" placeholder="Số điện thoại.." class="form-control" required>
+                                <label>Chọn báo giá theo:<sup>*</sup></label>
+                                <select id="txtHinhThuc" name="txtHinhThuc" class="form-control">
+                                    <option value="1">Gọi điện tư vấn</option>
+                                    <option value="2">Gửi báo giá qua Email</option>
+                                    <option value="3">Kỹ thuật tới khảo sát công trình</option>
+                                </select>
+                                <label>Ghi chú: </label>
+                                <textarea id="supject" name="supject" placeholder="Ghi chú.." style="height:200px" class="form-control"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-danger" value="Gửi" />
+                </div>
+            }           
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
