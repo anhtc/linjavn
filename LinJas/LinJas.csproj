@@ -237,6 +237,7 @@
     <Compile Include="Common\SubmitButtonAttribute.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Controllers\AcountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -1047,9 +1048,10 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\lessbootstrap.css" />
-    <Content Include="css\linja.search.desktop.css" />
     <Content Include="css\linja.about.desktop.css" />
     <Content Include="css\linja.contact.desktop.css" />
+    <Content Include="css\xingfa.category.index.desktop.css" />
+    <Content Include="css\xingfa.search.index.desktop.css" />
     <Content Include="css\xingfa.common.desktop.css" />
     <Content Include="css\xingfa.home.index.desktop.css" />
     <Content Include="css\xingfa.product.detail.desktop.css" />
@@ -1085,7 +1087,9 @@
     <Content Include="Images\avatar\1cpn-avata.jpg" />
     <Content Include="Images\avatar\2-hoa-toc.jpg" />
     <Content Include="Images\avatar\Rounded-Rectangle.jpg" />
+    <Content Include="Images\avatar\search-1.jpg" />
     <Content Include="Images\avatar\video-1.jpg" />
+    <Content Include="Images\background\bg-xingfa.jpg" />
     <Content Include="Images\background\bg_footer-ninja.png" />
     <Content Include="Images\banner\avatar-21.jpg" />
     <Content Include="Images\banner\banner-truck-tipsg.jpg" />
@@ -1112,6 +1116,7 @@
     <Content Include="js\halo.js" />
     <Content Include="js\jquery-1.10.2.min.js" />
     <Content Include="js\phaohoa.js" />
+    <Content Include="js\xingfa.funcs.desktop.js" />
     <Content Include="js\xingfa.common.desktop.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1640,6 +1645,7 @@
     <Content Include="Views\Shared\_PartialModel.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
