@@ -81,13 +81,11 @@
               columns.Bound(c => c.Id).Title("").ClientTemplate("<a onclick='removeItemGrid(\"#=Id#\")' ><span class='glyphicon glyphicon-trash'></span></a>").Width(30);
 
           })
-
           .ToolBar(toolbar =>
           {
-              toolbar.Template(@<text>
+          toolbar.Template(@<text>
         <div class="toolbar">
-
-            <table style="width:100%">
+            <table>
                 <tr>
                     <td width="50%" align="left">
                         <button type="button" id="BtnCreate" onclick="showWindowAddNew()" class="k-button"><span class="k-icon k-i-plus"></span>Thêm mới</button>
@@ -100,20 +98,19 @@
           })
         .Pageable()
         .Selectable(select => select
-            .Mode(GridSelectionMode.Single)
-            .Type(GridSelectionType.Row))
+        .Mode(GridSelectionMode.Single)
+        .Type(GridSelectionType.Row))
         .DataSource(dataSource => dataSource
-            .Ajax()
-            .PageSize(15)
-            .Model(model =>
-            {
-                model.Id(p => p.Id);
-            }
-            )
-            .Read(read => read.Action("LoadData", "Tag").Data("loadData"))
-            .ServerOperation(true)
+        .Ajax()
+        .PageSize(15)
+        .Model(model =>
+        {
+            model.Id(p => p.Id);
+        }
         )
-
+        .Read(read => read.Action("LoadDataTag", "Common").Data("loadData"))
+        .ServerOperation(true)
+        )
     )
 </div>
 
@@ -123,10 +120,10 @@
         .Draggable()
         .Width(350)
         .Visible(false)
-                        .Actions(actions => actions.Minimize().Maximize().Close())
+        .Actions(actions => actions.Close())
         .Content(
     @<text>
-        <div style="width: 95%; align-content: center; padding: 5px;">
+        <div>
             <table>
                 <tr>
                     <td>Loại Tag</td>
@@ -154,20 +151,20 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="80px">Tên Tag</td>
-                    <td height="40px">
-                        <input type="text" id="txtName" style="width: 220px;" />
+                    <td>Tên Tag</td>
+                    <td>
+                        <input type="text" id="txtName" class="k-textbox" />
                     </td>
                 </tr>
                 <tr>
-                    <td width="100px">Sắp xếp</td>
-                    <td height="30px">
-                        <input type="number" id="txtSapXep" style="width:170px;" value="0" onkeypress='validateNumberInt(event)' />
+                    <td>Sắp xếp</td>
+                    <td>
+                        <input type="number" id="txtSapXep"  class="k-textbox" value="0" onkeypress='validateNumberInt(event)' />
                     </td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td style="vertical-align: bottom;" height="30px">
+                    <td>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="button" id="BtnInsert" onclick="insertInfo()" class="k-button"><span class="k-icon k-i-plus"></span> Thêm mới</button>
                         <button type="button" id="BtnUpdate" onclick="updateInfo()" class="k-button" style="width:90px;"><span class="k-icon k-edit"></span> Sửa</button>
@@ -233,7 +230,7 @@
     }
     function func_Edit() {
 
-        $.get('@Url.Action("GetDetail", "Tag")', { id: detailId })
+        $.get('@Url.Action("GetDetailTag", "Common")', { id: detailId })
         .done(function (data) {
             $('#txtName').val(data.Name);
             $("#txtSapXep").val(data.SortOrder);

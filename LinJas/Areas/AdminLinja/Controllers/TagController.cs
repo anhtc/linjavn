@@ -29,17 +29,13 @@ namespace LinJas.Areas.AdminLinja.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-        public ActionResult LoadData([DataSourceRequest] DataSourceRequest request, string inputSearch, int? loai)
-        {
-            var listItems = _db.Database.SqlQuery<TagModel>(TVConstants.StoredProcedure.AdminTag.TagBlogSelectAll, inputSearch, loai).ToList();
-            return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        }
+        }       
+       
         public ActionResult GetDetail(int id)
         {
             var listItems = _db.Database.SqlQuery<TagModel>(TVConstants.StoredProcedure.AdminTag.TagBlogSelectById, id).FirstOrDefault();
             return Json(listItems, JsonRequestBehavior.AllowGet);
-        }
+        }   
         public ActionResult InsertTag(string name, int? sortOrder, int? loai)
         {
             var mediaData = new byte[] { 0x20 };

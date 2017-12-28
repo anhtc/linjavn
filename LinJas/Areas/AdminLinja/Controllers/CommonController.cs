@@ -232,5 +232,17 @@ namespace LinJas.Areas.AdminLinja.Controllers
             }
         }
         #endregion
+        #region Tag
+        public ActionResult LoadDataTag([DataSourceRequest] DataSourceRequest request, string inputSearch, int? loai)
+        {
+            var listItems = _db.Database.SqlQuery<TagModel>(TVConstants.StoredProcedure.AdminTag.TagBlogSelectAll, inputSearch, loai).ToList();
+            return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetDetailTag(int id)
+        {
+            var listItems = _db.Database.SqlQuery<TagModel>(TVConstants.StoredProcedure.AdminTag.TagBlogSelectById, id).FirstOrDefault();
+            return Json(listItems, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

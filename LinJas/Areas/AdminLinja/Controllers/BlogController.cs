@@ -129,6 +129,5 @@ namespace LinJas.Areas.AdminLinja.Controllers
             if (result < 1) text = "Xóa thất bại";
             return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
         }
-       
     }
 }

@@ -90,6 +90,7 @@ namespace LinJas.Areas.AdminLinja.Common
                 public const string TagBlogDelete = @"[admin_Tag_Delete] @Id={0}";
                 public const string TagBlogUpdate = @"[admin_Tag_Update] @Id={0}, @Name={1}, @SortOrder={2}, @Loai={3}";//
                 public const string BlogTags_SelectByBlogId = @"admin_BlogTags_SelectByBlogId @Search={0}, @BlogId={1}";
+
             }
         }
     }
