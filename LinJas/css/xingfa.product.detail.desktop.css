@@ -470,8 +470,7 @@
     left: auto;
     position: fixed;
     top: 0px; /*80*/
-    z-index: 9;
-    width: 73.2%;
+    z-index: 9;    
 }
 
 #thongsokythuat h2, #video h2, #gioithieu h2 { text-align: center; }
@@ -851,7 +850,7 @@ table tbody tr td:last-child{
     width: 87%;
 }
 .rm-submenu.affix {
-    width: 71.3%;
+    width: 73.4%;
 }
 /*video*/
 .embed-responsive {
@@ -882,24 +881,24 @@ table tbody tr td:last-child{
 }
 @media (min-width:1280px) {
     .rm-submenu.affix {
-        width: 68.7%;
+        width: 74%;
     }
 }
 @media (min-width:1366px){
     .rm-submenu.affix {
-        width: 70.5%;
+        width: 69.5%;
     }
 }
 
 @media (min-width:1440px) {
     .rm-submenu.affix {
-        width: 66.9%;
+        width: 65.8%;
     }
 }
 
 @media (min-width:1600px) {
     .rm-submenu.affix {
-        width: 60%;
+        width: 59.1%;
     }
 }
 @media (min-width: 1620px){

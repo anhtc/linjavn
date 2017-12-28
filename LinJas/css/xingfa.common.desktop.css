@@ -159,7 +159,7 @@ body {
     left:auto;
     z-index:12;
     min-height:300px;
-    width:630px;    
+    width:618px;    
     display:none;
     background:#FFF;    
     box-shadow: 0px 1px 2px #a29595;
@@ -225,6 +225,9 @@ body {
 }
 .top-product ul li:hover a{
     color:#000;
+}
+.top-product ul li:hover a p{
+    color: #3275d3;
 }
 .top-product ul li a{
     text-decoration:none;
@@ -1643,11 +1646,11 @@ input[type=text], input[type=tel], textarea {
     font-size:14px;
 }
 
-.list-funtion .rm-iconmobile-down {
+/*.list-funtion .rm-iconmobile-down {
     background-position: -378px -60px;
     width: 30px;
     height: 9px;
-}
+}*/
 
 .rm-check{
     position:relative;
@@ -1663,7 +1666,7 @@ input[type=text], input[type=tel], textarea {
     box-shadow: 0 10px 10px 0 rgba(0,0,0,.1);
     padding: 5px 0px 0px 0px;
     position: absolute;    
-    right: -6px;
+    right: -13px;
     top: 40px;
     z-index: 9999;
     min-height: 100px;
@@ -1725,7 +1728,7 @@ input[type=text], input[type=tel], textarea {
     color:#00a652;
 }
 
-[class^="rm-iconmobile-"], [class*="rm-iconmobile-"] {
+/*[class^="rm-iconmobile-"], [class*="rm-iconmobile-"] {
     background-image: url(/Html/Images/icon/iconmobile@2x.png);
     background-repeat: no-repeat;
     display: inline-block;
@@ -1734,7 +1737,7 @@ input[type=text], input[type=tel], textarea {
     line-height: 30px;
     vertical-align: middle;
     background-size: 400px 136px;
-}
+}*/
 
 /* Three dot */
 .tree-dot {

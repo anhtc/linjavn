@@ -40,7 +40,7 @@ namespace LinJas
                     "~/js/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/css/contact.desktop.css").Include(
-                     "~/css/bootstrap.min.css",
+                     "~/css/lessbootstrap.css",
                      "~/css/linja.common.desktop.css",
                      "~/css/linja.contact.desktop.css"));
             //About
@@ -48,17 +48,30 @@ namespace LinJas
                     "~/js/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/css/about.desktop.css").Include(
-                     "~/css/bootstrap.min.css",
+                     "~/css/lessbootstrap.css",
                      "~/css/linja.common.desktop.css",
                      "~/css/linja.about.desktop.css"));
             //Search 
             bundles.Add(new ScriptBundle("~/bundles/js/search.desktop.js").Include(
-                    "~/js/bootstrap.min.js"));
+                    "~/js/bootstrap.min.js",
+                    "~/js/xingfa.common.desktop.js"));
 
             bundles.Add(new StyleBundle("~/css/search.desktop.css").Include(
-                     "~/css/bootstrap.min.css",
+                     "~/css/lessbootstrap.css",
                      "~/css/linja.common.desktop.css",
-                     "~/css/linja.search.desktop.css"));
+                      "~/css/xingfa.common.desktop.css",
+                     "~/css/xingfa.search.index.desktop.css"));
+
+            //Category            
+            bundles.Add(new ScriptBundle("~/bundles/js/category.desktop.js").Include(
+                    "~/js/bootstrap.min.js",
+                    "~/js/xingfa.common.desktop.js"));
+
+            bundles.Add(new StyleBundle("~/css/category.desktop.css").Include(
+                     "~/css/lessbootstrap.css",
+                     "~/css/linja.common.desktop.css",
+                      "~/css/xingfa.common.desktop.css",
+                     "~/css/xingfa.category.index.desktop.css"));
             #endregion
 
             #region Mobile

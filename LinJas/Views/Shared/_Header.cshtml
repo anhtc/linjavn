@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-4 logo dropdown">
                 <div class="rm-main-menu">
-                    <a href="#">
+                    <a href="@Url.Action("Index","Home")">
                         <i class="rm-icondesktop-logo"></i>
                     </a>
                 </div>
@@ -28,7 +28,7 @@
                                     <a href="#">Cửa sổ mở trượt</a>
                                 </li>
                                 <li>
-                                    <a href="#">Cửa đi mở quay</a>
+                                    <a href="#">Cửa đi mở quay <span class="fa fa-angle-right"></span></a>
                                     <div class="rm-menu-right">
                                         <a href="#">Tất cả</a>
                                         <a href="#">Cửa đi mở quay 1 cánh</a>
@@ -38,7 +38,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="#">Cửa đi mở trượt</a>
+                                    <a href="#">Cửa đi mở trượt <span class="fa fa-angle-right"></span></a>
                                     <div class="rm-menu-right">
                                         <a href="#">Tất cả</a>
                                         <a href="#">Cửa đi mở trượt 1 cánh</a>
@@ -48,7 +48,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="#">Cửa đi mở xếp gấp</a>
+                                    <a href="#">Cửa đi mở xếp gấp <span class="fa fa-angle-right"></span></a>
                                     <div class="rm-menu-right">
                                         <a href="#">Tất cả</a>
                                         <a href="#">Cửa đi mở xếp gấp 4 cánh</a>
@@ -82,10 +82,65 @@
             </div>
             <div class="col-md-6 search">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm Xingfa Quảng đông, Cửa đi mở trượt, Cửa sổ mở hất...">
+                    <input id="rm-search-all" type="text" class="form-control" placeholder="Tìm kiếm Xingfa Quảng đông, Cửa đi mở trượt, Cửa sổ mở hất...">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button"><span class="rm-icondesktop-search"></span> Tìm kiếm</button>
                     </span>
+                </div>
+                <!-- Gợi ý từ khóa search -->
+                <div id="rm-Keyword-suggestion">
+                    <div class="top-keyword">
+                        <ul>
+                            <li>
+                                <a href="#"><span class="search-name">Nhôm</span> xingfa quảng đông</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="search-name">Nhôm</span> xingfa tem đỏ</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="search-name">Nhôm</span> xingfa t</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="search-name">Nhôm</span> xingfa cửa đi mở trượt</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="search-name">Nhôm</span> xingfa cửa đi mở quay</a>
+                            </li>
+                        </ul>
+                    </div>                    
+                    <div class="top-product">
+                        <h4>Sản phẩm</h4>
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <img src="~/Images/avatar/search-1.jpg" class="img-responsive" alt="search product" />
+                                    <p>Xingfa Group sử dụng độc quyền keo Dowcorning Eurowindow</p>
+                                    <span>100.000đ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="~/Images/avatar/search-1.jpg" class="img-responsive" alt="search product" />
+                                    <p>Xingfa Group sử dụng độc quyền keo Dowcorning Eurowindow 2.3 mm</p>
+                                    <span>120.000đ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="~/Images/avatar/search-1.jpg" class="img-responsive" alt="search product" />
+                                    <p>Xingfa Group sử dụng độc quyền keo Dowcorning Eurowindow</p>
+                                    <span>130.000đ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="~/Images/avatar/search-1.jpg" class="img-responsive" alt="search product" />
+                                    <p>Xingfa Group sử dụng độc quyền keo Dowcorning Eurowindow </p>
+                                    <span>140.000đ</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="col-md-2 fone-cart">
