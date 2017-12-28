@@ -72,6 +72,17 @@ namespace LinJas
                      "~/css/linja.common.desktop.css",
                       "~/css/xingfa.common.desktop.css",
                      "~/css/xingfa.category.index.desktop.css"));
+
+            //Blog            
+            bundles.Add(new ScriptBundle("~/bundles/js/blog.index.desktop.js").Include(
+                    "~/js/bootstrap.min.js",
+                    "~/js/xingfa.common.desktop.js"));
+
+            bundles.Add(new StyleBundle("~/css/blog.index.desktop.css").Include(
+                     "~/css/lessbootstrap.css",
+                     "~/css/linja.common.desktop.css",
+                      "~/css/xingfa.common.desktop.css",
+                     "~/css/xingfa.blog.index.desktop.css"));
             #endregion
 
             #region Mobile
