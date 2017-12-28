@@ -238,6 +238,7 @@
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Controllers\AcountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1049,8 +1050,9 @@
     <Content Include="css\linja.search.desktop.css" />
     <Content Include="css\linja.about.desktop.css" />
     <Content Include="css\linja.contact.desktop.css" />
-    <Content Include="css\rm.common.desktop.css" />
-    <Content Include="css\rm.home.index.desktop.css" />
+    <Content Include="css\xingfa.common.desktop.css" />
+    <Content Include="css\xingfa.home.index.desktop.css" />
+    <Content Include="css\xingfa.product.detail.desktop.css" />
     <Content Include="css\xingfa.home.desktop.css" />
     <Content Include="Dll\log4net.dll" />
     <Content Include="Dll\Microsoft.Practices.EnterpriseLibrary.Common.dll" />
@@ -1101,9 +1103,15 @@
     <Content Include="Images\icon\xingfa-icon.png" />
     <Content Include="Images\logo\logo-ninja-v1.png" />
     <Content Include="Images\logo\logo.png" />
+    <Content Include="Images\noel\ghost.gif" />
+    <Content Include="Images\product\detail-1.jpg" />
+    <Content Include="Images\product\sanpham-de-mo-1.jpg" />
+    <Content Include="Images\product\video-detail-1.jpg" />
     <Content Include="Images\tailieu\Phần mềm chuyển phát nhanh may đo chuyên nghiệp _ phần mềm chuyển phát nhanh _ phần mềm quản lý chuyển phát nhanh.html" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\halo.js" />
     <Content Include="js\jquery-1.10.2.min.js" />
+    <Content Include="js\phaohoa.js" />
     <Content Include="js\xingfa.common.desktop.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1630,6 +1638,8 @@
     <Content Include="Views\Search\Detail.cshtml" />
     <Content Include="Views\Acount\Index.cshtml" />
     <Content Include="Views\Shared\_PartialModel.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
