@@ -1,0 +1,109 @@
+﻿.menu{
+    margin-bottom:0px;
+}
+.rm-md{
+    padding-left:0px;
+    padding-right:0px;
+}
+.slideshow {
+    background: #363636;
+    min-height: 200px;
+    overflow: hidden;
+}
+#carousel-rm{    
+    margin-top:10px;
+}
+.sub-catogory .navigation{
+    background:#FFF;
+    min-height:140px;
+    margin: 0px 0px 15px 0px;
+    padding-top: 30px;
+    overflow: hidden;
+    text-align: center;
+}
+.sub-catogory .navigation a, .rm-tags .navigation a {
+    width: 7.8%;
+    display: inline-block;
+    vertical-align: text-top;
+    float: none;
+}
+.slideshow .slide{
+    margin-bottom:0px;
+}
+
+.rm-icondesktop-down {
+    background-position: -25px -259px;
+    height: 15px;
+    width: 23px;
+}
+/*Mô tả danh mục SP*/
+/*.text-h1{
+    font-size:22px;
+    font-family:Roboto-Medium;
+    line-height:22px;
+    text-align:center;
+    margin:0px 0px 5px 0px;
+    color:#1a1a1a;
+    font-weight:normal;
+}*/
+.text-h1 span{
+    color:#d30606;
+    font-size:15px;
+}
+.rm-decription{
+    color:#6c6c6c;
+    font-size:14px;
+    font-family:roboto-regular;
+    line-height:18px;
+    text-align:center;
+}
+.content-head{
+    margin-bottom:40px;
+}
+
+/* Chuyên mục phụ kiện ô tô*/
+.rm-car-accessory{
+    margin-top:10px;
+}
+.text-h3{
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+}
+.text-h3 a{
+    color:#00a652;
+    text-decoration:none;
+    padding:0px 15px;
+    font-size:14px;
+}
+/*Kết quả tìm  kiếm*/
+.text-h3 span{
+    color:#9a9a9a;    
+    padding:0px 5px;
+    margin-left:10px;
+    font-size:14px;
+    border-left:1px solid#9a9a9a;
+}
+.rm-search{
+    margin-top:10px;
+}
+.adv_left {
+    left: 6px!important;
+}
+
+.adv_right {
+    right: 6px!important;
+}
+.bg-category {
+    background: url(/Images/background/bg-xingfa.jpg) rgba(0, 0, 0, 0.81);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-clip: content-box;
+    background-position: center;
+    background-origin: padding-box;
+    height: 270px;
+    margin: 10px 0px;
+}
+.padding-top{
+    padding-top:30px
+}

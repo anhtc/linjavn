@@ -1,0 +1,474 @@
+﻿@using LinJas.Common;
+@{
+    ViewBag.Title = "danh mục xingfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    @Html.InlineStyles("~/css/category.desktop.css")
+}
+@section js{
+    @Html.InlineScripts("~/bundles/js/jquery.common.js")
+    @Scripts.RenderFormat("<script type=\"text/javascript\" src=\"{0}\" async></script>", "~/bundles/js/category.desktop.js")
+}
+@section Metas{
+    <title>Code Amp</title>
+}
+<div class="bg-category">
+    <!-- tiêu đề mô tả danh mục -->
+    <div class="container">
+        <div class="wapcontainer">
+            <div class="row">
+                <div class="col-md-12 content-head">
+                    <h1 class="text-h1">Xingfa Quảng đông <span>(76 sản phẩm)</span></h1>
+                    <p class="rm-decription">
+                        Xuất xứ chính hãng từ các nhà máy uy tín của Xingfa Quảng đông, đã được kiểm tra, giám sát chất lượng nghiêm ngặt theo đúng Tiêu Chuẩn Của sản phẩm nhôm Cao Cấp
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+  <!-- Bộ lọc nhanh -->
+<div class="container rm-fast-filter">
+    <div class="row">
+        <div class="col-md-5">
+            <h3 class="text-h3">Bộ lọc nhanh</h3>
+        </div>
+        <div class="col-md-7">
+            <ul class="list-funtion">
+                <li>
+                    <label><input type="checkbox" name="new" class="rm-check" /> Mới nhất</label>
+                </li>
+                <li>
+                    <label><input type="checkbox" name="sale" class="rm-check" /> Khuyến mại</label>
+                </li>
+                <li>
+                    <div id="rmprice">Giá <span class="rm-icondesktop-down"></span></div>
+                    <div class="rmlist-price">
+                        <form>
+                            <div>Tất cả mức giá</div>
+                            <label><input class="price" type="radio" name="price" checked /> < = 200.000VNĐ</label>
+                            <label><input class="price" type="radio" name="price" /> 200.000VNĐ - 500.000VNĐ</label>
+                            <label><input class="price" type="radio" name="price" /> > 500.000VNĐ</label>
+                            <p><a href="#" class="rm-btn-price"> Xem thêm 12 kết quả</a></p>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--sản phẩm-->
+<div class="container bg-while  padding-top">
+    <div class="wapcontainer">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row row-item">
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-sale">-30%</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-new">new</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-sale">-30%</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-new">new</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-sale">-30%</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-new">new</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-sale">-30%</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-new">new</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-sale">-30%</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-new">new</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-sale">-30%</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-new">new</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-sale">-30%</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-new">new</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-sale">-30%</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 rmitem-image">
+                        <div class="rm-item">
+                            <a href="#">
+                                <span class="text-new">new</span>
+                                <img src="~/Images/avatar/avatar-1.jpg" alt="slider 01" class="img-responsive">
+                            </a>
+                            <div class="rmitem-caption">
+                                <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                <p><span class="text-price">Liên hệ</span>/1m<sup>2</sup></p>
+                                <div><a href="#" class="rm-btn-buynow">Đặt hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <p class="text-view-more"><a href="#">Xem thêm (52 sản phẩm) <span class="fa fa-angle-double-right"></span></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Sản phẩm đã xem -->
+<div class="container bg-while">
+    <div class="wapcontainer">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-label">Sản phẩm đã xem</h2>
+            </div>
+            <div class="col-md-12">
+
+                <div id="product-seen" class="carousel slide">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item">
+                            <div class="row row-item">
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-sale">-30%</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+                                            <p><span class="text-outofstock">Hết hàng</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-new">new</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                            <p> <span class="text-goods-are-coming">Hàng đang về</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-sale">-30%</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-new">new</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--========= 2nd slide =========-->
+                        <div class="item active">
+                            <div class="row row-item">
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-new">new</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--========= 3rd slide =========-->
+                        <div class="item">
+                            <div class="row row-item">
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--======= Left Button =========-->
+                    <a class="left carousel-control adv_left" href="#product-seen" role="button" data-slide="prev">
+                        <span class="fa fa-angle-left"></span>
+                    </a>
+                    <!--======= Right Button =========-->
+                    <a class="right carousel-control  adv_right" href="#product-seen" role="button" data-slide="next">
+                        <span class="fa fa-angle-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
