@@ -1,0 +1,769 @@
+﻿@using LinJas.Common;
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    @Html.InlineStyles("~/css/detail.desktop.css")
+}
+@section js{
+    @Html.InlineScripts("~/bundles/js/jquery.common.js")
+    @Scripts.RenderFormat("<script type=\"text/javascript\" src=\"{0}\" async></script>", "~/bundles/js/detail.desktop.js")
+}
+@section Metas{
+    <title>Code Amp</title>
+}
+ <!-- breadcrumb -->
+<div class="container">
+    <div class="row">
+        <div id="rm-breadcrumb" class="col-md-12">
+            <ul class="breadcrumb">
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Cửa đi mở quay</a></li>
+                <li><a href="#">Cửa đi mở quay 1 cánh</a></li>
+                <li class="active"><span>Mẫu cửa đi mở quay 1 cánh nhôm Xingfa hệ 55 dày 2.0mm</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- slide data-ride="carousel" data-interval="1000" -->
+<div class="container bg-while rm-slide-detail">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-2">
+                <div id="rm-carousel-pager" class="carousel slide ">
+                    <!-- Carousel items -->
+                    <div class="carousel-inner vertical">
+                        <div class="active item">
+                            <img src="~/Images/product/sanpham-de-mo-1.jpg" class="img-responsive" data-target="#carousel-main" data-slide-to="0">
+                        </div>
+                        <div class="item">
+                            <img src="~/Images/product/sanpham-de-mo-1.jpg" class="img-responsive" data-target="#carousel-main" data-slide-to="1">
+                        </div>
+                        <div class="item">
+                            <img src="~/Images/product/sanpham-de-mo-1.jpg" class="img-responsive" data-target="#carousel-main" data-slide-to="2">
+                        </div>
+                        <div class="item">
+                            <img src="~/Images/product/sanpham-de-mo-1.jpg" class="img-responsive" data-target="#carousel-main" data-slide-to="3">
+                        </div>
+                        <div class="item">
+                            <img src="~/Images/product/sanpham-de-mo-1.jpg" class="img-responsive" data-target="#carousel-main" data-slide-to="4">
+                        </div>
+                        <div class="item">
+                            <img src="~/Images/product/sanpham-de-mo-1.jpg" class="img-responsive" data-target="#carousel-main" data-slide-to="5">
+                        </div>                        
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#rm-carousel-pager" role="button" data-slide="prev">
+                        <span class="fa fa-angle-up"></span>
+                    </a>
+                    <a class="right carousel-control" href="#rm-carousel-pager" role="button" data-slide="next">
+                        <span class="fa fa-angle-down"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div id="carousel-main" class="carousel slide " data-ride="carousel" data-interval="5000">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-main" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-main" data-slide-to="1"></li>
+                        <li data-target="#carousel-main" data-slide-to="2"></li>
+                        <li data-target="#carousel-main" data-slide-to="3"></li>
+                        <li data-target="#carousel-main" data-slide-to="4"></li>
+                        <li data-target="#carousel-main" data-slide-to="5"></li>                        
+                    </ol>
+                    <!-- Carousel items -->
+                    <div class="carousel-inner">
+                        <div class="active item">
+                            <img src="~/Images/product/sanpham-de-mo-1.jpg" class="img-responsive">
+                        </div>
+                        <div class="item">
+                            <img src="~/Images/product/sanpham-de-mo-1.jpg" class="img-responsive">
+                        </div>
+                        <div class="item">
+                            <img src="~/Images/product/sanpham-de-mo-1.jpg" class="img-responsive">
+                        </div>
+                        <div class="item">
+                            <img src="~/Images/product/sanpham-de-mo-1.jpg" class="img-responsive">
+                        </div>
+                        <div class="item">
+                            <img src="~/Images/product/sanpham-de-mo-1.jpg" class="img-responsive">
+                        </div>
+                        <div class="item">
+                            <img src="~/Images/product/sanpham-de-mo-1.jpg" class="img-responsive">
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href=".carousel" role="button" data-slide="prev">
+                        <span class="fa fa-angle-left"></span>
+                    </a>
+                    <a class="right carousel-control" href=".carousel" role="button" data-slide="next">
+                        <span class="fa fa-angle-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="content-right">
+                <h1 class="text-h1">Cửa sổ mở hất nhôm Xingfa tem đỏ nhập khẩu chính hãng Quảng Đông</h1>
+                <div class="rm-price"><span class="rm-sale">1.500.000đ</span><span class="rm-price-old">1.900.000đ</span> <span class="rm-icondesktop-price">Còn hàng (08)</span></div>
+                <div class="rm-guarantee">
+                    <div><span class="fa fa-check" aria-hidden="true"></span> Bảo hành chính hãng 5 năm  - <a href="#">Xem điểm bảo hành</a></div>
+                    <div><span class="fa fa-check" aria-hidden="true"></span> Giao hàng tận nơi miễn phí trong bán kính 100km - <a href="#">Tìm hiểu</a></div>
+                    <div><span class="fa fa-check" aria-hidden="true"></span> Giao hàng tận nơi lắp đặt và thi công tại nhà - <a href="#">Tìm hiểu</a></div>
+                </div>
+                <div class="form-button">
+                    <div class="col-md-6">
+                        <label>Mầu sắc</label>
+                        <p>
+                            <select class="form-control">
+                                <option>Mầu đỏ</option>
+                                <option>Mầu đen</option>                                
+                            </select>
+                        </p>
+                        <div id="rm-booking" class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="submit" class="btn btn-booking" value="Đặt hàng" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Số lượng</label>
+                        <p>
+                            <input type="number" class="form-control" placeholder="1" />
+                        </p>
+                        <div id="rm-addcart" class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="submit" class="btn btn-addcart" value="Liên hệ báo giá" />
+                        </div>
+                    </div>
+                </div>
+                <!-- like share -->
+                <div class="col-md-12">
+                    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NỘi dung chi tiết -->
+<div class="container rmcontact-us">
+    <div class="row">
+        <div class="col-md-9 rm-md-10 rm-product-right">
+            <div class="rm-submenu" data-spy="affix" data-offset-top="510">
+                <nav class="navbar">
+                    <div class="container">
+                        <div class="navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#video">Video</a></li>
+                                <li><a href="#gioithieu">Giới thiệu</a></li>
+                                <li><a href="#thongsokythuat">Thông số kỹ thuật</a></li>
+                                <li><a href="#binhluan">Bình luận</a></li>
+                                <li><a href="#related">Sản phẩm liên quan</a></li>
+                            </ul>
+                            <button class="btn-buynow"><span class="fa fa-shopping-cart"></span> Đặt hàng</button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="rm-detail">
+                <div id="video">
+                    <h2 class="text-h2">
+                        Video giới thiệu sản phẩm
+                    </h2>
+                    <div class="progress">
+                        <span class="sr-only"></span>
+                        <div class="progress-bar progress-bar-success"></div>
+                    </div>
+                    <div class="rm-decription">
+                        Ảnh Raw, Lấy nét theo pha (EIS), Tự động lấy nét, Chạm lấy nét, Nhận diện khuôn mặt, HDR, Panorama, Chống rung quang học (OIS), Chế độ chụp chuyên nghiệp
+                    </div>
+                    <p class="rm-text-center">.................o0o.................</p>
+                    <p><img src="~/Images/product/video-detail-1.jpg" alt="about" /></p>
+                </div>
+                <div id="gioithieu">
+                    <h2 class="text-h2">
+                        Giới thiệu sản phẩm
+                    </h2>
+                    <div class="progress">
+                        <span class="sr-only"></span>
+                        <div class="progress-bar progress-bar-success"></div>
+                    </div>
+                    <p>Remax – thương hiệu phụ kiện thông minh hàng đầu thế giới có trụ sở chính ở Hồng Kông được thành lập từ năm 2008. Những sản phẩm của Remax mang phong cách trẻ trung, thời trang nên được giới trẻ rất yêu thích và lựa chọn sử dụng. </p>
+                    <p><img src="~/Images/product/detail-1.jpg" alt="about" /></p>
+                    <p>Remax – thương hiệu phụ kiện thông minh hàng đầu thế giới có trụ sở chính ở Hồng Kông được thành lập từ năm 2008. Những sản phẩm của Remax mang phong cách trẻ trung, thời trang nên được giới trẻ rất yêu thích và lựa chọn sử dụng. </p>
+                    <p><img src="~/Images/product/detail-1.jpg" alt="about" /></p>
+                    <p>Remax – thương hiệu phụ kiện thông minh hàng đầu thế giới có trụ sở chính ở Hồng Kông được thành lập từ năm 2008. Những sản phẩm của Remax mang phong cách trẻ trung, thời trang nên được giới trẻ rất yêu thích và lựa chọn sử dụng. </p>
+                    <p><img src="~/Images/product/detail-1.jpg" alt="about" /></p>
+                    <p>Remax – thương hiệu phụ kiện thông minh hàng đầu thế giới có trụ sở chính ở Hồng Kông được thành lập từ năm 2008. Những sản phẩm của Remax mang phong cách trẻ trung, thời trang nên được giới trẻ rất yêu thích và lựa chọn sử dụng. </p>
+                    <p><img src="~/Images/product/detail-1.jpg" alt="about" /></p>
+                    <p>Remax – thương hiệu phụ kiện thông minh hàng đầu thế giới có trụ sở chính ở Hồng Kông được thành lập từ năm 2008. Những sản phẩm của Remax mang phong cách trẻ trung, thời trang nên được giới trẻ rất yêu thích và lựa chọn sử dụng. </p>
+                    <p>Remax – thương hiệu phụ kiện thông minh hàng đầu thế giới có trụ sở chính ở Hồng Kông được thành lập từ năm 2008. Những sản phẩm của Remax mang phong cách trẻ trung, thời trang nên được giới trẻ rất yêu thích và lựa chọn sử dụng. </p>
+                    <p><img src="~/Images/product/detail-1.jpg" alt="about" /></p>
+                    <p>Remax – thương hiệu phụ kiện thông minh hàng đầu thế giới có trụ sở chính ở Hồng Kông được thành lập từ năm 2008. Những sản phẩm của Remax mang phong cách trẻ trung, thời trang nên được giới trẻ rất yêu thích và lựa chọn sử dụng. </p>
+                    <p>Remax – thương hiệu phụ kiện thông minh hàng đầu thế giới có trụ sở chính ở Hồng Kông được thành lập từ năm 2008. Những sản phẩm của Remax mang phong cách trẻ trung, thời trang nên được giới trẻ rất yêu thích và lựa chọn sử dụng. </p>
+                </div>
+                <div id="thongsokythuat">
+                    <h2 class="text-h2">
+                        Thông số kỹ thuật
+                    </h2>
+                    <div class="progress">
+                        <span class="sr-only"></span>
+                        <div class="progress-bar progress-bar-success"></div>
+                    </div>                   
+                    <table class="table table-responsive table-striped">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    + Thanh profile
+                                </td>
+                                <td>
+                                    nhôm Xingfa hệ 55
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> + Độ dày</td>
+                                <td>khung và cánh cửa dày 2.0 (mm)</td>
+                            </tr>
+                            <tr>
+                                <td>+ Mầu sắc</td>
+                                <td>trắng sứ, nâu sần, đen, ghi, vân gỗ</td>
+                            </tr>
+                            <tr>
+                                <td>+ Kích thước</td>
+                                <td>sản xuất theo thực tế cửa</td>
+                            </tr>
+                            <tr>
+                                <td>+ Kính</td>
+                                <td>an toàn Hải Long dày 6.38 - 21mm</td>
+                            </tr>
+                            <tr>
+                                <td>+ Phụ kiện</td>
+                                <td>Kinlong nhập khẩu đồng bộ</td>
+                            </tr>
+                            <tr>
+                                <td>+ Gioăng kép</td>
+                                <td>EDPM kín khít tuyệt đối</td>
+                            </tr>
+                            <tr>
+                                <td>+ Keo</td>
+                                <td>đặc chủng Dowcorning Eurowindow</td>
+                            </tr>
+                            <tr>
+                                <td>+ Ốc vít</td>
+                                <td>sử dụng ốc vít Inox chống rỉ</td>
+                            </tr>
+                            <tr>
+                                <td>+ Bảo hành</td>
+                                <td>bảo hành chính hãng 5 năm</td>
+                            </tr>
+                            <tr>
+                                <td>+ Website</td>
+                                <td>www.xingfanhapkhau.vn</td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                    <br />
+                    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+
+                </div>
+                <!-- tags -->
+                <div id="rm-tags">
+                    <a>Tags: </a>
+                    <a href="#">xingfa</a>
+                    <a href="#">nhôm xingfa</a>
+                    <a href="#">xingfa quảng đông</a>
+                    <a href="#">xingfa t</a>
+                    <a href="#">xingfa</a>
+                    <a href="#">nhôm xingfa</a>
+                    <a href="#">xingfa quảng đông</a>
+                    <a href="#">xingfa t</a>
+                </div>
+            </div>
+            <!--Đánh giá, bình luận -->
+            <div id="binhluan" class="rm-comment">
+                <h2 class="text-h2">Bình luận & Đánh giá</h2>
+                <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="100%" data-numposts="2"></div>
+            </div>
+        </div>
+        <div class="col-md-3 rm-product-left">
+            <div class="rm-left-top">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="rm-icondesktop-63th"></i>
+                            </div>
+                            Miễn phí vận chuyển 5Km tại Hà Nội
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="rm-icondesktop-cart"></i>
+                            </div>
+                            Giao hàng toàn quốc
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="rm-icondesktop-huongdan"></i>
+                            </div>
+                            Đổi trả hàng trong 1 năm thủ  tục đơn giản
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="rm-icondesktop-doitra"></i>
+                            </div>
+                            Chính sách bảo hành  toàn quốc
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="rm-icondesktop-chinhhang"></i>
+                            </div>
+                            Chính sách  khuyến mãi
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <h2>Có thể bạn quan tâm</h2>
+            <div class="rm-help">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <span class="text-sale">-30%</span>
+                            <img src="~/Images/avatar/avatar-8.jpg" class="img-responsive" alt="có thể bạn quan tâm" />
+                            <h3>Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</h3>
+                        </a>
+                        <span class="price">180.000đ</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="text-new">new</span>
+                            <img src="~/Images/avatar/avatar-8.jpg" class="img-responsive" alt="có thể bạn quan tâm" />
+                            <h3>Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</h3>
+                        </a>
+                        <span class="price">180.000đ</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="text-new">new</span>
+                            <img src="~/Images/avatar/avatar-8.jpg" class="img-responsive" alt="có thể bạn quan tâm" />
+                            <h3>Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</h3>
+                        </a>
+                        <span class="text-outofstock">Hết hàng</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="text-sale">-30%</span>
+                            <img src="~/Images/avatar/avatar-8.jpg" class="img-responsive" alt="có thể bạn quan tâm" />
+                            <h3>Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</h3>
+                        </a>
+                        <span class="price">180.000đ</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="text-new">new</span>
+                            <img src="~/Images/avatar/avatar-8.jpg" class="img-responsive" alt="có thể bạn quan tâm" />
+                            <h3>Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</h3>
+                        </a>
+                        <span class="price">180.000đ</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="text-new">new</span>
+                            <img src="~/Images/avatar/avatar-8.jpg" class="img-responsive" alt="có thể bạn quan tâm" />
+                            <h3>Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</h3>
+                        </a>
+                        <span class="text-outofstock">Hết hàng</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Sản phẩm liên quan -->
+<div id="related" class="container bg-while">
+    <div class="wapcontainer">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-label">Sản phẩm liên quan</h2>
+            </div>
+            <div class="col-md-12">
+                <div id="product-related" class="carousel slide four_shows_one_move team_columns_carousel_wrapper">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item">
+                            <div class="row row-item">
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-sale">-30%</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+                                            <p><span class="text-outofstock">Hết hàng</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-new">new</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p> <span class="text-goods-are-coming">Hàng đang về</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-sale">-30%</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-new">new</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--========= 2nd slide =========-->
+                        <div class="item active">
+                            <div class="row row-item">
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-new">new</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--========= 3rd slide =========-->
+                        <div class="item">
+                            <div class="row row-item">
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--======= Left Button =========-->
+                    <a class="left carousel-control adv_left" href="#product-related" role="button" data-slide="prev">
+                        <span class="fa fa-angle-left"></span>
+                    </a>
+                    <!--======= Right Button =========-->
+                    <a class="right carousel-control  adv_right" href="#product-related" role="button" data-slide="next">
+                        <span class="fa fa-angle-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Sản phẩm đã xem -->
+<div class="container bg-while">
+    <div class="wapcontainer">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-label">Sản phẩm đã xem</h2>
+            </div>
+            <div class="col-md-12">
+
+                <div id="product-seen" class="carousel slide">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item">
+                            <div class="row row-item">
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-sale">-30%</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+                                            <p><span class="text-outofstock">Hết hàng</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-new">new</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p> <span class="text-goods-are-coming">Hàng đang về</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-sale">-30%</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-new">new</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--========= 2nd slide =========-->
+                        <div class="item active">
+                            <div class="row row-item">
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <span class="text-new">new</span>
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--========= 3rd slide =========-->
+                        <div class="item">
+                            <div class="row row-item">
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 rmitem-image">
+                                    <div class="rm-item">
+                                        <a href="#">
+                                            <img src="~/Images/avatar/avatar-8.jpg" alt="slider 01" class="img-responsive">
+                                        </a>
+                                        <div class="rmitem-caption">
+                                            <h4><a href="#">Giá đỡ điện thoại trên ô tô Remax EETO RC - FC2</a></h4>
+
+                                            <p><span class="text-price">180.000đ</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--======= Left Button =========-->
+                    <a class="left carousel-control adv_left" href="#product-seen" role="button" data-slide="prev">
+                        <span class="fa fa-angle-left"></span>
+                    </a>
+                    <!--======= Right Button =========-->
+                    <a class="right carousel-control  adv_right" href="#product-seen" role="button" data-slide="next">
+                        <span class="fa fa-angle-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

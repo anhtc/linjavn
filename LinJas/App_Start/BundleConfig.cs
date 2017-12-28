@@ -22,8 +22,19 @@ namespace LinJas
                      "~/css/lessbootstrap.css",
                      "~/css/linja.common.desktop.css",
                      "~/css/xingfa.home.desktop.css",
-                     "~/css/rm.common.desktop.css",
-                     "~/css/rm.home.index.desktop.css"));
+                     "~/css/xingfa.common.desktop.css",
+                     "~/css/xingfa.home.index.desktop.css"));
+
+            //Detail product
+            bundles.Add(new ScriptBundle("~/bundles/js/detail.desktop.js").Include(
+                    "~/js/bootstrap.min.js",
+                    "~/js/xingfa.common.desktop.js"));
+
+            bundles.Add(new StyleBundle("~/css/detail.desktop.css").Include(
+                     "~/css/lessbootstrap.css",
+                     "~/css/linja.common.desktop.css",
+                      "~/css/xingfa.common.desktop.css",
+                     "~/css/xingfa.product.detail.desktop.css"));
             //Contact
             bundles.Add(new ScriptBundle("~/bundles/js/contact.desktop.js").Include(
                     "~/js/bootstrap.min.js"));
