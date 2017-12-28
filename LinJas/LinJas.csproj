@@ -237,6 +237,7 @@
     <Compile Include="Common\SubmitButtonAttribute.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Controllers\AcountController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -1646,6 +1647,7 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
