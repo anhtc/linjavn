@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace LinJas.Controllers
 {
-    public class BlogController : Controller
+    public class BlogsController : Controller
     {
         // GET: Blog
         public ActionResult Index()
