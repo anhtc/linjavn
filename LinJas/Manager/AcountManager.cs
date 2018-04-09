@@ -36,7 +36,7 @@ namespace LinJas.Manager
         //    }
         //}
         /// <summary>
-        /// Lấy Blog nổi bật dùng cho trang Home: 3 item
+        /// đăng nhập
         /// </summary>
         /// <returns></returns>
         public List<LoginModel> Login(string UserName, string PasswordHash)
