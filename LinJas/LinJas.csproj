@@ -253,6 +253,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\filelinja.sql" />
     <Content Include="App_Data\ninjadiagrams.PNG" />
     <Content Include="App_Data\script.sql" />
     <Content Include="App_Data\scripts.sql" />
