@@ -1,0 +1,116 @@
+﻿.body-content {
+   background:#FFF;
+}
+header{
+    height:24px;   
+}
+
+#menu{
+    background:#f7f6f6;   
+    box-shadow: 0px 2px 6px #d8d8d8;
+    border-radius:0px;
+}
+#menu.affix{
+    width:100%;
+    top:0px;
+    z-index:100;
+}
+#menu .navbar-right li{
+    background-image:url(/Asset/images/icon/icon-bd-right.png);
+    background-repeat:no-repeat;
+    background-position-y:50%;
+    background-position-x:0%;
+}
+#menu .navbar-right li.active{
+    background:#8d44ad;
+    border-top:1px solid #f7941e;
+}
+#menu .navbar-right li.active a{
+    background: #8d44ad;
+    color:#FFF;
+}
+#menu .navbar-right li a{
+    text-decoration:none;
+    text-transform:uppercase;
+    color:#0f0f0f;
+    font-size:14px;
+    padding-bottom:26px;
+    padding-top: 26px;
+}
+#menu .navbar-right li a:hover{
+    background:#8d44ad;
+    color:#FFF;   
+}
+#menu .navbar-right li:hover{
+     border-top:1px solid #f7941e;
+}
+
+.a-footer{
+    background:#333333;
+    min-height:238px;
+    border-bottom:5px solid#8d44ad;
+    padding-bottom:30px;
+}
+.a-footer h3{
+    margin:50px 0px 20px 0px;
+    color:#FFF;
+    text-transform:uppercase;
+    font-size:16px;
+    text-align:left;
+    font-weight:bold;
+}
+.a-footer ul {
+    padding-left:15px;
+
+}
+.a-footer ul li{
+   color:#FFF;
+   margin:10px 0px;
+}
+.a-footer ul li a{
+   color:#FFF;
+   text-decoration:none;
+   font-size:13px;
+}
+.a-footer p{
+    text-align:justify;
+    font-size:13px;
+    color:#f6f6f6;
+    line-height:24px;
+}
+.a-footer-center{
+    background:#FFF;
+    min-height:146px;
+    border-bottom:5px solid#8d44ad;
+}
+.a-footer-center ul{
+    padding:0px;
+    margin:20px 0 30px 0;
+}
+.a-footer-center ul li{
+    list-style:none;
+    font-size:13px;
+    color:#777;
+    line-height:22px;
+}
+.a-footer-bottom{
+    background:#8d44ad;
+    height:50px;
+    border-bottom:5px solid#8d44ad;
+}
+.a-footer-bottom .img-circle {
+    position:absolute;
+    top:-30px;
+    left:0;
+    float:left;
+    width:72px;
+   
+}
+.a-footer-bottom div.hotline{
+    color:#FFF;
+    font-size:16px;
+    font-weight:bold;
+    text-transform:uppercase;  
+     margin-left:60px;  
+     padding:10px 0px;
+}

@@ -1,33 +1,82 @@
 ﻿@using LinJas.Common
 @{
-    ViewBag.Title = "Contact";
-}
-@section css{
-    @Html.InlineStyles("~/css/contact.desktop.css")
-}
-@section js{
-    @Html.InlineScripts("~/bundles/js/jquery.common.js")
-    @Scripts.RenderFormat("<script type=\"text/javascript\" src=\"{0}\" async></script>", "~/bundles/js/contact.desktop.js")
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Metas{
-    <title>Code Amp</title>
+    <title>Liên hệ</title>
 }
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form_main">
-                <h4 class="heading"><strong>Quick </strong> Contact <span></span></h4>
-                <div class="form">
-                    <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
-                        <input type="text" required="" placeholder="Please input your Name" value="" name="name" class="txt">
-                        <input type="text" required="" placeholder="Please input your mobile No" value="" name="mob" class="txt">
-                        <input type="text" required="" placeholder="Please input your Email" value="" name="email" class="txt">
-
-                        <textarea placeholder="Your Message" name="mess" type="text" class="txt_3"></textarea>
-                        <input type="submit" value="submit" name="submit" class="txt2">
-                    </form>
-                </div>
+@section css{
+    @Styles.Render("~/bundles/desktop/css-lienhe")
+}
+@section scripts{
+    <script type="text/javascript">
+        setTimeout(function () {
+            var e = document.createElement('script');
+            e.src = '@Scripts.Url("~/bundles/desktop-lienhe")';
+            e.type = 'text/javascript';
+            document.getElementsByTagName("head")[0].appendChild(e);
+            }, 10);
+    </script>
+}
+<section class="plus-head">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="@Url.Action("Index","Home")">Trang chủ</a>
+                    </li>
+                    <li>
+                        <span>Liên hệ</span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-</div>
+</section>
+<section class="plus-contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Bạn có thể nói chuyện với tư vấn viên trực tuyến của chúng tôi bất cứ lúc nào thông qua hệ thống Live Chat của chúng tôi trên website hoặc một trong các chương trình nhắn tin tức thời bên cạnh đây.</p>
+                <p>Xin hãy kiên nhẫn trong khi chờ đợi phản hồi.</p>
+                <p>Điện thoại yêu cầu chung: 0-1258-961-889 (Hỗ trợ 24/7)</p>
+                <h1>Thông tin địa chỉ</h1>
+                <h2>Trụ sở chính</h2>
+                <ul>
+                    <li>Hà Nội</li>
+                    <li>Số 32/64/179 Phố Vĩnh Hưng, Hoàng Mai, Hà Nội</li>
+                    <li><b>Telephone: (+84) 1258-961-889</b></li>
+                    @*<li><b>FAX:</b>  +1 (012) 345 6789</li>*@
+                    <li><b>E-mail: </b>seotop10developer@gmail.com</li>
+                    <li><b>Zalo: </b>0163 558 4621</li>
+                    <li><b>Fanpage: </b><a href="https://www.facebook.com/thietkewebchuanseotop/" rel="nofollow">FaceBook</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h3>Gửi góp ý/Yêu cầu</h3>
+                @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-group" }))
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span>Họ & Tên <sup>*</sup></span>
+                            <input type="text" class="form-control" name="Name" placeholder="Họ và tên..." required />
+                        </div>
+                        <div class="col-md-6">
+                            <span>Số điện thoại</span>
+                            <input type="tel" class="form-control" name="Phone" placeholder="Số điện thoại..." />
+                        </div>
+                    </div>
+                    <span>Email <sup>*</sup></span>
+                    <input type="email" class="form-control" name="Email" placeholder="Email..." required />
+                    <span>Tiêu đề lời nhắn <sup>*</sup></span>
+                    <input type="text" class="form-control" name="TieuDe" placeholder="Tiêu đề lời nhắn..." required />
+                    <span>Nội dung <sup>*</sup></span>
+                    <textarea rows="10" class="form-control" name="GhiChu" placeholder="Nội dung..." required></textarea>
+                    <input type="submit" class="btn btn-danger right" value="Gửi đi" />
+                }
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -10,79 +10,48 @@ namespace LinJas
         {
 
             #region Desktop
-            //common
-            bundles.Add(new ScriptBundle("~/bundles/js/jquery.common.js").Include(
-                    "~/js/jquery-1.10.2.min.js"));
-            //Home
-            bundles.Add(new ScriptBundle("~/bundles/js/home.index.desktop.js").Include(
-                     "~/js/bootstrap.min.js",
-                     "~/js/xingfa.common.desktop.js"));
+            bundles.Add(new ScriptBundle("~/bundles/desktop-home").Include(
+                     "~/Asset/js/jquery-1.10.2.min.js",
+                     "~/Asset/js/bootstrap.min.js",
+                     "~/Asset/js/lazysizes.min.js",
+                     "~/Asset/js/common.desktop.js",
+                     "~/Asset/js/home.index.desktop.js"
+                     ));
 
-            bundles.Add(new StyleBundle("~/css/home.index.desktop.css").Include(
-                     "~/css/lessbootstrap.css",
-                     "~/css/linja.common.desktop.css",
-                     "~/css/xingfa.home.desktop.css",
-                     "~/css/xingfa.common.desktop.css",
-                     "~/css/xingfa.home.index.desktop.css"));
+            bundles.Add(new ScriptBundle("~/bundles/desktop/css-home").Include(
+                   "~/Asset/css/bootstrap.css",
+                   "~/Asset/css/common.desktop.css",
+                   "~/Asset/css/home.index.desktop.css"
+                   ));
 
-            //Detail product
-            bundles.Add(new ScriptBundle("~/bundles/js/detail.desktop.js").Include(
-                    "~/js/bootstrap.min.js",
-                    "~/js/xingfa.common.desktop.js"));
+            //giới thiệu
+            bundles.Add(new ScriptBundle("~/bundles/desktop-gioithieu").Include(
+                    "~/Asset/js/jquery-1.10.2.min.js",
+                    "~/Asset/js/bootstrap.min.js",
+                    "~/Asset/js/lazysizes.min.js",
+                    "~/Asset/js/common.desktop.js"
+                    ));
 
-            bundles.Add(new StyleBundle("~/css/detail.desktop.css").Include(
-                     "~/css/lessbootstrap.css",
-                     "~/css/linja.common.desktop.css",
-                      "~/css/xingfa.common.desktop.css",
-                     "~/css/xingfa.product.detail.desktop.css"));
-            //Contact
-            bundles.Add(new ScriptBundle("~/bundles/js/contact.desktop.js").Include(
-                    "~/js/bootstrap.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/desktop/css-gioithieu").Include(
+                   "~/Asset/css/bootstrap.css",
+                   "~/Asset/css/common.desktop.css",
+                   "~/Asset/css/gioithieu.index.desktop.css"
+                   ));
 
-            bundles.Add(new StyleBundle("~/css/contact.desktop.css").Include(
-                     "~/css/lessbootstrap.css",
-                     "~/css/linja.common.desktop.css",
-                     "~/css/linja.contact.desktop.css"));
-            //About
-            bundles.Add(new ScriptBundle("~/bundles/js/about.desktop.js").Include(
-                    "~/js/bootstrap.min.js"));
+            //Liên hệ
+            bundles.Add(new ScriptBundle("~/bundles/desktop-lienhe").Include(
+                   "~/Asset/js/jquery-1.10.2.min.js",
+                   "~/Asset/js/bootstrap.min.js",
+                   "~/Asset/js/lazysizes.min.js",
+                   "~/Asset/js/common.desktop.js"
+                   ));
 
-            bundles.Add(new StyleBundle("~/css/about.desktop.css").Include(
-                     "~/css/lessbootstrap.css",
-                     "~/css/linja.common.desktop.css",
-                     "~/css/linja.about.desktop.css"));
-            //Search 
-            bundles.Add(new ScriptBundle("~/bundles/js/search.desktop.js").Include(
-                    "~/js/bootstrap.min.js",
-                    "~/js/xingfa.common.desktop.js"));
+            bundles.Add(new ScriptBundle("~/bundles/desktop/css-lienhe").Include(
+                   "~/Asset/css/bootstrap.css",
+                   "~/Asset/css/common.desktop.css",
+                   "~/Asset/css/lienhe.index.desktop.css"
+                   ));
 
-            bundles.Add(new StyleBundle("~/css/search.desktop.css").Include(
-                     "~/css/lessbootstrap.css",
-                     "~/css/linja.common.desktop.css",
-                      "~/css/xingfa.common.desktop.css",
-                     "~/css/xingfa.search.index.desktop.css"));
-
-            //Category            
-            bundles.Add(new ScriptBundle("~/bundles/js/category.desktop.js").Include(
-                    "~/js/bootstrap.min.js",
-                    "~/js/xingfa.common.desktop.js"));
-
-            bundles.Add(new StyleBundle("~/css/category.desktop.css").Include(
-                     "~/css/lessbootstrap.css",
-                     "~/css/linja.common.desktop.css",
-                      "~/css/xingfa.common.desktop.css",
-                     "~/css/xingfa.category.index.desktop.css"));
-
-            //Blog            
-            bundles.Add(new ScriptBundle("~/bundles/js/blog.index.desktop.js").Include(
-                    "~/js/bootstrap.min.js",
-                    "~/js/xingfa.common.desktop.js"));
-
-            bundles.Add(new StyleBundle("~/css/blog.index.desktop.css").Include(
-                     "~/css/lessbootstrap.css",
-                     "~/css/linja.common.desktop.css",
-                      "~/css/xingfa.common.desktop.css",
-                     "~/css/xingfa.blog.index.desktop.css"));
             #endregion
 
             #region Mobile

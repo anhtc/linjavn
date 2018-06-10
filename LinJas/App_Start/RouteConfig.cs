@@ -13,6 +13,9 @@ namespace LinJas
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("gioithieu", "gioi-thieu/thiet-ke-web-chuan-seo", new { controller = "Home", action = "About" });
+            routes.MapRoute("lienhe", "lien-he", new { controller = "Home", action = "Contact" });
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

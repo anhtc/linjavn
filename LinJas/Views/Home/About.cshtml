@@ -1,14 +1,234 @@
 ﻿@using LinJas.Common
 @{
-    ViewBag.Title = "About";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Metas{
+    <title>Giới thiệu về thiết kế web chuẩn SEO</title>
+
+
 }
 @section css{
-    @Html.InlineStyles("~/css/about.desktop.css")
+    @Styles.Render("~/bundles/desktop/css-gioithieu")
 }
-@section js{
-    @Html.InlineScripts("~/bundles/js/jquery.common.js")
-    @Scripts.RenderFormat("<script type=\"text/javascript\" src=\"{0}\" async></script>", "~/bundles/js/about.desktop.js")
+@section scripts{
+
+    <script type="text/javascript">
+        setTimeout(function () {
+            var e = document.createElement('script');
+            e.src = '@Scripts.Url("~/bundles/desktop-gioithieu")';
+                e.type = 'text/javascript';
+                document.getElementsByTagName("head")[0].appendChild(e);
+        }, 10);
+
+    </script>
 }
-@section Metas{
-    <title>Code Amp</title>
-}
+<!--#breadcrumb-->
+<div class="plus-head">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="@Url.Action("Index","Home")">Trang chủ</a>
+                    </li>
+                    <li>
+                        <span>Giới thiệu</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--#Conent-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1><span>Câu chuyện về chúng tôi</span></h1>
+                <hr class="plus-hr" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>
+                    Là đối tác trong việc phát triển và mở rộng kinh doanh của bạn. Mọi giải pháp mà chúng tôi mang đến cho bạn đều được hỗ trợ bởi chiến lược kinh doanh, marketing sáng tạo và chất lượng.
+                </h2>
+                <div class="plus-img">
+                    <img class="lazyload img-responsive" src="@Url.Content("~/Asset/images/gioi-thieu/ve-chung-toi.png")" data-src="@Url.Content("~/Asset/images/gioi-thieu/ve-chung-toi.png")" alt="Giới thiệu về thiết kế web cho seo" />
+                </div>
+
+                <p class="description">
+                    Bước đầu tiên của việc xây dựng, phát triển kinh doanh trong thời kì bùng nổ internet đó là sở hữu một website chất lượng. Website giúp bạn thu hút một lượng khách hàng lớn với chi phí thấp và tỉ lệ mua hàng cao.
+                </p>
+                <p>
+                    Bằng sự nỗ lực, chúng tôi sẽ giúp bạn thiết kế và phát triển website chất lượng, thúc đẩy khách hàng truy cập, tăng tỉ lệ tương tác và mua sản phẩm với chi phí thấp nhất.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <div class="plus-tabs">
+                    <!-- #menutab -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#chung-toi-la-ai" aria-controls="home" role="tab" data-toggle="tab">Chúng tôi là ai?</a></li>
+                        <li role="presentation"><a href="#chung-toi-lam-gi" aria-controls="profile" role="tab" data-toggle="tab">Chúng tôi làm gì?</a></li>
+                        <li role="presentation"><a href="#nhiem-vu-cua-chung-toi" aria-controls="messages" role="tab" data-toggle="tab">Nhiệm vụ của chúng tôi?</a></li>
+                    </ul>
+
+                    <!-- #contenttab -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="chung-toi-la-ai">
+                            <div class="plus-img">
+                                <img class="lazyload img-responsive" src="@Url.Content("~/Asset/images/gioi-thieu/thiet-ke-web-chuan-seo-la-ai.png")" data-src="@Url.Content("~/Asset/images/gioi-thieu/thiet-ke-web-chuan-seo-la-ai.png")" alt="Giới thiệu về thiết kế web cho seo" />
+                            </div>
+                            <h4>Thiết kế website chuẩn SEO?</h4>
+                            <p class="description">
+                                TechSofPlus là một công ty thiết kế web, một cơ quan tiếp thị kỹ thuật số chuyên nghiệp. Chúng tôi là một phần của lực lượng kĩ thuật số hiện đại, cung cấp cho bạn các giải pháp kinh doanh, chiến lược marketing hiệu quả trên đường truyền internet với chi phí thấp nhất.
+                            </p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="chung-toi-lam-gi">
+                            <div class="plus-img">
+                                <img class="lazyload img-responsive" src="@Url.Content("~/Asset/images/gioi-thieu/thiet-ke-web-chuan-seo-la-ai.png")" data-src="@Url.Content("~/Asset/images/gioi-thieu/ve-chung-toi.png")" alt="Giới thiệu về thiết kế web cho seo" />
+                            </div>
+
+                            <p class="description">
+                                Thông qua thiết kế và phát triển website tuyệt đẹp + các chiến dịch tiếp thị và xây dựng thương hiệu sáng tạo: tối ưu hóa công cụ tìm kiếm (SEO), quảng cáo google adwords, tiếp thị qua email, quảng cáo hiển thị và chiến dịch truyền thông xã hội … chúng tôi sẽ giúp bạn gia tăng lượng khách hàng với chi phí thấp nhất.
+                            </p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="nhiem-vu-cua-chung-toi">
+                            <div class="plus-img">
+                                <img class="lazyload img-responsive" src="@Url.Content("~/Asset/images/gioi-thieu/thiet-ke-web-chuan-seo-la-ai.png")" data-src="@Url.Content("~/Asset/images/gioi-thieu/thiet-ke-web-chuan-seo-la-ai.png")" alt="Giới thiệu về thiết kế web cho seo" />
+                            </div>
+
+                            <p class="description">
+                                Xứ mệnh của chúng tôi là đảm bảo sự thành công trong hoạt động kinh doanh của bạn. Chúng tôi cố gắng hết sức để dự đoán sự thay đổi, xu hướng mới và cung cấp các giá trị tuyệt vời: website tuyệt đẹp + chiến dịch marketing sáng tạo để mang lại lợi nhuận cao nhất cho hoạt động kinh doanh của bạn.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--#khách hàng nói về chúng tôi-->
+<section class="plus-wap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>
+                    <span>Khách hàng nói về  chúng tôi</span>
+                </h3>
+                <hr class="plus-hr" />
+                <p class="plus-description">
+                    Cảm ơn các đối tác chiến lược đã cho TechSofPlus có cơ hội được hỗ trợ, là một phần trong thành công của hoạt động kinh doanh.
+                </p>
+            </div>
+            <div class="col-md-12">
+                <div id="carousel-customer" class="carousel slide" data-ride="carousel" data-interval="false">
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <div class="row">
+                                <div class="col-md-6 left">
+                                    <div class="col-md-9">
+                                        <b>Trịnh Hoàng Ánh</b>
+                                        <p>Công nghệ thông tin-<span> Kỹ sư</span></p>
+                                        <p>
+                                            Các website được tạo ra bởi TechSofPlus rất tuyệt vời và chúng tôi cảm ơn vì điều đó. Nó giúp ích rất nhiều trong hoạt động kinh doanh của chúng tôi.
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="plus-img">
+                                            <img class="lazyload img-responsive" src="@Url.Content("~/Asset/images/gioi-thieu/ve-chung-toi.png")" data-src="@Url.Content("~/Asset/images/gioi-thieu/ve-chung-toi.png")" alt="Giới thiệu về thiết kế web cho seo" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 right">
+                                    <div class="col-md-3">
+                                        <div class="plus-img">
+                                            <img class="lazyload img-responsive" src="@Url.Content("~/Asset/images/gioi-thieu/ve-chung-toi.png")" data-src="@Url.Content("~/Asset/images/gioi-thieu/ve-chung-toi.png")" alt="Giới thiệu về thiết kế web cho seo" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <b>Nguyễn Mạnh Quân</b>
+                                        <p>Công nghệ thông tin-<span> Kỹ sư</span></p>
+                                        <p>
+                                            Nỗ lực, trách nhiệm và hiệu quả là những điều tuyệt vời của TechSofPlus. Họ cung cấp cho chúng tôi biết về những cạm bẫy và cách giải quyết trong việc tiếp cận khách hàng.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-md-6 left">
+                                    <div class="col-md-9">
+                                        <b>Phạm Thị Thanh Tuyết</b>
+                                        <p>Marketing -<span> Cử nhân </span></p>
+                                        <p>
+                                            TechSofPlus luôn đáp ứng được các nhu cầu của chúng tôi về ý tưởng và cách thức làm việc, ngay trong những giai đoạn vô cùng căng thẳng và cấp bách
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="plus-img">
+                                            <img class="lazyload img-responsive" src="@Url.Content("~/Asset/images/gioi-thieu/ve-chung-toi.png")" data-src="@Url.Content("~/Asset/images/gioi-thieu/ve-chung-toi.png")" alt="Giới thiệu về thiết kế web cho seo" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 right">
+                                    <div class="col-md-3">
+                                        <div class="plus-img">
+                                            <img class="lazyload img-responsive" src="@Url.Content("~/Asset/images/gioi-thieu/ve-chung-toi.png")" data-src="@Url.Content("~/Asset/images/gioi-thieu/ve-chung-toi.png")" alt="Giới thiệu về thiết kế web cho seo" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <b>Ninh Văn Bình</b>
+                                        <p>Sư phạm Toán-tin-<span> Cử nhân</span></p>
+                                        <p>
+                                            Ban đầu có thể là tham vọng, nhưng chúng tôi rất bất ngờ vì dự án diễn ra suôn sẻ và chúng tôi cảm ơn vì điều đó.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-customer" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-customer" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--#Khách hàng-->
+<section class="plus-khahang">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>
+                    <span>Khách hàng của chúng tôi</span>
+                </h3>
+                <hr class="plus-hr" />
+                <p class="plus-description">
+                    Chúng tôi yêu khách hàng của mình, luôn nỗ lực để hỗ trợ họ một cách tốt nhất, với chi phí thấp nhất
+                </p>
+            </div>
+            <div class="con-md-12">
+                <ul class="plus-doitac">
+                    @for (int i = 0; i < 12; i++)
+                    {
+                        <li @((i == 5 || i == 11) ? "id=border-plus-right" : "") class="@(i>5?"border-plus-bottom ": "border-plus")">
+                            <img src="@Url.Content("~/Asset/images/logo/ht_microsoft_cc_120823_wg.jpg")" data-src="@Url.Content("~/Asset/images/logo/ht_microsoft_cc_120823_wg.jpg")" alt="đối tác" class="img-responsive lazyload" />
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

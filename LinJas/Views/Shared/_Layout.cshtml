@@ -2,95 +2,33 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
-    @*<link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico">*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/x-icon" href="~/favicon.ico" rel="shortcut icon" />
 
-    <link rel="icon" href="~/Images/icon/xingfa-icon.png" sizes="32x32" />
-    <link rel="icon" href="~/Images/icon/xingfa-icon.png" sizes="192x192" />
-    <link rel="apple-touch-icon-precomposed" href="~/Images/icon/xingfa-icon.png" />
-    <meta name="msapplication-TileImage" content="~/Images/icon/xingfa-icon.png" />
-    @RenderSection("Metas",false)
+    <!--meta-->
+    @RenderSection("Metas", false)
+    <!--css-->
     @RenderSection("css",false)
 </head>
-<body data-spy="scroll" data-offset="50" data-target=".navbar">
-    <!--Header-->
+<body data-spy="scroll">
     @Html.Partial("_Header")
     
-    <!--Content-->
-    <div class="main-content">
+    <div class="body-content">
+
         @RenderBody()
+        
     </div>
-    <!--Model-->
-    @Html.Partial("_PartialModel")
-    <!--Footer-->
-    <footer id="footer" class="container-fluid">
-       @Html.Partial("_Footer")
-    </footer> 
-    @RenderSection("js",false)
+    @Html.Partial("_Footer")  
+    <!--js-->
+    @RenderSection("scripts", required: false)
     <div id="fb-root"></div>
-    <!--về top-->
-    <button id="myBtn" title="Go to top"><span class="fa fa-angle-up"></span></button>
-
-    @*<script src="~/js/phaohoa.js"></script>
-    <script type="text/javascript">
-        var bgBegin = 22;
-        var bgEnd = 31;
-        var bgTetId = 31;
-        var bgTetUrl = '/banner/';
-        document.body.style.backgroundImage = 'url(' + bgTetUrl + bgTetId + '.jpg)';
-        document.body.style.backgroundAttachment = 'fixed';
-        document.body.style.backgroundSize = 'cover';
-        setInterval(function () {
-            if (bgTetId == bgEnd) bgTetId = bgBegin;
-            document.body.style.backgroundImage = 'url(' + bgTetUrl + bgTetId + '.jpg)';
-            document.body.style.backgroundAttachment = 'fixed';
-            document.body.style.backgroundSize = 'cover';
-            bgTetId++;
-        }, 15000);
-    </script>*@
-    <!--noel-->
-    @*<script src="~/js/halo.js"></script>*@
-    <!--dành cho bài  chi tiết-->
-    <!-- search -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#rm-search-all").focus(function (e) {
-                $("#rm-Keyword-suggestion").show();
-            });
-            $(".rmcontact-us ").click(function (e) {
-                $("#rm-Keyword-suggestion").hide();
-            });
-        });
-
-    </script>
-    <!-- slide show -->
     <script>
-        $('.carousel .vertical .item').each(function () {
-            var next = $(this).next();
-            if (!next.length) {
-                next = $(this).siblings(':first');
-            }
-            next.children(':first-child').clone().appendTo($(this));
-
-            for (var i = 1; i < 5; i++) {
-                next = next.next();
-                if (!next.length) {
-                    next = $(this).siblings(':first');
-                }
-
-                next.children(':first-child').clone().appendTo($(this));
-            }
-        });
-    </script>
-    <!--facebook-->
-    <script>
-        (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11&appId=1554982964804255';
-        fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-    </script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.0&appId=179707186080623&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 </body>
 </html>

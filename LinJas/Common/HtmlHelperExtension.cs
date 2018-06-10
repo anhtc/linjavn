@@ -13,77 +13,65 @@ namespace LinJas.Common
 {
     public static class HtmlHelperExtension
     {
-        public static string CategoryItemActive(this HtmlHelper html, string actions = "", string controllers = "",
-            string categorys = "", string cssClass = "active")
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(HtmlHelperExtension));
+        public static string MenuItemActive(this HtmlHelper html, string actions, string controllers, int? id = null, string cssClass = "active")
         {
             try
             {
-                var num = 0;
-                ViewContext viewContext = html.ViewContext;
-                bool isChildAction = viewContext.Controller.ControllerContext.IsChildAction;
+                var viewContext = html.ViewContext;
+                var isChildAction = viewContext.Controller.ControllerContext.IsChildAction;
 
                 if (isChildAction)
                     viewContext = html.ViewContext.ParentActionViewContext;
 
+                var routeValues = viewContext.RouteData.Values;
+                var currentAction = routeValues["action"].ToString();
+                var currentController = routeValues["controller"].ToString();
 
-                RouteValueDictionary routeValues = viewContext.RouteData.Values;
-                string currentAction = routeValues["action"].ToString();
-                string currentController = routeValues["controller"].ToString();
+                int? currentId = null;
+                if (routeValues["id"] != null)
+                {
+                    currentId = Convert.ToInt32(routeValues["id"]);
+                }
 
-                string currentCategory = "";
-                if (routeValues.ContainsKey("category"))
-                {
-                    currentCategory = routeValues["category"].ToString();
-                }
-                else if (int.TryParse(categorys, out num) && routeValues.ContainsKey("parentId"))
-                {
-                    currentCategory = routeValues["parentId"].ToString();
-                }
-                else if (routeValues.ContainsKey("tenLoaiBlog"))
-                {
-                    currentCategory = routeValues["tenLoaiBlog"].ToString();
-                }
-                else if (int.TryParse(categorys, out num) && routeValues.ContainsKey("loaiTinTucId"))
-                {
-                    currentCategory = routeValues["loaiTinTucId"].ToString();
-                }
-                else if (int.TryParse(categorys, out num) && routeValues.ContainsKey("tagId"))
-                {
-                    currentCategory = routeValues["tagId"].ToString();
-                }
-                else if (int.TryParse(categorys, out num) && routeValues.ContainsKey("nhomBSTId"))
-                {
-                    currentCategory = routeValues["nhomBSTId"].ToString();
-                }
-                if (String.IsNullOrEmpty(actions))
+                if (string.IsNullOrEmpty(actions))
                     actions = currentAction;
 
-                if (String.IsNullOrEmpty(controllers))
+                if (string.IsNullOrEmpty(controllers))
                     controllers = currentController;
 
-                if (String.IsNullOrEmpty(categorys))
-                    categorys = currentCategory;
+                if (!id.HasValue)
+                {
+                    currentId = id;
+                }
 
-                string[] acceptedActions = actions.Trim().Split(',').Distinct().ToArray();
-                string[] acceptedControllers = controllers.Trim().Split(',').Distinct().ToArray();
-                string[] acceptedCategorys = categorys.Trim().Split(',').Distinct().ToArray();
+                var acceptedActions = actions.Trim().Split(',').Distinct().ToArray();
+                var acceptedControllers = controllers.Trim().Split(',').Distinct().ToArray();
 
-                string str = acceptedActions.Contains(currentAction) && acceptedControllers.Contains(currentController) &&
-                             acceptedCategorys.Contains(currentCategory)
+                return acceptedActions.Contains(currentAction)
+                    && acceptedControllers.Contains(currentController)
+                    && currentId == id
                     ? cssClass
-                    : String.Empty;
-
-                return acceptedActions.Contains(currentAction) && acceptedControllers.Contains(currentController) &&
-                       acceptedCategorys.Contains(currentCategory)
-                    ? cssClass
-                    : String.Empty;
+                    : string.Empty;
             }
             catch (Exception ex)
-            {                
-                throw ex;
+            {
+                Logger.Error(ex);
+                throw;
             }
         }
 
+        public static bool IsActionName(this HtmlHelper html, string actionName, string controllerName)
+        {
+            var controllerContext = html.ViewContext.Controller.ControllerContext;
+            if (controllerContext.IsChildAction) return false;
+
+            var currentActionName = controllerContext.RouteData.Values["action"].ToString();
+            var currentControllerName = controllerContext.RouteData.Values["controller"].ToString();
+
+            return string.Equals(currentActionName, actionName, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(currentControllerName, controllerName, StringComparison.OrdinalIgnoreCase);
+        }
 
         public static string ReturnUrl(this HttpRequestBase request)
         {
