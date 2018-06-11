@@ -209,6 +209,7 @@
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspNetRoleModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspNetUser.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\AspRoleController.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AuthModel\AutherizeUser.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\Blog.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\CheckQuyenModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\ControllerViewModel.cs" />
@@ -232,7 +233,7 @@
     <Compile Include="Areas\AdminLinja\Models\TinhModel.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\HtmlHelperExtension.cs" />
-    <Compile Include="Common\IdentityExtension.cs" />
+    <Compile Include="Areas\AdminLinja\Common\IdentityExtension.cs" />
     <Compile Include="Common\SessionHelper.cs" />
     <Compile Include="Common\StringHelper.cs" />
     <Compile Include="Common\SubmitButtonAttribute.cs" />
@@ -242,10 +243,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspController.cs" />
+    <Compile Include="Models\AspNetRole.cs" />
+    <Compile Include="Models\AspNetUser.cs" />
+    <Compile Include="Models\AspRoleController.cs" />
     <Compile Include="Manager\AcountManager.cs" />
     <Compile Include="Manager\BaseManager.cs" />
     <Compile Include="Models\AuthAttribute.cs" />
     <Compile Include="Models\IdentityModel.cs" />
+    <Compile Include="Models\ModelCodeFist.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1667,15 +1673,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -1688,6 +1685,13 @@
     <Content Include="Views\Shared\_LayoutDefault.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Web.Config" />
+    <None Include="Web.Debug.Config">
+      <DependentUpon>Web.Config</DependentUpon>
+    </None>
+    <None Include="Web.Release.Config">
+      <DependentUpon>Web.Config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -12,7 +12,7 @@ namespace LinJas.Manager
                 if (_database == null)
                 {
                     var factory = new DatabaseProviderFactory();
-                    _database = factory.Create("XingfaGroup");
+                    _database = factory.Create("Techsoftplus");
                 }
                 return _database;
             }

@@ -46,7 +46,8 @@ namespace LinJas.Areas.AdminLinja.Common
                 public const string DeleteUserById = @"admin_DeleteUserById @Id={0}";
                 //Quyền phân cho người dùng
                 public const string GetQuyenByAll = @"admin_GetQuyenByAll";
-
+                // Check quyền cho người dùng khi login
+                public const string CheckRoleByUserId = @"admin_checkRoleByUserId @userId={0}";
             }
             public class AdminSanPham
             {

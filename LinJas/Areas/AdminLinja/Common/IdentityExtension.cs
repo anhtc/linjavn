@@ -4,7 +4,7 @@ using log4net;
 using Newtonsoft.Json;
 using System.Security.Principal;
 
-namespace LinJas.Common
+namespace LinJas.Areas.AdminLinja.Common
 {
     public static class IdentityExtension
     {
