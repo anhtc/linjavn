@@ -212,6 +212,31 @@ namespace LinJas.Areas.AdminLinja.Controllers
             return Json(new { Num = result, Message = text }, JsonRequestBehavior.AllowGet);
         }
         #endregion
+        #region Dịch vụ
+        public ActionResult LoadDataDichVu([DataSourceRequest] DataSourceRequest request)
+        {
+            var listItems = _db.Database.SqlQuery<DichVu>(TVConstants.StoredProcedure.AdminDichVu.GetDichVuByAll).ToList();
+            return Json(listItems.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetDichVuById(int? id)
+        {
+            var itemBlog = _db.Database.SqlQuery<DichVu>(TVConstants.StoredProcedure.AdminDichVu.GetDichVuById, id).FirstOrDefault();
+            return Json(itemBlog, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult ShowPhotoDichVuById(Guid? id)
+        {
+            var item = _db.Database.SqlQuery<DichVuViewModel>(TVConstants.StoredProcedure.AdminDichVu.GetDichVuByAnhId, id).FirstOrDefault();
+            if (item != null && item.HinhAnh != null)
+            {
+                return File(item.HinhAnh, "image/png");
+            }
+            else
+            {
+                return File("~/Content/Images/NoImage.jpg", "image/png");
+            }
+        }
+        #endregion
         #region lấy ảnh avatar
         /// <summary>
         /// Show ảnh avatar

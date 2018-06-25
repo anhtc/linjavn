@@ -214,6 +214,8 @@
     <Compile Include="Areas\AdminLinja\Models\AuthModel\CheckQuyenModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\ControllerViewModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\DanhMuc.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AuthModel\DichVu.cs" />
+    <Compile Include="Areas\AdminLinja\Models\AuthModel\DichVuViewModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\ManagerModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\NguoiDungModel.cs" />
     <Compile Include="Areas\AdminLinja\Models\AuthModel\NhomQuyenModel.cs" />
@@ -1662,6 +1664,7 @@
     <Content Include="Asset\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Asset\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Areas\AdminLinja\Views\DichVu\Index.cshtml" />
+    <Content Include="Areas\AdminLinja\Views\DichVu\_PartialAddDichVu.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

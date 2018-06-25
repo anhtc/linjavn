@@ -19,6 +19,7 @@ namespace LinJas.Areas.AdminLinja.Models.AuthModel
         public virtual DbSet<AnhSanPham> AnhSanPhams { get; set; }
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<DichVu> DichVus { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -100,6 +100,7 @@ namespace LinJas.Areas.AdminLinja.Common
                 public const string AddDichVu= "[admin_AddDichVu] @TieuDe={0} , @MoTa={1} , @NoiDung ={2}, @Active ={3}, @OrderBy={4} , @MetaTieuDe={5} , @MetaMoTa={6} , @MetaTuKhoa ={7}, @HinhAnh ={8}, @DanhGia ={9}, @SoNguoi ={10}, @GhiChu={11}";
                 public const string UpdateDichVu= "[admin_UpdateDichVu] @Id={0}, @TieuDe={1} , @MoTa={2} , @NoiDung ={3}, @Active ={4}, @OrderBy={5} , @MetaTieuDe={6} , @MetaMoTa={7} , @MetaTuKhoa ={8}, @HinhAnh ={9}, @DanhGia ={10}, @SoNguoi ={11}, @GhiChu={12}, ,@IsChangeImage={13}";
                 public const string DeleteDichVu = "[admin_DeleteDichVu]  @Id={0}";
+                public const string GetDichVuByAnhId= "[admin_GetDichVuByAnhId] @Id={0}";
             }
         }
     }
