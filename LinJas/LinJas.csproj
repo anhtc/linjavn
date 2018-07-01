@@ -1051,6 +1051,7 @@
     <Content Include="Asset\css\bootstrap.css" />
     <Content Include="Asset\css\bootstrap.min.css" />
     <Content Include="Asset\css\common.desktop.css" />
+    <Content Include="Asset\css\dichvu.index.desktop.css" />
     <Content Include="Asset\css\gioithieu.index.desktop.css" />
     <Content Include="Asset\css\home.index.desktop.css" />
     <Content Include="Asset\css\lienhe.index.desktop.css" />
@@ -1688,7 +1689,10 @@
     <Content Include="Views\Shared\_LayoutDefault.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Web.Config" />
+    <Content Include="Web.Config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Home\Service.cshtml" />
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.Config</DependentUpon>
     </None>

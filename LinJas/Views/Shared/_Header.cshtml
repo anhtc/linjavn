@@ -10,7 +10,7 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li class="@Html.MenuItemActive("About","Home",null)">@Html.ActionLink("Giới thiệu", "About", "Home")</li>
-                <li><a href="@Url.Action("","")">Dịch vụ</a></li>
+                <li class="@Html.MenuItemActive("Service","Home",null)"><a href="@Url.Action("Service","Home",new { name="seo-tu-khoa-len-top"})">Dịch vụ</a></li>
                 <li>@Html.ActionLink("My Project", "Index", "Home")</li>
                 <li><a href="@Url.Action("","")">Blog</a></li>
                 <li><a href="@Url.Action("","")">Tuyển dụng</a></li>

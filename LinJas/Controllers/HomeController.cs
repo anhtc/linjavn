@@ -26,5 +26,11 @@ namespace LinJas.Controllers
 
             return View();
         }
+        public ActionResult Service()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }

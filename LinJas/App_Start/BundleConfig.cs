@@ -38,6 +38,20 @@ namespace LinJas
                    "~/Asset/css/gioithieu.index.desktop.css"
                    ));
 
+            //Dịch vụ
+            bundles.Add(new ScriptBundle("~/bundles/desktop-dichvu").Include(
+                    "~/Asset/js/jquery-1.10.2.min.js",
+                    "~/Asset/js/bootstrap.min.js",
+                    "~/Asset/js/lazysizes.min.js",
+                    "~/Asset/js/common.desktop.js"
+                    ));
+
+            bundles.Add(new ScriptBundle("~/bundles/desktop/css-dichvu").Include(
+                   "~/Asset/css/bootstrap.css",
+                   "~/Asset/css/common.desktop.css",
+                   "~/Asset/css/dichvu.index.desktop.css"
+                   ));
+
             //Liên hệ
             bundles.Add(new ScriptBundle("~/bundles/desktop-lienhe").Include(
                    "~/Asset/js/jquery-1.10.2.min.js",
